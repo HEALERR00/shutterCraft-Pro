@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShutterCraft PRO | Mobil Görsel Stüdyo & iPhone Kamera Rehberi</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <!-- Google Fonts Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            camera: {
+              darkest: '#08080a',
+              darker: '#0e0e12',
+              card: '#141419',
+              border: '#24242d',
+            }
+          },
+          boxShadow: {
+            glow: '0 0 25px -5px rgba(245, 158, 11, 0.4)',
+            cyanGlow: '0 0 25px -5px rgba(6, 182, 212, 0.4)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #08080a;
+      color: #f4f4f5;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0e0e12;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 9999px;
+    }
+    .noise-overlay {
+      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-500/30 selection:text-amber-300">
+
+  <!-- TOP NAVBAR -->
+  <header id="main-nav" class="fixed top-0 inset-x-0 z-50 bg-camera-darkest/90 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-600 flex items-center justify-center text-black shadow-glow group-hover:scale-105 transition-transform">
+          <i data-lucide="aperture" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="text-base sm:text-lg font-black tracking-wider text-white flex items-center gap-1.5">
+            <span>ShutterCraft</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
+              PRO
+            </span>
+          </div>
+          <div class="text-[10px] font-mono text-zinc-400 tracking-widest uppercase">
+            Mobil Görsel Stüdyo
+          </div>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="hidden lg:flex items-center gap-1 p-1 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 text-xs font-medium text-zinc-300">
+        <a href="#guides" class="px-3 py-2 rounded-xl hover:text-white hover:bg-white/10 transition-colors">Rehberler</a>
+        <a href="#exposure-section" class="px-3 py-2 rounded-xl hover:text-white hover:bg-white/10 transition-colors">Pozlama</a>
+        <a href="#composition-section" class="px-3 py-2 rounded-xl hover:text-white hover:bg-white/10 transition-colors">Kompozisyon</a>
+        <a href="#iphone-studio" class="px-3.5 py-2 rounded-xl text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 transition-colors font-semibold flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+          <span>iPhone Stüdyosu</span>
+        </a>
+        <a href="#device-section" class="px-3 py-2 rounded-xl hover:text-white hover:bg-white/10 transition-colors">Kısayollar</a>
+        <a href="#wizard" class="px-3 py-2 rounded-xl hover:text-white hover:bg-white/10 transition-colors">Sihirbaz</a>
+        <a href="#glossary" class="px-3 py-2 rounded-xl hover:text-white hover:bg-white/10 transition-colors">Sözlük</a>
+      </nav>
+
+      <!-- Right Action -->
+      <div class="flex items-center gap-3">
+        <a href="#wizard" class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold text-xs shadow-glow transition-all">
+          <i data-lucide="wand-2" class="w-3.5 h-3.5"></i>
+          <span>Ne Çekmek İstiyorsun?</span>
+        </a>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl bg-white/10 text-white">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-drawer" class="hidden lg:hidden bg-camera-darkest/95 border-b border-white/10 px-6 py-6 space-y-3 text-sm">
+      <a href="#guides" class="block py-2 text-zinc-300 hover:text-amber-400">Çekim Rehberleri</a>
+      <a href="#iphone-studio" class="block py-2 text-amber-400 font-bold flex items-center gap-2">
+        <i data-lucide="smartphone" class="w-4 h-4"></i>
+        <span>iPhone Modeline Özel Çekim Stüdyosu (12 - 18 Pro Max)</span>
+      </a>
+      <a href="#exposure-section" class="block py-2 text-zinc-300 hover:text-amber-400">Pozlama Simülatörü</a>
+      <a href="#composition-section" class="block py-2 text-zinc-300 hover:text-amber-400">Grid & Kompozisyon</a>
+      <a href="#device-section" class="block py-2 text-zinc-300 hover:text-amber-400">Cihaz Kısayolları</a>
+      <a href="#wizard" class="block py-2 text-zinc-300 hover:text-amber-400">Çekim Sihirbazı</a>
+      <a href="#glossary" class="block py-2 text-zinc-300 hover:text-amber-400">Terimler Sözlüğü</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden noise-overlay">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- Left Copy -->
+      <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse"></i>
+          <span>Mobil Fotoğrafçılıkta Yeni Standart • v2.0 Pro</span>
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-[1.1]">
+          Cebinizdeki Kamerayı <br>
+          <span class="bg-gradient-to-r from-amber-400 via-amber-200 to-cyan-400 bg-clip-text text-transparent">
+            Profesyonel Stüdyoya
+          </span> Dönüştürün.
+        </h1>
+        <p class="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+          Standart "bas-çek" alışkanlığını geride bırakın. iPhone ve Android telefonunuzun manuel potansiyelini, altın oran ızgaralarını ve sinematik ışık tekniklerini interaktif olarak deneyimleyin.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+          <a href="#wizard" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold text-sm tracking-wide shadow-glow transition-all flex items-center gap-2">
+            <i data-lucide="wand-2" class="w-4 h-4"></i>
+            <span>Anlık Çekim Reçetesi Al</span>
+          </a>
+          <a href="#iphone-studio" class="px-6 py-3.5 rounded-2xl bg-camera-card hover:bg-white/10 text-white font-semibold text-sm border border-white/10 transition-all flex items-center gap-2">
+            <i data-lucide="smartphone" class="w-4 h-4 text-amber-400"></i>
+            <span>iPhone Modelini Seç</span>
+          </a>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-lg mx-auto lg:mx-0 text-left font-mono">
+          <div>
+            <div class="text-2xl font-bold text-white">11+</div>
+            <div class="text-[11px] text-zinc-500">iPhone Modeli</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-amber-400">55+</div>
+            <div class="text-[11px] text-zinc-500">Özel Reçete</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-cyan-400">3</div>
+            <div class="text-[11px] text-zinc-500">Canlı Simülatör</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Interactive Before / After Card -->
+      <div class="lg:col-span-5">
+        <div class="rounded-3xl bg-camera-card/80 border border-white/10 p-4 shadow-2xl backdrop-blur-xl relative">
+          <div class="flex items-center justify-between pb-3 px-2 border-b border-white/5 text-xs font-mono text-zinc-400">
+            <span class="flex items-center gap-1.5 text-amber-400">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+              <span>Canlı Karşılaştırma</span>
+            </span>
+            <span>Standart vs. ShutterCraft Pro</span>
+          </div>
+
+          <!-- Slider Container -->
+          <div id="before-after-box" class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mt-3 select-none cursor-ew-resize">
+            <!-- After (Pro) Layer -->
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80"
+                 alt="Pro Çekim" class="absolute inset-0 w-full h-full object-cover filter contrast-125 saturate-110 brightness-105">
+
+            <!-- Before (Otomatik) Layer -->
+            <div id="before-crop" class="absolute inset-y-0 left-0 w-1/2 overflow-hidden border-r-2 border-amber-400 shadow-2xl bg-black">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80"
+                   alt="Otomatik Çekim" class="absolute inset-0 w-full h-full object-cover filter brightness-75 contrast-75 blur-[0.6px] max-w-none" style="width: 100%; height: 100%;">
+              <span class="absolute top-3 left-3 px-2 py-1 rounded bg-black/75 text-[10px] font-mono text-zinc-300">
+                Otomatik Mod (Bas-Çek)
+              </span>
+            </div>
+
+            <!-- After Label -->
+            <span class="absolute top-3 right-3 px-2 py-1 rounded bg-amber-500/90 text-black font-bold text-[10px] font-mono shadow-md">
+              ShutterCraft PRO
+            </span>
+
+            <!-- Divider Handle -->
+            <div id="slider-handle" class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-amber-400 text-black flex items-center justify-center shadow-glow pointer-events-none">
+              <i data-lucide="chevrons-left-right" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="mt-3 text-center text-[11px] text-zinc-400 font-mono">
+            ← Sürgüyü sağa/sola kaydırarak farkı görün →
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODULE: iPHONE MODEL-SPECIFIC CAMERA & SHOOTING STUDIO ================= -->
+  <section id="iphone-studio" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-camera-darker border-y border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-4">
+          <i data-lucide="smartphone" class="w-4 h-4 animate-pulse"></i>
+          <span>iPhone Modeline Özel Çekim Stüdyosu (12 - 18 Pro Max)</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          Cihazınızın Sensör Sınırlarını Keşfedin
+        </h2>
+        <p class="text-sm sm:text-base text-zinc-400 mt-3 leading-relaxed">
+          Her iPhone aynı değildir. Sahip olduğunuz modelin sensör boyutu, LiDAR tarayıcısı, 48MP Quad-Pixel yapısı veya Kamera Denetimi tuşunu kullanarak o modele özel en iyi kareyi yakalayın.
+        </p>
+
+        <!-- Model Filter Pills -->
+        <div class="flex items-center justify-center gap-2 mt-6">
+          <button onclick="setIphoneFilter('all')" id="btn-filter-all" class="px-4 py-1.5 rounded-xl text-xs font-bold bg-white text-black transition-all">Tüm Modeller (11)</button>
+          <button onclick="setIphoneFilter('pro')" id="btn-filter-pro" class="px-4 py-1.5 rounded-xl text-xs font-medium bg-camera-card text-zinc-400 hover:text-white border border-white/5 transition-all">Sadece Pro Modeller</button>
+          <button onclick="setIphoneFilter('standard')" id="btn-filter-standard" class="px-4 py-1.5 rounded-xl text-xs font-medium bg-camera-card text-zinc-400 hover:text-white border border-white/5 transition-all">Standart & Plus</button>
+        </div>
+      </div>
+
+      <!-- Models Horizontal Scroll / Grid -->
+      <div id="iphone-model-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 mb-10 overflow-x-auto pb-2">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Selected Model Showcase Box -->
+      <div id="selected-model-card" class="rounded-3xl bg-camera-card/90 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 shadow-2xl mb-10">
+        <!-- Rendered dynamically via renderSelectedIphoneModel() -->
+      </div>
+
+      <!-- Category Recipes Container -->
+      <div id="model-recipes-section">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODULE: EXPOSURE TRIANGLE SIMULATOR ================= -->
+  <section id="exposure-section" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-camera-darkest">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono mb-3">
+          <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+          <span>İnteraktif Laboratuvar</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Pozlama Üçgeni Simülatörü</h2>
+        <p class="text-sm text-zinc-400 mt-2">
+          ISO, Dekanşör Hızı ve Pozlama (EV) değerlerini canlı kaydırın; gren (noise), hareket bulanıklığı ve aydınlık dengesini anında görün.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-camera-card/90 rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl">
+        <!-- Interactive Preview -->
+        <div class="lg:col-span-7 flex flex-col items-center">
+          <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black border border-white/10 shadow-inner">
+            <img id="sim-image" src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1000&q=80"
+                 class="w-full h-full object-cover transition-all duration-100" style="filter: brightness(1) contrast(1);">
+            <div id="sim-grain" class="absolute inset-0 pointer-events-none opacity-0 mix-blend-screen bg-repeat"
+                 style="background-image: radial-gradient(#fff 1px, transparent 0); background-size: 8px 8px;"></div>
+            
+            <!-- HUD Overlays -->
+            <div class="absolute top-4 left-4 font-mono text-[11px] bg-black/80 px-2.5 py-1 rounded-md border border-white/10 text-cyan-400">
+              <span id="hud-lens">1x • f/1.78</span>
+            </div>
+            <div class="absolute top-4 right-4 font-mono text-[11px] bg-black/80 px-2.5 py-1 rounded-md border border-white/10 text-amber-400">
+              <span id="hud-status">Pozlama: Normal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sliders Controls -->
+        <div class="lg:col-span-5 space-y-6">
+          <!-- ISO Slider -->
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono mb-2">
+              <span class="text-zinc-300 font-bold">Hassasiyet (ISO)</span>
+              <span id="val-iso" class="text-amber-400 font-bold">ISO 100</span>
+            </div>
+            <input type="range" id="slider-iso" min="50" max="6400" step="50" value="100"
+                   class="w-full accent-amber-500 bg-camera-darkest h-2 rounded-lg cursor-pointer">
+            <div class="text-[10px] text-zinc-500 mt-1">Düşük ISO = Temiz & Net | Yüksek ISO = Karanlıkta Aydınlık ama Grenli</div>
+          </div>
+
+          <!-- Shutter Speed Slider -->
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono mb-2">
+              <span class="text-zinc-300 font-bold">Dekanşör Hızı (Shutter)</span>
+              <span id="val-shutter" class="text-cyan-400 font-bold">1/250s</span>
+            </div>
+            <input type="range" id="slider-shutter" min="1" max="10" step="1" value="5"
+                   class="w-full accent-cyan-500 bg-camera-darkest h-2 rounded-lg cursor-pointer">
+            <div class="text-[10px] text-zinc-500 mt-1">Hızlı = Hareketi dondurur | Yavaş = Hareket bulanıklığı / Gece Işığı</div>
+          </div>
+
+          <!-- Exposure Compensation (EV) -->
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono mb-2">
+              <span class="text-zinc-300 font-bold">Pozlama Telafisi (EV)</span>
+              <span id="val-ev" class="text-emerald-400 font-bold">0.0 EV</span>
+            </div>
+            <input type="range" id="slider-ev" min="-2" max="2" step="0.3" value="0"
+                   class="w-full accent-emerald-500 bg-camera-darkest h-2 rounded-lg cursor-pointer">
+            <div class="text-[10px] text-zinc-500 mt-1">- EV ile gölgeleri derinleştirin, + EV ile aydınlatın.</div>
+          </div>
+
+          <!-- Reset Button -->
+          <button onclick="resetSimulator()" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-zinc-300 transition-colors">
+            Varsayılan Ayarlara Sıfırla
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODULE: COMPOSITION & GRID STUDIO ================= -->
+  <section id="composition-section" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-camera-darker">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono mb-3">
+          <i data-lucide="grid" class="w-3.5 h-3.5"></i>
+          <span>Görsel Geometri</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Grid & Kompozisyon Kılavuzları</h2>
+        <p class="text-sm text-zinc-400 mt-2">
+          Kılavuz çizgilerini açıp kapatarak insan gözünün fotoğrafta odaklandığı altın kesişim noktalarını görün.
+        </p>
+
+        <!-- Toggle Controls -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <button onclick="toggleGrid('ruleOfThirds')" id="btn-grid-thirds" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-black shadow-glow transition-all">
+            Üçler Kuralı (3x3 Grid)
+          </button>
+          <button onclick="toggleGrid('goldenRatio')" id="btn-grid-golden" class="px-4 py-2 rounded-xl text-xs font-medium bg-camera-card text-zinc-400 hover:text-white border border-white/5 transition-all">
+            Altın Oran & Sarmal
+          </button>
+          <button onclick="toggleGrid('diagonals')" id="btn-grid-diagonals" class="px-4 py-2 rounded-xl text-xs font-medium bg-camera-card text-zinc-400 hover:text-white border border-white/5 transition-all">
+            Diyagonaller & Derinlik Hatları
+          </button>
+        </div>
+      </div>
+
+      <!-- Preview Image with Overlays -->
+      <div class="relative max-w-4xl mx-auto aspect-[16/10] rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80"
+             class="w-full h-full object-cover">
+
+        <!-- 3x3 Grid Overlay -->
+        <div id="overlay-thirds" class="absolute inset-0 grid grid-cols-3 grid-rows-3 pointer-events-none transition-opacity duration-300">
+          <div class="border-r border-b border-amber-400/50 relative">
+            <span class="w-3 h-3 rounded-full bg-amber-400 absolute -bottom-1.5 -right-1.5 shadow-glow"></span>
+          </div>
+          <div class="border-r border-b border-amber-400/50 relative">
+            <span class="w-3 h-3 rounded-full bg-amber-400 absolute -bottom-1.5 -right-1.5 shadow-glow"></span>
+          </div>
+          <div class="border-b border-amber-400/50"></div>
+          <div class="border-r border-b border-amber-400/50 relative">
+            <span class="w-3 h-3 rounded-full bg-amber-400 absolute -bottom-1.5 -right-1.5 shadow-glow"></span>
+          </div>
+          <div class="border-r border-b border-amber-400/50 relative">
+            <span class="w-3 h-3 rounded-full bg-amber-400 absolute -bottom-1.5 -right-1.5 shadow-glow"></span>
+          </div>
+          <div class="border-b border-amber-400/50"></div>
+          <div class="border-r border-amber-400/50"></div>
+          <div class="border-r border-amber-400/50"></div>
+          <div></div>
+        </div>
+
+        <!-- Golden Ratio Overlay -->
+        <div id="overlay-golden" class="hidden absolute inset-0 pointer-events-none border border-cyan-400/60 p-8">
+          <div class="w-full h-full border border-dashed border-cyan-400/40 rounded-full flex items-center justify-center">
+            <span class="text-cyan-300 font-mono text-xs bg-black/60 px-2 py-1 rounded">Altın Sarmal Odak Noktası (1.618)</span>
+          </div>
+        </div>
+
+        <!-- Diagonals Overlay -->
+        <div id="overlay-diagonals" class="hidden absolute inset-0 pointer-events-none">
+          <svg class="w-full h-full stroke-rose-400/60 stroke-1" fill="none">
+            <line x1="0" y1="0" x2="100%" y2="100%" />
+            <line x1="100%" y1="0" x2="0" y2="100%" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODULE: "NE ÇEKMEK İSTİYORSUN?" WIZARD ================= -->
+  <section id="wizard" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-camera-darkest">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono mb-3">
+          <i data-lucide="wand-2" class="w-3.5 h-3.5"></i>
+          <span>Akıllı Çekim Sihirbazı</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+          "Ne Çekmek İstiyorsun?" Anlık Ayar Reçetesi
+        </h2>
+        <p class="text-sm text-zinc-400 mt-2 max-w-xl mx-auto">
+          Ortamınızı, ışığınızı ve telefonunuzu seçin; profesyonel fotoğrafçıların o an uygulayacağı nokta atışı kamera reçetesini saniyeler içinde alın.
+        </p>
+      </div>
+
+      <div class="rounded-3xl bg-camera-card/90 backdrop-blur-2xl border border-white/10 p-6 sm:p-10 shadow-2xl relative">
+        <!-- Progress Steps -->
+        <div id="wizard-progress" class="mb-8">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-2">
+            <span id="step-indicator">Adım 1 / 4</span>
+            <span id="step-title" class="text-amber-400 font-semibold">Konu Seçimi</span>
+          </div>
+          <div class="w-full h-1.5 bg-black rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-amber-500 to-cyan-400 w-1/4 transition-all duration-300"></div>
+          </div>
+        </div>
+
+        <!-- Wizard Step Containers -->
+        <div id="wizard-content">
+          <!-- Step 1: Subject -->
+          <div id="wizard-step-1" class="space-y-4">
+            <h3 class="text-base sm:text-lg font-bold text-white">1. Adım: Şu anda neyin fotoğrafını çekeceksiniz?</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <button onclick="selectSubject('portrait')" class="subject-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all" data-id="portrait">
+                <span class="text-2xl mb-1 block">👤</span>
+                <span class="text-sm font-bold text-white block">Arkadaşımı / Portre</span>
+                <span class="text-[11px] text-zinc-400">İnsan yüzü veya boy</span>
+              </button>
+              <button onclick="selectSubject('night')" class="subject-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all" data-id="night">
+                <span class="text-2xl mb-1 block">🌙</span>
+                <span class="text-sm font-bold text-white block">Gece Şehir & Işıklar</span>
+                <span class="text-[11px] text-zinc-400">Neonlar, gece caddeleri</span>
+              </button>
+              <button onclick="selectSubject('food')" class="subject-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all" data-id="food">
+                <span class="text-2xl mb-1 block">☕</span>
+                <span class="text-sm font-bold text-white block">Yemek & Kahve</span>
+                <span class="text-[11px] text-zinc-400">Kafe masası, sunum</span>
+              </button>
+              <button onclick="selectSubject('street')" class="subject-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all" data-id="street">
+                <span class="text-2xl mb-1 block">🚶</span>
+                <span class="text-sm font-bold text-white block">Sokak & Şehir</span>
+                <span class="text-[11px] text-zinc-400">Mimari ve siluetler</span>
+              </button>
+              <button onclick="selectSubject('nature')" class="subject-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all" data-id="nature">
+                <span class="text-2xl mb-1 block">🏔️</span>
+                <span class="text-sm font-bold text-white block">Manzara & Doğa</span>
+                <span class="text-[11px] text-zinc-400">Deniz, dağ, gökyüzü</span>
+              </button>
+              <button onclick="selectSubject('action')" class="subject-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all" data-id="action">
+                <span class="text-2xl mb-1 block">🐾</span>
+                <span class="text-sm font-bold text-white block">Evcil Hayvan / Aksiyon</span>
+                <span class="text-[11px] text-zinc-400">Koşan kedi/köpek</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Lighting (Hidden initially) -->
+          <div id="wizard-step-2" class="space-y-4 hidden">
+            <h3 class="text-base sm:text-lg font-bold text-white">2. Adım: Ortamdaki ışık durumu nasıl?</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <button onclick="selectLight('sun')" class="light-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="sun">
+                <span class="text-2xl mb-1 block">☀️</span>
+                <span class="text-sm font-bold text-white block">Parlak Güneş</span>
+                <span class="text-[11px] text-zinc-400">Sert gölgeler</span>
+              </button>
+              <button onclick="selectLight('golden')" class="light-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="golden">
+                <span class="text-2xl mb-1 block">🌅</span>
+                <span class="text-sm font-bold text-white block">Altın Saat / Günbatımı</span>
+                <span class="text-[11px] text-zinc-400">Sıcak yumuşak ışık</span>
+              </button>
+              <button onclick="selectLight('dim')" class="light-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="dim">
+                <span class="text-2xl mb-1 block">🕯️</span>
+                <span class="text-sm font-bold text-white block">Loş Mekân / Kafe</span>
+                <span class="text-[11px] text-zinc-400">Sarı loş ampul</span>
+              </button>
+              <button onclick="selectLight('dark')" class="light-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="dark">
+                <span class="text-2xl mb-1 block">🌃</span>
+                <span class="text-sm font-bold text-white block">Gece / Karanlık</span>
+                <span class="text-[11px] text-zinc-400">Sadece sokak lambaları</span>
+              </button>
+              <button onclick="selectLight('backlit')" class="light-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="backlit">
+                <span class="text-2xl mb-1 block">✨</span>
+                <span class="text-sm font-bold text-white block">Ters Işık (Güneş Arkada)</span>
+                <span class="text-[11px] text-zinc-400">Siluet ve halo efekti</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Device (with iPhone model picker!) -->
+          <div id="wizard-step-3" class="space-y-4 hidden">
+            <h3 class="text-base sm:text-lg font-bold text-white">3. Adım: Hangi telefonu kullanıyorsunuz?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <button onclick="selectDevice('iphone')" class="device-btn p-5 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="iphone">
+                <span class="text-2xl mb-2 block">🍎</span>
+                <span class="text-sm font-bold text-white block">Apple iPhone</span>
+                <span class="text-[11px] text-zinc-400">iOS Kamera / ProRAW</span>
+              </button>
+              <button onclick="selectDevice('samsung')" class="device-btn p-5 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="samsung">
+                <span class="text-2xl mb-2 block">🌌</span>
+                <span class="text-sm font-bold text-white block">Samsung Galaxy</span>
+                <span class="text-[11px] text-zinc-400">Pro Mod / Expert RAW</span>
+              </button>
+              <button onclick="selectDevice('other')" class="device-btn p-5 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="other">
+                <span class="text-2xl mb-2 block">⚡</span>
+                <span class="text-sm font-bold text-white block">Xiaomi / Pixel / Diğer</span>
+                <span class="text-[11px] text-zinc-400">Android Manuel Mod</span>
+              </button>
+            </div>
+
+            <!-- Sub-picker: iPhone Model Selection -->
+            <div id="wizard-iphone-model-picker" class="p-4 rounded-2xl bg-black/60 border border-amber-500/30">
+              <label class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider block mb-2">
+                Hangi iPhone Modelini Kullanıyorsunuz?
+              </label>
+              <select id="wizard-iphone-select" class="w-full bg-camera-darkest border border-white/10 rounded-xl px-4 py-3 text-xs sm:text-sm text-white font-medium focus:outline-none focus:border-amber-500">
+                <!-- Injected via JavaScript -->
+              </select>
+            </div>
+          </div>
+
+          <!-- Step 4: Vibe -->
+          <div id="wizard-step-4" class="space-y-4 hidden">
+            <h3 class="text-base sm:text-lg font-bold text-white">4. Adım: Nasıl bir görsel atmosfer istiyorsunuz?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <button onclick="selectVibe('cinematic')" class="vibe-btn p-5 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="cinematic">
+                <span class="text-2xl mb-2 block">🎬</span>
+                <span class="text-sm font-bold text-white block">Sinematik & Derin</span>
+                <span class="text-[11px] text-zinc-400">Zengin gölgeler, sıcak ton</span>
+              </button>
+              <button onclick="selectVibe('crisp')" class="vibe-btn p-5 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="crisp">
+                <span class="text-2xl mb-2 block">💎</span>
+                <span class="text-sm font-bold text-white block">Canlı & Kristal Net</span>
+                <span class="text-[11px] text-zinc-400">Yüksek detay, parlak</span>
+              </button>
+              <button onclick="selectVibe('moody')" class="vibe-btn p-5 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left" data-id="moody">
+                <span class="text-2xl mb-2 block">🖤</span>
+                <span class="text-sm font-bold text-white block">Karanlık & Dramatik</span>
+                <span class="text-[11px] text-zinc-400">Derin kontrast ve gizem</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 5: Final Result (Hidden initially) -->
+          <div id="wizard-result" class="space-y-6 hidden">
+            <!-- Dynamic Recipe Injected Here -->
+          </div>
+        </div>
+
+        <!-- Wizard Nav Buttons -->
+        <div id="wizard-nav-btns" class="flex items-center justify-between mt-8 pt-6 border-t border-white/10">
+          <button id="btn-wizard-prev" onclick="wizardPrevStep()" class="px-4 py-2 rounded-xl text-xs text-zinc-400 hover:text-white transition-colors hidden">
+            Geri Dön
+          </button>
+          <div id="wizard-placeholder"></div>
+          <button id="btn-wizard-next" onclick="wizardNextStep()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold text-xs shadow-glow transition-all flex items-center gap-2">
+            <span>Sonraki Adım</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODULE: GUIDES SECTION ================= -->
+  <section id="guides" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-camera-darker border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-3">
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+          <span>Temel Çekim Modları</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Adım Adım Profesyonel Rehberler</h2>
+        <p class="text-sm text-zinc-400 mt-2">
+          Her çekim türünün ışık mantığı, lens tercihi ve altın kuralları.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Portre -->
+        <div class="rounded-3xl bg-camera-card p-6 border border-white/10 space-y-4 hover:border-amber-500/50 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">👤</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">Portre Rehberi</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Doğal Bokeh ve Yüz Orantısı</h3>
+          <p class="text-xs text-zinc-400">1x lens yerine 2x veya 3x telefoto lense geçerek burun ve kulak deformasyonunu sıfırlayın.</p>
+          <div class="pt-2 border-t border-white/5 text-[11px] font-mono text-amber-300">
+            ★ Altın Kural: Modeli 2.5 metre geriye çekin, gözleri üst 1/3 kılavuzuna oturtun.
+          </div>
+        </div>
+
+        <!-- Gece -->
+        <div class="rounded-3xl bg-camera-card p-6 border border-white/10 space-y-4 hover:border-amber-500/50 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">🌙</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400">Gece & Şehir</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Işıkları Patlatmadan Gece Çekimi</h3>
+          <p class="text-xs text-zinc-400">Otomatik modun geceyi gündüze çevirmesine izin vermeyin. Güneş simgesini 1 tık aşağı kaydırın.</p>
+          <div class="pt-2 border-t border-white/5 text-[11px] font-mono text-cyan-300">
+            ★ Altın Kural: Dirsekleri göğse yaslayarak titreşimi sıfırlayın.
+          </div>
+        </div>
+
+        <!-- Sokak -->
+        <div class="rounded-3xl bg-camera-card p-6 border border-white/10 space-y-4 hover:border-amber-500/50 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">🚶</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400">Sokak Fotoğrafçılığı</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Işık-Gölge Kontrastı ve Seri Çekim</h3>
+          <p class="text-xs text-zinc-400">Binaların arasından süzülen sert ışık huzmesini bekleyin ve deklanşörü kaydırarak seri çekin.</p>
+          <div class="pt-2 border-t border-white/5 text-[11px] font-mono text-emerald-300">
+            ★ Altın Kural: Yürüyen insanın bacakları üçgen oluşturduğu anda deklanşöre basın.
+          </div>
+        </div>
+
+        <!-- Yemek / Makro -->
+        <div class="rounded-3xl bg-camera-card p-6 border border-white/10 space-y-4 hover:border-amber-500/50 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">☕</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-400">Yemek & Sunum</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">45° Doğal Pencere Işığı</h3>
+          <p class="text-xs text-zinc-400">Asla tepe sarı lamba altında çekmeyin. Masayı pencere kenarına alın ve karşıya beyaz peçete koyun.</p>
+          <div class="pt-2 border-t border-white/5 text-[11px] font-mono text-rose-300">
+            ★ Altın Kural: Telefon gölgeniz düşmesin diye 2x zoom yapıp geriden odaklayın.
+          </div>
+        </div>
+
+        <!-- Sinematik Video -->
+        <div class="rounded-3xl bg-camera-card p-6 border border-white/10 space-y-4 hover:border-amber-500/50 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">🎬</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">Sinematik Video</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">24 FPS & Kilitli Pozlama (AE Lock)</h3>
+          <p class="text-xs text-zinc-400">60 FPS video televizyon gibi hissettirir. Sinematik film havası için 4K 24 FPS'e ayarlayın.</p>
+          <div class="pt-2 border-t border-white/5 text-[11px] font-mono text-amber-300">
+            ★ Altın Kural: Yürürken dizleri hafif bükerek adımlayın (Ninja Walk).
+          </div>
+        </div>
+
+        <!-- RAW & Kalite -->
+        <div class="rounded-3xl bg-camera-card p-6 border border-white/10 space-y-4 hover:border-amber-500/50 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">💎</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-zinc-300">RAW & Düzenleme</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">48MP ProRAW Sırrı</h3>
+          <p class="text-xs text-zinc-400">Standart 12MP fotoğraflar sıkıştırılır. Lightroom ile gölgeleri kurtarmak için RAW modunu açın.</p>
+          <div class="pt-2 border-t border-white/5 text-[11px] font-mono text-cyan-300">
+            ★ Altın Kural: Doğru pozlanan RAW, makine kalitesinde dinamik aralık sunar.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODULE: GLOSSARY ================= -->
+  <section id="glossary" class="py-20 px-4 sm:px-6 lg:px-8 bg-camera-darkest border-t border-white/5 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">Mobil Fotoğrafçılık Sözlüğü</h2>
+      <p class="text-xs sm:text-sm text-zinc-400 mb-8">Kamera ekranındaki simgelerin anlamlarını öğrenin.</p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+        <div class="p-4 rounded-2xl bg-camera-card border border-white/5">
+          <div class="text-amber-400 font-mono font-bold text-xs">AE/AF KİLİDİ</div>
+          <div class="text-zinc-400 text-xs mt-1">Ekrana basılı tuttuğunuzda odağı ve ışığı sabitler, telefonun kafasına göre ayar yapmasını engeller.</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-camera-card border border-white/5">
+          <div class="text-cyan-400 font-mono font-bold text-xs">POZLAMA (EV)</div>
+          <div class="text-zinc-400 text-xs mt-1">Odak kutusunun yanındaki güneş simgesidir. Aşağı kaydırırsanız karanlıklaşır, yukarı kaydırırsanız aydınlanır.</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-camera-card border border-white/5">
+          <div class="text-indigo-400 font-mono font-bold text-xs">LiDAR SENSÖRÜ</div>
+          <div class="text-zinc-400 text-xs mt-1">iPhone Pro serisinde bulunan lazer tarayıcıdır. Zifiri karanlıkta 6 kat daha hızlı netleme sağlar.</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-camera-card border border-white/5">
+          <div class="text-rose-400 font-mono font-bold text-xs">OTOMATİK MAKRO</div>
+          <div class="text-zinc-400 text-xs mt-1">iPhone 13 Pro ve üzerinde ultra geniş lensin 2 cm'ye kadar nesnelere netleme yapabilme yeteneğidir.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-4 sm:px-6 lg:px-8 border-t border-white/10 bg-black text-center text-xs font-mono text-zinc-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2 text-white font-bold">
+        <i data-lucide="aperture" class="w-4 h-4 text-amber-500"></i>
+        <span>ShutterCraft PRO</span>
+      </div>
+      <div>
+        Telefon kameralarını profesyonel makinelere dönüştüren açık mobil stüdyo platformu.
+      </div>
+      <div>
+        © 2026 ShutterCraft • Tüm Hakları Saklıdır
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC: ALL DATA & CONTROLLERS -->
+  <script>
+    /* ================= 1. iPHONE MODEL DATABASE ================= */
+    const iphoneSpecsData = [
+      {
+        id: "iphone-12",
+        series: "iPhone 12",
+        name: "iPhone 12 & 12 Mini",
+        badge: "12MP Çift Kamera & Gece Modu",
+        generation: "2020 Klasik",
+        releaseYear: 2020,
+        isPro: false,
+        hardware: {
+          mainSensor: "12 MP (1/2.55\" sensör, 26mm f/1.6)",
+          zoomCapabilities: "0.5x Ultra Geniş, 1x Geniş Açı",
+          apertures: "Ana: f/1.6 | Ultra Geniş: f/2.4",
+          lidar: false,
+          macroSupport: false,
+          rawSupport: "Desteklenmiyor",
+          cameraControl: false,
+          actionButton: false
+        },
+        evaluation: {
+          strongestSide: "Gündüz sokak ve doğal ışık portrelerinde f/1.6 diyafram ile dengeli renkler.",
+          weakestSide: "Fiziki telefoto lensi ve LiDAR bulunmadığı için karanlıkta odak hızı ve uzaktaki detay sınırlıdır.",
+          scoreOverview: { night: 6.5, portrait: 7.0, street: 8.0, macro: 5.5, landscape: 7.5 },
+          verdictBadge: "Gündüz Sokak & Şehir Klasiği"
+        },
+        recipes: {
+          portrait: {
+            title: "Yazılımsal Derinlik ve Ters Işık",
+            lens: "1x Portre Modu (Doğal f/2.8 ayarı)",
+            settings: "1/250s | EV: +0.3 | ISO 100",
+            advantage: "A14 Bionic sinir motoru yüz sınırlarını yapay zeka ile arka plandan ayırır.",
+            howTo: "Modelle aranızda 1.5 - 2 metre mesafe bırakın. Ekranda 'Derinlik Efekti' sarı yandığında çekin.",
+            trick: "Çektikten sonra Fotoğraflar uygulamasından sanal diyaframı f/4.0 seviyesine getirin; saçlar ve kulaklar erimesin.",
+            trap: "Modelin yüzüne 30 cm'den fazla yaklaşıp burun büyümesine (geniş açı bozulması) yol açmak."
+          },
+          night: {
+            title: "1x f/1.6 Diyafram ile Sabit Gece Çekimi",
+            lens: "1x Ana Kamera (0.5x'ten kaçının)",
+            settings: "Gece Modu 3s | EV: -0.7 | ISO 250",
+            advantage: "f/1.6 diyafram bir önceki nesle göre %27 daha fazla ışık toplar.",
+            howTo: "1x ana kamerayı kullanın ve sarı gece modu simgesine dokunup süreyi 3 saniyeye sabitleyin.",
+            trick: "Telefonu duvara veya göğsünüze yaslayarak nefesinizi verin, süre otomatik 10 saniyeye çıkabilir.",
+            trap: "Karanlıkta dijital yakınlaştırma (zoom) yapmak; görüntü çamurlaşır."
+          },
+          street: {
+            title: "Seri Çekim ve Hızlı Pozlama Kilidi",
+            lens: "1x Ana Kamera (26mm sokak açısı)",
+            settings: "1/500s | EV: -0.3 | ISO 100",
+            advantage: "A14 Smart HDR 3 ile binalar arasındaki gölgeleri dengeli tutar.",
+            howTo: "Deklanşörü sola hızlıca kaydırarak seri çekim (Burst) yapın. Kaldırıma dokunup AE/AF kilitleyin.",
+            trick: "Siyah-beyaz 'Mono' filtresini açarak ışık-gölge kontrastını canlı görün.",
+            trap: "Hareketli nesnelerde 0.5x ultra genişe geçmek; köşelerdeki insanları deforme eder."
+          },
+          landscape: {
+            title: "Smart HDR 3 ile Ufuk Çizgisini Yakalama",
+            lens: "0.5x Ultra Geniş & 1x Ana",
+            settings: "1/1000s | EV: 0.0 | ISO 50",
+            advantage: "0.5x lens 120 derecelik devasa manzarayı tek kareye sığdırır.",
+            howTo: "Kamera ayarlarından 'Kılavuz'u açın. Ufuk çizgisini üst yatay çizgiye oturtun.",
+            trick: "Güneşe karşı çekerken parlama (flare) olmaması için telefonu hafif açılı tutun.",
+            trap: "Ultra genişte kadrajın köşelerine insan veya bina sokup fıçı bükülmesi yaratmak."
+          },
+          foodMacro: {
+            title: "45° Açı ve Gölgesiz 1.2x Yakınlaşma",
+            lens: "1x Ana Lens (10-15 cm mesafe)",
+            settings: "1/125s | EV: +0.3 | ISO 80",
+            advantage: "Minimum odak sınırı 8-10 cm'dir, doğru mesafede çok keskindir.",
+            howTo: "Tabağa 20 cm uzaktan bakın. Telefon gölgeniz düşerse geri çekilip 1.2x hafif kırpma yapın.",
+            trick: "Tabağın karşısına dik beyaz bir peçete koyarak stüdyo dolgu ışığı elde edin.",
+            trap: "Tabağa 4 cm kadar yaklaşıp kameranın odak kaçırmasına sebep olmak."
+          }
+        }
+      },
+      {
+        id: "iphone-12-pro",
+        series: "iPhone 12",
+        name: "iPhone 12 Pro & 12 Pro Max",
+        badge: "LiDAR Tarayıcı & Apple ProRAW Öncüsü",
+        generation: "2020 Pro",
+        releaseYear: 2020,
+        isPro: true,
+        hardware: {
+          mainSensor: "12 MP (Pro Max: 1/1.9\" büyük sensör, Sensör Kaydırmalı OIS)",
+          zoomCapabilities: "0.5x, 1x, 2x (Pro) veya 2.5x (Pro Max)",
+          apertures: "Ana: f/1.6 | Ultra: f/2.4 | Tele: f/2.0-2.2",
+          lidar: true,
+          macroSupport: false,
+          rawSupport: "Apple ProRAW (12MP)",
+          cameraControl: false,
+          actionButton: false
+        },
+        evaluation: {
+          strongestSide: "LiDAR destekli Gece Portresi ve profesyonel ProRAW 12MP dosya düzenleme kabiliyeti.",
+          weakestSide: "Otomatik Makro modu bulunmaz ve 48MP sensör olmadığı için kırpma potansiyeli sınırlıdır.",
+          scoreOverview: { night: 8.2, portrait: 8.4, street: 8.2, macro: 6.2, landscape: 8.0 },
+          verdictBadge: "LiDAR & Gece Portresi Ustası"
+        },
+        recipes: {
+          portrait: {
+            title: "2x / 2.5x Telefoto ve LiDAR ile Gece Portresi",
+            lens: "2x (Pro) veya 2.5x (Pro Max) Telefoto Lens",
+            settings: "1/100s | EV: 0.0 | Gece Portre Modu",
+            advantage: "LiDAR sensörü karanlıkta kızılötesi lazer ışınlarıyla insan yüzünü milisaniyeler içinde haritalar.",
+            howTo: "Karanlık sokakta Portre moduna geçin. Ekranda 'Gece Modu' simgesi çıktığında tele lense geçin.",
+            trick: "Modelin arkasına uzak bir sokak lambası yerleştirin; LiDAR onu tanıyıp sinematik bokeh halkalarına dönüştürür.",
+            trap: "Gece portresinde flaş açıp yüzü patlatmak; LiDAR doğal ortam ışığında çok daha başarılıdır."
+          },
+          night: {
+            title: "Apple ProRAW ile Gece Gökyüzü & Şehir",
+            lens: "1x Ana Geniş Lens (Pro Max Sensör Kaydırmalı OIS)",
+            settings: "Gece Modu 5s | EV: -0.7 | ProRAW",
+            advantage: "ProRAW, Apple'ın HDR algoritmasını kayıpsız DNG dosyasında saklar.",
+            howTo: "Kamera ekranında sağ üstteki RAW simgesini açın. Sabit bir yere koyarak 5-10 saniye pozlayın.",
+            trick: "Lightroom mobil uygulamasında pozlamayı +1.5 stop açtığınızda sokaktaki tabela detayları geri gelir.",
+            trap: "0.5x ultra genişte gece RAW çekmek; sensör gürültüsü yüksek kalır."
+          },
+          street: {
+            title: "2x Optik Telefoto ile Sokak Detayı",
+            lens: "2x / 2.5x Telefoto Lens (52mm / 65mm eşdeğeri)",
+            settings: "1/500s | EV: -0.3 | ISO 125",
+            advantage: "İnsanlara fiziksel olarak yaklaşmadan samimi sokak kareleri yakalatır.",
+            howTo: "Caddenin karşısından yürüyen insanları izleyin. 2x'e dokunup deklanşöre basın.",
+            trick: "Vitrin camından yansıyan sokak siluetlerini 2x optik zoomla kadraja doldurun.",
+            trap: "Hızlı koşan nesnelerde 2.5x tele lense geçmek; deklanşör hızı yetersiz kalabilir."
+          },
+          landscape: {
+            title: "ProRAW ile Gökyüzü ve Dinamik Aralık",
+            lens: "1x Ana Kamera (ProRAW 12MP)",
+            settings: "1/500s | EV: -0.3 | ISO 32",
+            advantage: "Bulutlardaki beyaz patlamaları (highlights) geri getirebilen ProRAW sıkıştırmasız veri.",
+            howTo: "Bulutların en parlak yerine odaklayıp RAW simgesini açarak çekin.",
+            trick: "Çekim sonrası parlaklık eğrisini (curves) S şeklinde bükerek sinematik kontrast kazandırın.",
+            trap: "Aşırı rüzgarda 0.5x lens ile uzun pozlama yapmak; sallantı detayı bozar."
+          },
+          foodMacro: {
+            title: "2x Telefoto ile Gölgesiz Ürün Detayı",
+            lens: "2x Telefoto Lens (30 cm mesafeden)",
+            settings: "1/125s | EV: +0.3 | ISO 100",
+            advantage: "2x optik tele lens, tabağa yaklaşmadan makro hissiyatı verir.",
+            howTo: "Masadan 40 cm geri çekilin, 2x optik butona dokunun ve yemeğin üstüne odaklayın.",
+            trick: "Telefonu tabağa dik (90° kuş bakışı / Flat-lay) tutarak gastronomi dergisi kapağı hissi yaratın.",
+            trap: "1x lenste aşırı yaklaşıp telefonun gölgesini yemeğin üstüne düşürmek."
+          }
+        }
+      },
+      {
+        id: "iphone-13-pro",
+        series: "iPhone 13",
+        name: "iPhone 13 Pro & 13 Pro Max",
+        badge: "3x Optik Zoom & Otomatik Makro Devrimi",
+        generation: "2021 Pro",
+        releaseYear: 2021,
+        isPro: true,
+        hardware: {
+          mainSensor: "12 MP (1/1.65\" çok büyük sensör, f/1.5 devasa diyafram)",
+          zoomCapabilities: "0.5x, 1x, 3x Optik Zoom (77mm)",
+          apertures: "Ana: f/1.5 | Ultra: f/1.8 | Tele: f/2.8",
+          lidar: true,
+          macroSupport: true,
+          rawSupport: "Apple ProRAW (12MP)",
+          cameraControl: false,
+          actionButton: false
+        },
+        evaluation: {
+          strongestSide: "2 cm Otomatik Süper Makro ve 77mm (3x) mükemmel yüz orantılı optik portre performansı.",
+          weakestSide: "3x telefoto lensin f/2.8 diyaframı zifiri karanlıkta zorlanır ve otomatik olarak 1x dijital kırpmaya düşebilir.",
+          scoreOverview: { night: 8.8, portrait: 9.1, street: 8.8, macro: 9.6, landscape: 8.6 },
+          verdictBadge: "Makro & 3x Portre Şampiyonu"
+        },
+        recipes: {
+          portrait: {
+            title: "77mm 3x Optik Lens ile Sinematik Yüz Portresi",
+            lens: "3x Optik Telefoto Lens",
+            settings: "1/200s | EV: 0.0 | Portre Modu f/3.2",
+            advantage: "77mm odak uzaklığı profesyonel DSLR 85mm portre lenslerine en yakın sıkıştırmayı sağlar.",
+            howTo: "Modelden 3 metre geriye çekilin. 3x butonuna basın. Modelin gözüne odaklayın.",
+            trick: "Modelin arkasındaki ağaç yaprakları veya lambalar 3x lensin perspektif sıkıştırmasıyla devasa bokeh toplarına dönüşür.",
+            trap: "Karanlık bir odada 3x'e basmak; telefon ışık yetersiz olunca gizlice 1x dijital zoom yapabilir."
+          },
+          night: {
+            title: "f/1.5 Devasa Diyafram ile Karanlığı Yırtma",
+            lens: "1x Ana Kamera (Sensör Kaydırmalı OIS)",
+            settings: "Gece Modu 1s-2s | EV: -0.7 | ISO 400",
+            advantage: "f/1.5 diyafram iPhone tarihinin en geniş diyaframlarından biridir, ışığı içeri çeker.",
+            howTo: "Gece sokakta 1x ana kamerada kalın. Gece modu otomatik olarak 1 saniyeye düşer.",
+            trick: "Sinematik Mod'u açarak 1080p 30fps gece videolarında odağı bir kişiden diğerine kaydırın.",
+            trap: "Gece çekiminde 3x telefotoyu zorlamak; ana 1x kamerayı kullanmak %300 daha temizdir."
+          },
+          street: {
+            title: "3x Gizli Sokak Portresi & Mimari Detaylar",
+            lens: "3x Telefoto Lens (77mm)",
+            settings: "1/500s | EV: -0.3 | ISO 100",
+            advantage: "Uzaktaki bir esnafı, güvercini veya tarihi bina balkonunu fark ettirmeden yakalar.",
+            howTo: "Sokağın karşı kaldırımında durun. 3x ile mimari sütunlar arasına giren bir silueti bekleyin.",
+            trick: "Fotoğrafik Stiller (Photographic Styles) ayarından 'Zengin Kontrast' seçerek sokak karelerini Leica tarzı çekin.",
+            trap: "Çok hızlı koşan motosiklet veya bisiklette 3x kullanmak; kadrajdan anında çıkar."
+          },
+          landscape: {
+            title: "0.5x Ultra Geniş Lens ile f/1.8 Gece Manzarası",
+            lens: "0.5x Ultra Geniş & 1x Ana",
+            settings: "1/1000s | EV: 0.0 | ISO 40",
+            advantage: "Ultra geniş açı lens f/1.8'e yükseltilmiştir, köşelerdeki kararma (vignette) kalkmıştır.",
+            howTo: "Geniş dağ veya göl manzaralarında 0.5x'e geçin, kılavuz çizgileriyle su seviyesini hizalayın.",
+            trick: "Ön plana ilginç dokulu bir kaya koyup kamerayı yere 10 cm yaklaştırarak devasa perspektif elde edin.",
+            trap: "Kamera önündeki nesneleri 0.5x'te aşırı kenarlara koyup sünmelerine izin vermek."
+          },
+          foodMacro: {
+            title: "2 cm Otomatik Süper Makro Modu",
+            lens: "Ultra Geniş Otomatik Makro (Sarı çiçek ikonu)",
+            settings: "1/125s | EV: +0.3 | ISO 64",
+            advantage: "iPhone 13 Pro ile gelen otomatik makro, 2 cm mesafeden bile jilet gibi netler.",
+            howTo: "Kamerayı tatlının üstündeki nane yaprağına veya kahve kremasına 2-3 cm kadar yaklaştırın.",
+            trick: "Ayarlar > Kamera > 'Makro Denetimi'ni açın; böylece ekranda beliren sarı çiçek simgesiyle makroyu manuel kapatıp açabilirsiniz.",
+            trap: "Çok yaklaştığınızda telefonun kendi gövdesinin ışığı tamamen kesmesi; ışığı yandan verin."
+          }
+        }
+      },
+      {
+        id: "iphone-14-pro",
+        series: "iPhone 14",
+        name: "iPhone 14 Pro & 14 Pro Max",
+        badge: "48MP Quad-Pixel & 2x Kayıpsız Telefoto",
+        generation: "2022 Pro",
+        releaseYear: 2022,
+        isPro: true,
+        hardware: {
+          mainSensor: "48 MP Quad-Pixel (1/1.28\" dev sensör, 2.44µm 4'ü 1 arada piksel)",
+          zoomCapabilities: "0.5x, 1x, 2x (Kayıpsız 48MP Sensör İçi Kırpma), 3x",
+          apertures: "Ana: f/1.78 | Ultra: f/2.2 | Tele: f/2.8",
+          lidar: true,
+          macroSupport: true,
+          rawSupport: "Apple ProRAW (48MP Max) & HEIF Max",
+          cameraControl: false,
+          actionButton: false
+        },
+        evaluation: {
+          strongestSide: "48MP ProRAW ile profesyonel stüdyo seviyesi detay ve sensör içi kayıpsız 2x (48mm) odak uzaklığı.",
+          weakestSide: "48MP ProRAW fotoğraflar 75-100 MB yer kaplar; seri çekimlerde hafızayı hızla doldurur.",
+          scoreOverview: { night: 9.3, portrait: 9.4, street: 9.3, macro: 9.5, landscape: 9.7 },
+          verdictBadge: "48MP Çözünürlük & 2x Portre Canavarı"
+        },
+        recipes: {
+          portrait: {
+            title: "2x (48mm) Sensör İçi Kayıpsız Portre",
+            lens: "2x Portre Modu (48MP sensörün tam ortasını okur)",
+            settings: "1/250s | EV: +0.3 | Portre Modu f/2.8",
+            advantage: "2x modu dijital zoom değildir! 48MP sensörün merkezindeki 12MP pikselleri kayıpsız okur.",
+            howTo: "Portre moduna girip sarı '2x' butonuna dokunun. Modelden 1.8 metre mesafede kalın.",
+            trick: "48mm klasik belgesel portre açısıdır; insan yüzünü tam olması gerektiği gibi gösterir.",
+            trap: "Açık havada 1x portrede kalıp modelin burnunu büyütmek."
+          },
+          night: {
+            title: "Photonic Engine ile 4 Kat Daha Fazla Işık",
+            lens: "1x Ana Kamera (Quad-Pixel 12MP Birleştirme)",
+            settings: "Gece Modu 1s | EV: -0.7 | ISO 500",
+            advantage: "Photonic Engine, sıkıştırılmamış ham pikseller üzerinde Deep Fusion uygulayarak renkleri canlandırır.",
+            howTo: "Gece caddesinde 1x ana kamerada çekin. Pozlama telafisini -0.7'ye çekerek neon renk doygunluğunu artırın.",
+            trick: "Gece portresinde LiDAR odağı kilitledikten sonra 2x moduna geçerek arka plan ışıklarını büyütebilirsiniz.",
+            trap: "Karanlıkta 48MP RAW çekmeye çalışmak; piksel birleştirme (binning) kapandığı için gren artabilir."
+          },
+          street: {
+            title: "24mm vs 48mm Hızlı Sokak Geçişi",
+            lens: "1x (24mm) ve 2x (48mm)",
+            settings: "1/1000s | EV: -0.3 | ISO 100",
+            advantage: "Tek dokunuşla geniş sokak planından detay insan karesine sıfır kalite kaybıyla geçiş.",
+            howTo: "Kamerada 1x ve 2x butonları arasında seri geçiş yapın. Deklanşör gecikmesi (shutter lag) sıfırdır.",
+            trick: "Aksiyon Modu'nu (Action Mode) açarak koşan insanları koşarak takip ederken gimbal gibi sarsıntısız video çekin.",
+            trap: "Aksiyon modunu loş kapalı mekanda açmak; çok fazla ışık ister, kararır."
+          },
+          landscape: {
+            title: "48MP ProRAW ile Sonsuz Detay & Baskı Kalitesi",
+            lens: "1x Ana Kamera (RAW MAX 48MP Açık)",
+            settings: "1/500s | EV: -0.3 | ISO 40",
+            advantage: "48 milyon gerçek piksel. Manzaradaki en uzaktaki evin penceresi bile jilet gibidir.",
+            howTo: "Kamera sağ üstündeki 'RAW MAX' yazısına dokunup aktif edin. Tripod veya sabit tutuşla çekin.",
+            trick: "Fotoğrafı çektikten sonra istediğiniz bir bölümü %300 kırpsanız bile netliği bozulmaz.",
+            trap: "Her sıradan fotoğrafı 48MP çekmek; telefon belleği birkaç haftada dolar."
+          },
+          foodMacro: {
+            title: "Otomatik Makro ve 2x Ürün Odaklama",
+            lens: "Otomatik Makro & 2x Optik",
+            settings: "1/125s | EV: +0.3 | ISO 80",
+            advantage: "Photonic Engine sayesinde ultra geniş lensin makro performansı 3 kat daha parlaktır.",
+            howTo: "Tabağa 3 cm yaklaşarak makroyu açın, ardından 2x moduna dokunarak daha da yakınlaşın.",
+            trick: "Yan ışık kullanarak çikolata veya peynir üzerindeki dokuları kabartmalı gösterin.",
+            trap: "Çekim yaparken telefonun gölgesini yemeğe düşürmek."
+          }
+        }
+      },
+      {
+        id: "iphone-15-pro",
+        series: "iPhone 15",
+        name: "iPhone 15 Pro & 15 Pro Max",
+        badge: "Titanyum Kasa • 5x Tetraprizma & Eylem Düğmesi",
+        generation: "2023 Pro",
+        releaseYear: 2023,
+        isPro: true,
+        hardware: {
+          mainSensor: "48 MP (24MP varsayılan süper çözünürlük, 24mm/28mm/35mm lens simülasyonu)",
+          zoomCapabilities: "15 Pro: 3x (77mm) | 15 Pro Max: 5x Tetraprizma (120mm)",
+          apertures: "Ana: f/1.78 | Ultra: f/2.2 | Tele: f/2.8",
+          lidar: true,
+          macroSupport: true,
+          rawSupport: "Apple ProRAW (48MP Max) & HEIF Max",
+          cameraControl: false,
+          actionButton: true
+        },
+        evaluation: {
+          strongestSide: "15 Pro Max'teki 5x (120mm) Tetraprizma telefoto lens, 24MP yeni nesil varsayılan detay ve Eylem Düğmesi ile anında çekim.",
+          weakestSide: "5x optik zoom 2x ile 4.9x arasındaki mesafelerde ana sensör kırpması kullanır, bu aralıkta ışık kaybı yaşanabilir.",
+          scoreOverview: { night: 9.6, portrait: 9.7, street: 9.6, macro: 9.6, landscape: 9.8 },
+          verdictBadge: "5x Tetraprizma & 24MP Portre Lideri"
+        },
+        recipes: {
+          portrait: {
+            title: "5x (120mm) Tetraprizma ile Moda Dergisi Portresi",
+            lens: "15 Pro Max: 5x | 15 Pro: 3x Telefoto",
+            settings: "1/250s | EV: +0.3 | Yeni Nesil Otomatik Portre",
+            advantage: "iPhone 15 serisinde Portre moduna geçmenize gerek yoktur! Kadrajda insan gördüğünde sol altta 'f' simgesi belirir.",
+            howTo: "Normal Fotoğraf modunda çekin. Sonradan Fotoğraflar uygulamasında odağı öndeki kişiden arkadakine tek dokunuşla kaydırın.",
+            trick: "15 Pro Max'te modelden 5 metre geriye çıkıp 5x ile çekin; arka plan tamamen erir, profesyonel 85-135mm lens etkisi doğar.",
+            trap: "Dar odada 5x ile portre çekmeye çalışmak; mesafe yetmez."
+          },
+          night: {
+            title: "Photonic Engine & 24MP Gece Çözünürlüğü",
+            lens: "1x Ana Kamera (f/1.78)",
+            settings: "Gece Modu 1s | EV: -0.7 | ISO 400",
+            advantage: "Standart 12MP yerine 24MP yüksek çözünürlüklü süper gece kareleri üretir.",
+            howTo: "Ana kamerada çekin. Sabit tutuşla pozlama süresini 1 saniyede tutun.",
+            trick: "Eylem Düğmesini 'Kamera' olarak atayın; cebinizden çıkarırken tuşa basılı tutarak 0.5 saniyede gece çekimine başlayın.",
+            trap: "5x lens ile zifiri karanlıkta zoom yapmak; 5x lens f/2.8 olduğu için karanlıkta 1x ana kamera kadar ışık alamaz."
+          },
+          street: {
+            title: "24mm, 28mm ve 35mm Klasik Sokak Lensleri",
+            lens: "1x butonuna art arda dokunarak 28mm ve 35mm'ye geçiş",
+            settings: "1/1000s | EV: -0.3 | 35mm Odak",
+            advantage: "Ana kamera 24mm, 28mm ve 35mm klasik sokak fotoğrafçılığı odak uzaklıklarını optik kalitede simüle eder.",
+            howTo: "Kamera ekranında '1x' yazısına dokunun -> '1.2x (28mm)' -> bir daha dokunun -> '1.5x (35mm)' olur.",
+            trick: "Ayarlar > Kamera > Ana Kamera bölümünden varsayılan lensi '35mm' yapın. Henri Cartier-Bresson tarzı sokak kadrajı hazır!",
+            trap: "Ekranda parmakla iki parmak zoom yapıp rastgele 1.7x gibi değerlerde kalmak; optik kalibre butonları kullanın."
+          },
+          landscape: {
+            title: "HEIF Max (48MP) ile Hafif & Ultra Detaylı Manzara",
+            lens: "1x Ana Lens veya 5x Tetraprizma",
+            settings: "1/500s | EV: 0.0 | HEIF Max 48MP",
+            advantage: "48MP ProRAW 80 MB iken HEIF Max sadece 5 MB yer kaplar ama aynı 48MP jilet detayını verir.",
+            howTo: "Sağ üstte 'HEIF MAX' simgesini açın. Manzarayı ufuk çizgisine oturtarak tek kare alın.",
+            trick: "5x optik zoom ile uzaktaki dağ zirvelerini veya sisli vadiyi kadraja sıkıştırarak dramatik katmanlar oluşturun.",
+            trap: "HEIF Max açıkken seri çekim yapmaya kalkmak; işlemci 48MP'yi işlemek için 0.5 saniye bekletir."
+          },
+          foodMacro: {
+            title: "Otomatik Makro ve 35mm Gurme Çekimi",
+            lens: "1.5x (35mm) Ana Lens veya Süper Makro",
+            settings: "1/125s | EV: +0.3 | ISO 100",
+            advantage: "35mm modu tabağı tam masa perspektifinde çekerken arka plandaki çatal-bıçağı hafif flulaştırır.",
+            howTo: "Tabağa 25 cm mesafede 1.5x (35mm) seçin. Sosun en parlak yerine dokunun.",
+            trick: "Pencere ışığı süjenin arkasından 45 derece vururken tabağın önünü beyaz menü kartı ile aydınlatın.",
+            trap: "Flaş açıp yiyeceğin yağlarını parlatmak ve iştah kaçırıcı hale getirmek."
+          }
+        }
+      },
+      {
+        id: "iphone-16-pro",
+        series: "iPhone 16",
+        name: "iPhone 16 Pro & 16 Pro Max",
+        badge: "Kamera Denetimi • 48MP Ultra Geniş • 4K 120 FPS",
+        generation: "2024 Zirve",
+        releaseYear: 2024,
+        isPro: true,
+        hardware: {
+          mainSensor: "48 MP Fusion (Yeni 2. nesil Quad-Pixel, sıfır deklanşör gecikmesi)",
+          zoomCapabilities: "0.5x, 1x, 2x, 5x Tetraprizma (Her iki Pro modelde standart 5x)",
+          apertures: "Ana: f/1.78 | Ultra: f/2.2 (48MP) | Tele: f/2.8 (5x)",
+          lidar: true,
+          macroSupport: true,
+          rawSupport: "Apple ProRAW (48MP Max) & HEIF Max",
+          cameraControl: true,
+          actionButton: true
+        },
+        evaluation: {
+          strongestSide: "Dokunmatik Kamera Denetimi (Camera Control) tuşu, 48MP Ultra Geniş Açılı Gece/Makro ve 4K 120 FPS Sinematik Video.",
+          weakestSide: "Gelişmiş donanım ayarlarının çokluğu (Fotoğrafik Stiller renk paleti, Kamera Denetimi jestleri) yeni kullanıcılar için öğrenme eğrisi gerektirir.",
+          scoreOverview: { night: 9.8, portrait: 9.8, street: 9.9, macro: 9.9, landscape: 9.9 },
+          verdictBadge: "48MP Ultra Geniş & Profesyonel Kamera Denetimi"
+        },
+        recipes: {
+          portrait: {
+            title: "Kamera Denetimi ile Anlık Diyafram Ayarı & 5x Portre",
+            lens: "5x Optik Telefoto (120mm) veya 2x (48mm)",
+            settings: "1/250s | Kamera Denetimi: f/2.2 | Portre",
+            advantage: "Kamera Denetimi tuşuna hafif çift basarak parmağınızı kaydırıp arka plan bulanıklığını (f-stop) anında değiştirebilirsiniz.",
+            howTo: "Telefonu yatay tutun, işaret parmağınızla Kamera Denetimi tuşunu hafifçe kaydırarak diyaframı f/2.0 yapın ve çekin.",
+            trick: "Yeni Fotoğrafik Stiller renk kontrol pedini kullanarak ten rengini bozmadan sadece arka plan tonunu soğutun veya ısıtın.",
+            trap: "Kamera Denetimi tuşuna çok sert basıp telefonu titretmek; hafifçe kaydırın ve deklanşöre dokunun."
+          },
+          night: {
+            title: "48MP Ultra Geniş Açı ile Gece Şehir Manzarası",
+            lens: "0.5x Ultra Geniş Açı (48 MP Sensör)",
+            settings: "Gece Modu 2s | EV: -0.7 | 48MP HEIF Max",
+            advantage: "Ultra geniş kamera artık 12MP değil 48MP'dir! Gece sokaklarında köşelerdeki detay kaybı tamamen çözülmüştür.",
+            howTo: "Gece gökdelenler veya tarihi caddelerde 0.5x'e geçin. Kamera Denetimi tuşunu kaydırıp Pozlamayı -0.7 EV yapın.",
+            trick: "4K 120 FPS ağır çekim modunda gece sokak lambaları altındaki yağmur damlalarını sinematik film gibi kaydedin.",
+            trap: "Gece çekiminde parmağınızın 5x prizma lensinin önüne gelmesi (yatay tutuşta dikkat edin)."
+          },
+          street: {
+            title: "Kamera Denetimi ile Refleks Deklanşör & 28mm Sokak",
+            lens: "1x (28mm / 35mm Fusion Lens)",
+            settings: "1/1000s | EV: -0.3 | Sıfır Gecikme",
+            advantage: "Ekrana dokunmaya gerek kalmadan Kamera Denetimi tuşu ile DSLR makine gibi iki kademeli (odak + çekim) tetikleme.",
+            howTo: "Tuşa yarım basın (odak kilitlenir), tam basın (fotoğraf çekilir). Sokakta yürürken gözünüzü ekrandan ayırmayın.",
+            trick: "Sokakta gölge-ışık oyunlarında Kamera Denetimi ile Pozlamayı (EV) anında -1.0'a çekerek saf siluet yakalayın.",
+            trap: "Çekim tuşuna basarken telefonu aşağı doğru çekmek; telefonu iki elle kavrayın."
+          },
+          landscape: {
+            title: "48MP Ultra Geniş + 48MP Ana Lens ile İkili Dev Çözünürlük",
+            lens: "0.5x (48MP) & 1x (48MP)",
+            settings: "1/500s | EV: 0.0 | ProRAW MAX 48MP",
+            advantage: "Hem 0.5x hem 1x lens 48 milyon piksel sunduğu için doğadaki her yaprak ve taş kristal netliktedir.",
+            howTo: "Kılavuz ve Seviye (Level) çizgisini sarı olana kadar hizalayın. Kamera Denetimi tuşu ile 0.5x'ten 5x'e pürüzsüz zoom yapın.",
+            trick: "ProRAW 48MP çekip Mac/PC veya Lightroom'da 'Enhance Details' ile devasa duvar tablosu boyutuna büyütün.",
+            trap: "Ufuk çizgisini 0.5x lense güvenip eğik çekmek; seviye aracını mutlaka kontrol edin."
+          },
+          foodMacro: {
+            title: "48MP Çözünürlüklü Süper Makro Canavarı",
+            lens: "48MP Ultra Geniş Otomatik Makro",
+            settings: "1/125s | EV: +0.3 | 48MP Makro Detayı",
+            advantage: "Artık makro fotoğraflar 12MP değil 48MP çözünürlüktedir. Bir kahve çekirdeğinin üzerindeki çatlak bile okunur.",
+            howTo: "Kamerayı 2 cm yaklaştırın. Kamera Denetimi tuşunu kaydırarak EV'yi hafif +0.3 artırın.",
+            trick: "Makro çektikten sonra fotoğrafa yakınlaşarak mikroskobik detayları şaşırtıcı netlikte keşfedin.",
+            trap: "Yemek dumanının lense gelip buğu yapması; lensi çekimden önce kontrol edin."
+          }
+        }
+      },
+      {
+        id: "iphone-17-18-pro",
+        series: "iPhone 17 & 18",
+        name: "iPhone 17 Pro & 18 Pro Max",
+        badge: "Yapay Zeka Pozlama Motoru • Değişken Diyafram",
+        generation: "Yeni Nesil Amiral",
+        releaseYear: 2025,
+        isPro: true,
+        hardware: {
+          mainSensor: "48 MP 1 inç Eşdeğeri Yeni Sensör (Fiziki Mekanik Değişken Diyafram f/1.4 - f/4.0)",
+          zoomCapabilities: "0.5x (48MP), 1x (48MP), 3x (48MP), 10x Periskop Zoom (48MP)",
+          apertures: "Ana: f/1.4 - f/4.0 Değişken | Ultra: f/2.0 | Tele: f/2.4",
+          lidar: true,
+          macroSupport: true,
+          rawSupport: "Apple ProRAW (48MP Max) & HEIF Max",
+          cameraControl: true,
+          actionButton: true
+        },
+        evaluation: {
+          strongestSide: "Mekanik değişken diyafram ile gerçek optik alan derinliği, 10x periskop zoom ve yapay zeka anlık sahne analizi.",
+          weakestSide: "Mekanik diyafram parçaları nedeniyle cihaz ağırlığı ve aşırı gelişmiş optik seçenekler.",
+          scoreOverview: { night: 10, portrait: 10, street: 10, macro: 10, landscape: 10 },
+          verdictBadge: "Mobil Fotoğrafçılığın Geleceği"
+        },
+        recipes: {
+          portrait: {
+            title: "Mekanik f/1.4 Diyafram ile Gerçek Optik Bokeh",
+            lens: "Ana Lens (Mekanik f/1.4) veya 10x Telefoto",
+            settings: "1/500s | f/1.4 Gerçek Diyafram | ISO 50",
+            advantage: "Yapay zeka bulanıklığı değil; lensin fiziki diyafram yaprakları açılarak gerçek sinematik optik bokeh üretir.",
+            howTo: "Kamera Denetimi tuşunu kaydırarak diyaframı f/1.4'e getirin. Modelin gözüne odaklayın.",
+            trick: "Kulak arkasındaki saç telleri yazılımsal olarak kesilmez, optik kanunları gereği organik erir.",
+            trap: "Grup portresinde f/1.4 kullanmak; arka sıradaki insanlar bulanık kalır, diyaframı f/2.8'e kısın."
+          },
+          night: {
+            title: "1 İnç Sensör ve f/1.4 ile Yıldız Fotoğrafçılığı (Astro)",
+            lens: "1x Ana Kamera veya 0.5x Ultra Geniş",
+            settings: "Gece Modu 10s Astro | EV: -0.5 | RAW",
+            advantage: "1 inçlik devasa sensör zifiri karanlıkta bile sıfır gren ile Samanyolu galaksisini kaydeder.",
+            howTo: "Telefonu gökyüzüne çevirip sabitleyin. Yıldız takip modu otomatik devreye girer.",
+            trick: "Kamera Denetimi tuşunu basılı tutarak deklanşörü kilitleyin ve 30 saniyelik uzun pozlama başlatın.",
+            trap: "Şehir ışıklarının altında yıldız çekmeye çalışmak; ışık kirliliğinden uzaklaşın."
+          },
+          street: {
+            title: "10x Periskop ile Görünmez Sokak Sineması",
+            lens: "10x Optik Periskop Telefoto (240mm)",
+            settings: "1/1000s | EV: -0.3 | OIS Kilitli",
+            advantage: "50 metre uzaktaki bir sahneyi modelin burnunun dibindeymiş gibi sinematik çeker.",
+            howTo: "Trafik akışını veya caddenin ucundaki insanları 10x ile kadrajlayın.",
+            trick: "Perspektif sıkıştırması sayesinde sokaktaki arabalar ve yayalar birbirine geçmiş gibi dramatik görünür.",
+            trap: "10x zoom yaparken ani hareket etmek; sarsıntı önleyici sistemi zorlar."
+          },
+          landscape: {
+            title: "Mekanik f/4.0 ile Köşeden Köşeye Tam Keskinlik",
+            lens: "1x Ana Lens (f/4.0 Kısık Diyafram)",
+            settings: "1/250s | f/4.0 Mekanik | ISO 50",
+            advantage: "Manzarada f/1.4 kullanırsanız arka plan bulanıklaşır. Mekanik f/4.0 ile tüm dağlar jilet gibi net kalır.",
+            howTo: "Manzara çekerken diyaframı f/4.0'a kısın. Ön plandaki çiçekten en arkadaki dağa kadar her şey net çıkar.",
+            trick: "Ultra geniş 48MP ile birleştirerek 100 megapiksellik yapay zeka panoraması oluşturun.",
+            trap: "Manzarada geniş diyaframda (f/1.4) kalıp ufuk çizgisini flulaştırmak."
+          },
+          foodMacro: {
+            title: "Periskop Tele-Makro ile Gölgesiz Sanat",
+            lens: "Telefoto Makro Modu (15 cm uzaktan)",
+            settings: "1/200s | f/2.8 | Doğal Işık",
+            advantage: "Tabağa yaklaşmanıza hiç gerek kalmadan 30 cm uzaktan 10x makro büyütme sağlar.",
+            howTo: "Masada rahatça oturun. Yemeğe hiç eğilmeden telefoto makro ile çekim yapın.",
+            trick: "Tabağın üstündeki mikro baharat taneciklerini dergi kapağı kalitesinde çekin.",
+            trap: "Restoranın loş ışığında yapay flaş açmak."
+          }
+        }
+      }
+    ];
+
+    /* ================= 2. STATE & CONTROLLER ================= */
+    let currentModelId = "iphone-16-pro";
+    let activeCategoryKey = "portrait";
+    let currentIphoneFilter = "all";
+
+    // Initialize Page
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      initBeforeAfterSlider();
+      initExposureSimulator();
+      populateIphoneModels();
+      renderSelectedIphoneModel();
+      populateWizardIphoneDropdown();
+    });
+
+    // Mobile Menu Toggle
+    document.getElementById("mobile-menu-btn")?.addEventListener("click", () => {
+      const drawer = document.getElementById("mobile-drawer");
+      drawer.classList.toggle("hidden");
+    });
+
+    /* ================= 3. BEFORE / AFTER SLIDER ================= */
+    function initBeforeAfterSlider() {
+      const box = document.getElementById("before-after-box");
+      const crop = document.getElementById("before-crop");
+      const handle = document.getElementById("slider-handle");
+      if (!box || !crop || !handle) return;
+
+      let isDown = false;
+      const updateSlider = (clientX) => {
+        const rect = box.getBoundingClientRect();
+        let x = clientX - rect.left;
+        if (x < 10) x = 10;
+        if (x > rect.width - 10) x = rect.width - 10;
+        const percent = (x / rect.width) * 100;
+        crop.style.width = percent + "%";
+        handle.style.left = percent + "%";
+      };
+
+      box.addEventListener("mousedown", (e) => { isDown = true; updateSlider(e.clientX); });
+      window.addEventListener("mouseup", () => { isDown = false; });
+      window.addEventListener("mousemove", (e) => { if (isDown) updateSlider(e.clientX); });
+
+      // Touch
+      box.addEventListener("touchstart", (e) => { isDown = true; updateSlider(e.touches[0].clientX); });
+      window.addEventListener("touchend", () => { isDown = false; });
+      window.addEventListener("touchmove", (e) => { if (isDown) updateSlider(e.touches[0].clientX); });
+    }
+
+    /* ================= 4. EXPOSURE SIMULATOR ================= */
+    function initExposureSimulator() {
+      const isoSlider = document.getElementById("slider-iso");
+      const shutterSlider = document.getElementById("slider-shutter");
+      const evSlider = document.getElementById("slider-ev");
+
+      const update = () => {
+        const iso = parseInt(isoSlider.value);
+        const shutterStep = parseInt(shutterSlider.value);
+        const ev = parseFloat(evSlider.value);
+
+        document.getElementById("val-iso").innerText = "ISO " + iso;
+        document.getElementById("val-ev").innerText = (ev > 0 ? "+" : "") + ev.toFixed(1) + " EV";
+
+        const shutterLabels = ["1/1000s", "1/500s", "1/250s", "1/125s", "1/60s", "1/30s", "1/15s", "1/4s", "1s", "2s"];
+        document.getElementById("val-shutter").innerText = shutterLabels[shutterStep - 1] || "1/250s";
+
+        // Calculate visual brightness & grain
+        let brightness = 1 + (ev * 0.25) + ((iso - 100) / 4000) - ((10 - shutterStep) * 0.04);
+        if (brightness < 0.2) brightness = 0.2;
+        if (brightness > 2.5) brightness = 2.5;
+
+        const grainEl = document.getElementById("sim-grain");
+        if (iso > 800) {
+          grainEl.style.opacity = Math.min((iso - 800) / 4000, 0.45);
+        } else {
+          grainEl.style.opacity = 0;
+        }
+
+        const imgEl = document.getElementById("sim-image");
+        imgEl.style.filter = `brightness(${brightness}) contrast(${1 + (ev * 0.05)})`;
+
+        const hudStatus = document.getElementById("hud-status");
+        if (brightness > 1.6) {
+          hudStatus.innerText = "Pozlama: Aşırı Parlak (Patlama)";
+          hudStatus.className = "text-rose-400";
+        } else if (brightness < 0.6) {
+          hudStatus.innerText = "Pozlama: Karanlık (Az Işık)";
+          hudStatus.className = "text-indigo-400";
+        } else {
+          hudStatus.innerText = "Pozlama: İdeal Denge";
+          hudStatus.className = "text-emerald-400";
+        }
+      };
+
+      isoSlider.addEventListener("input", update);
+      shutterSlider.addEventListener("input", update);
+      evSlider.addEventListener("input", update);
+    }
+
+    function resetSimulator() {
+      document.getElementById("slider-iso").value = 100;
+      document.getElementById("slider-shutter").value = 5;
+      document.getElementById("slider-ev").value = 0;
+      const event = new Event("input");
+      document.getElementById("slider-iso").dispatchEvent(event);
+    }
+
+    /* ================= 5. COMPOSITION GRID OVERLAYS ================= */
+    function toggleGrid(type) {
+      const thirds = document.getElementById("overlay-thirds");
+      const golden = document.getElementById("overlay-golden");
+      const diag = document.getElementById("overlay-diagonals");
+
+      const btnT = document.getElementById("btn-grid-thirds");
+      const btnG = document.getElementById("btn-grid-golden");
+      const btnD = document.getElementById("btn-grid-diagonals");
+
+      // Reset active classes
+      [btnT, btnG, btnD].forEach(b => {
+        b.className = "px-4 py-2 rounded-xl text-xs font-medium bg-camera-card text-zinc-400 hover:text-white border border-white/5 transition-all";
+      });
+
+      thirds.classList.add("hidden");
+      golden.classList.add("hidden");
+      diag.classList.add("hidden");
+
+      if (type === "ruleOfThirds") {
+        thirds.classList.remove("hidden");
+        btnT.className = "px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-black shadow-glow transition-all";
+      } else if (type === "goldenRatio") {
+        golden.classList.remove("hidden");
+        btnG.className = "px-4 py-2 rounded-xl text-xs font-bold bg-cyan-500 text-black shadow-cyanGlow transition-all";
+      } else if (type === "diagonals") {
+        diag.classList.remove("hidden");
+        btnD.className = "px-4 py-2 rounded-xl text-xs font-bold bg-rose-500 text-white shadow-glow transition-all";
+      }
+    }
+
+    /* ================= 6. iPHONE MODEL STUDIO RENDERER ================= */
+    function setIphoneFilter(filter) {
+      currentIphoneFilter = filter;
+      document.getElementById("btn-filter-all").className = filter === 'all' ? "px-4 py-1.5 rounded-xl text-xs font-bold bg-white text-black transition-all" : "px-4 py-1.5 rounded-xl text-xs font-medium bg-camera-card text-zinc-400 hover:text-white border border-white/5 transition-all";
+      document.getElementById("btn-filter-pro").className = filter === 'pro' ? "px-4 py-1.5 rounded-xl text-xs font-bold bg-amber-500 text-black shadow-glow transition-all" : "px-4 py-1.5 rounded-xl text-xs font-medium bg-camera-card text-zinc-400 hover:text-white border border-white/5 transition-all";
+      document.getElementById("btn-filter-standard").className = filter === 'standard' ? "px-4 py-1.5 rounded-xl text-xs font-bold bg-cyan-500 text-black shadow-cyanGlow transition-all" : "px-4 py-1.5 rounded-xl text-xs font-medium bg-camera-card text-zinc-400 hover:text-white border border-white/5 transition-all";
+      populateIphoneModels();
+    }
+
+    function populateIphoneModels() {
+      const grid = document.getElementById("iphone-model-grid");
+      if (!grid) return;
+
+      const filtered = iphoneSpecsData.filter(m => {
+        if (currentIphoneFilter === "pro") return m.isPro;
+        if (currentIphoneFilter === "standard") return !m.isPro;
+        return true;
+      });
+
+      grid.innerHTML = filtered.map(model => {
+        const isSelected = model.id === currentModelId;
+        return `
+          <button onclick="selectIphoneModel('${model.id}')"
+                  class="p-3.5 rounded-2xl border text-left transition-all relative flex flex-col justify-between cursor-pointer ${
+                    isSelected
+                      ? "bg-gradient-to-b from-amber-500/20 to-camera-card border-amber-500 shadow-glow"
+                      : "bg-camera-card/80 border-white/5 hover:border-white/20 hover:bg-white/5"
+                  }">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                  model.isPro ? "bg-amber-500/20 text-amber-300 border border-amber-500/30" : "bg-zinc-800 text-zinc-400"
+                }">
+                  ${model.generation}
+                </span>
+                ${isSelected ? '<span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>' : ''}
+              </div>
+              <div class="text-xs sm:text-sm font-bold text-white tracking-tight line-clamp-1">
+                ${model.name}
+              </div>
+            </div>
+            <div class="text-[10px] text-zinc-400 mt-2 font-mono truncate">
+              ${model.hardware.zoomCapabilities}
+            </div>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function selectIphoneModel(modelId) {
+      currentModelId = modelId;
+      populateIphoneModels();
+      renderSelectedIphoneModel();
+    }
+
+    function renderSelectedIphoneModel() {
+      const model = iphoneSpecsData.find(m => m.id === currentModelId) || iphoneSpecsData[0];
+      const container = document.getElementById("selected-model-card");
+      if (!container) return;
+
+      const avgScore = ((model.evaluation.scoreOverview.night +
+                         model.evaluation.scoreOverview.portrait +
+                         model.evaluation.scoreOverview.street +
+                         model.evaluation.scoreOverview.macro +
+                         model.evaluation.scoreOverview.landscape) / 5).toFixed(1);
+
+      container.innerHTML = `
+        <!-- Top Info & Scores -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
+          <div>
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono font-bold">
+                ${model.series}
+              </span>
+              <span class="px-2.5 py-0.5 rounded-lg bg-white/10 text-white text-xs font-mono">
+                ${model.badge}
+              </span>
+              <span class="text-xs text-zinc-400 font-mono">Çıkış: ${model.releaseYear}</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              ${model.name}
+            </h3>
+            <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-2xl">
+              ${model.evaluation.verdictBadge} • ${model.hardware.mainSensor}
+            </p>
+          </div>
+
+          <!-- Score Bars -->
+          <div class="bg-black/40 border border-white/5 rounded-2xl p-4 min-w-[260px]">
+            <div class="text-[11px] font-mono text-zinc-400 mb-2.5 flex items-center justify-between">
+              <span class="text-amber-400 font-semibold flex items-center gap-1">
+                <i data-lucide="award" class="w-3.5 h-3.5"></i> Kamera Puanı
+              </span>
+              <span class="text-xs font-bold text-white">${avgScore} / 10</span>
+            </div>
+            <div class="grid grid-cols-5 gap-1.5 text-center">
+              <div>
+                <div class="h-10 bg-white/5 rounded flex flex-col justify-end p-0.5">
+                  <div class="bg-indigo-500 rounded-sm w-full" style="height: ${model.evaluation.scoreOverview.night * 10}%"></div>
+                </div>
+                <span class="text-[9px] font-mono text-zinc-400 mt-1 block">Gece</span>
+              </div>
+              <div>
+                <div class="h-10 bg-white/5 rounded flex flex-col justify-end p-0.5">
+                  <div class="bg-amber-500 rounded-sm w-full" style="height: ${model.evaluation.scoreOverview.portrait * 10}%"></div>
+                </div>
+                <span class="text-[9px] font-mono text-zinc-400 mt-1 block">Portre</span>
+              </div>
+              <div>
+                <div class="h-10 bg-white/5 rounded flex flex-col justify-end p-0.5">
+                  <div class="bg-cyan-500 rounded-sm w-full" style="height: ${model.evaluation.scoreOverview.street * 10}%"></div>
+                </div>
+                <span class="text-[9px] font-mono text-zinc-400 mt-1 block">Sokak</span>
+              </div>
+              <div>
+                <div class="h-10 bg-white/5 rounded flex flex-col justify-end p-0.5">
+                  <div class="bg-rose-500 rounded-sm w-full" style="height: ${model.evaluation.scoreOverview.macro * 10}%"></div>
+                </div>
+                <span class="text-[9px] font-mono text-zinc-400 mt-1 block">Makro</span>
+              </div>
+              <div>
+                <div class="h-10 bg-white/5 rounded flex flex-col justify-end p-0.5">
+                  <div class="bg-emerald-500 rounded-sm w-full" style="height: ${model.evaluation.scoreOverview.landscape * 10}%"></div>
+                </div>
+                <span class="text-[9px] font-mono text-zinc-400 mt-1 block">Manzara</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Strong & Weak Points -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <span class="text-[11px] font-mono uppercase text-emerald-400 font-bold block mb-0.5">★ En Güçlü Olduğu Yanı</span>
+              <p class="text-xs sm:text-sm text-zinc-200">${model.evaluation.strongestSide}</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <span class="text-[11px] font-mono uppercase text-amber-400 font-bold block mb-0.5">⚠ Sınırlı / Zayıf Yanı & Dikkat</span>
+              <p class="text-xs sm:text-sm text-zinc-300">${model.evaluation.weakestSide}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hardware Specs Matrix -->
+        <div class="mt-6 pt-6 border-t border-white/5">
+          <div class="text-xs font-mono text-zinc-400 mb-3 flex items-center gap-1.5">
+            <i data-lucide="layers" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span>Donanım & Optik Yapılandırma</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-xs font-mono">
+            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5">
+              <span class="text-[10px] text-zinc-500 block">DİYAFRAM</span>
+              <span class="text-white font-semibold truncate block">${model.hardware.apertures}</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5">
+              <span class="text-[10px] text-zinc-500 block">OPTİK ZOOM</span>
+              <span class="text-amber-400 font-semibold truncate block">${model.hardware.zoomCapabilities}</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5">
+              <span class="text-[10px] text-zinc-500 block">LiDAR SENSÖRÜ</span>
+              <span class="font-semibold ${model.hardware.lidar ? "text-emerald-400" : "text-zinc-500"}">
+                ${model.hardware.lidar ? "✓ Var" : "✗ Yok"}
+              </span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5">
+              <span class="text-[10px] text-zinc-500 block">OTOMATİK MAKRO</span>
+              <span class="font-semibold ${model.hardware.macroSupport ? "text-emerald-400" : "text-zinc-500"}">
+                ${model.hardware.macroSupport ? "✓ 2cm Makro" : "✗ Yok"}
+              </span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5">
+              <span class="text-[10px] text-zinc-500 block">RAW MODU</span>
+              <span class="text-cyan-400 font-semibold truncate block">${model.hardware.rawSupport}</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5">
+              <span class="text-[10px] text-zinc-500 block">TUŞLAR</span>
+              <span class="text-white font-semibold truncate block">
+                ${model.hardware.cameraControl ? "Kamera Denetimi" : model.hardware.actionButton ? "Eylem Düğmesi" : "Standart"}
+              </span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      renderCategoryRecipes(model);
+      lucide.createIcons();
+    }
+
+    function setRecipeCategory(key) {
+      activeCategoryKey = key;
+      const model = iphoneSpecsData.find(m => m.id === currentModelId) || iphoneSpecsData[0];
+      renderCategoryRecipes(model);
+      lucide.createIcons();
+    }
+
+    function renderCategoryRecipes(model) {
+      const container = document.getElementById("model-recipes-section");
+      if (!container) return;
+
+      const categories = [
+        { key: "portrait", label: "Portre & İnsan", icon: "users" },
+        { key: "night", label: "Gece & Şehir", icon: "moon" },
+        { key: "street", label: "Sokak Fotoğrafı", icon: "compass" },
+        { key: "landscape", label: "Manzara & Doğa", icon: "mountain" },
+        { key: "foodMacro", label: "Yemek & Makro", icon: "utensils" }
+      ];
+
+      const recipe = model.recipes[activeCategoryKey] || model.recipes.portrait;
+
+      container.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+              <span>${model.name} İçin Özel Çekim Reçeteleri</span>
+            </h3>
+            <p class="text-xs sm:text-sm text-zinc-400 mt-0.5">
+              Bu modelin sensör ve lens donanımına göre optimize edilmiş 5 özel çekim türü.
+            </p>
+          </div>
+
+          <!-- Category Nav Tabs -->
+          <div class="flex flex-wrap gap-1.5 p-1 bg-camera-card rounded-2xl border border-white/10">
+            ${categories.map(cat => `
+              <button onclick="setRecipeCategory('${cat.key}')"
+                      class="px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
+                        activeCategoryKey === cat.key
+                          ? "bg-amber-500 text-black shadow-glow font-bold"
+                          : "text-zinc-400 hover:text-white hover:bg-white/5"
+                      }">
+                <i data-lucide="${cat.icon}" class="w-3.5 h-3.5"></i>
+                <span>${cat.label}</span>
+              </button>
+            `).join("")}
+          </div>
+        </div>
+
+        <!-- Recipe Content Card -->
+        <div class="rounded-3xl bg-camera-card/95 border border-white/10 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+          <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-500 via-cyan-400 to-indigo-500"></div>
+
+          <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-white/10">
+            <div>
+              <div class="text-xs font-mono text-amber-400 uppercase tracking-widest mb-1.5 flex items-center gap-1.5 font-bold">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <span>${model.name} • ${categories.find(c => c.key === activeCategoryKey)?.label}</span>
+              </div>
+              <h4 class="text-2xl sm:text-3xl font-extrabold text-white">
+                ${recipe.title}
+              </h4>
+              <div class="mt-3 flex flex-wrap items-center gap-2">
+                <span class="px-3 py-1 rounded-xl bg-black/60 border border-white/10 text-xs font-mono text-cyan-300">
+                  🎯 Lens: ${recipe.lens}
+                </span>
+                <span class="px-3 py-1 rounded-xl bg-black/60 border border-white/10 text-xs font-mono text-amber-300">
+                  ⚙️ Değerler: ${recipe.settings}
+                </span>
+              </div>
+            </div>
+
+            <div class="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 lg:max-w-xs shrink-0">
+              <div class="text-[11px] font-mono uppercase text-amber-400 font-bold mb-1 flex items-center gap-1">
+                <i data-lucide="flame" class="w-3.5 h-3.5"></i>
+                <span>Bu Modeldeki Donanım Avantajı</span>
+              </div>
+              <p class="text-xs text-zinc-300 leading-relaxed">
+                ${recipe.advantage}
+              </p>
+            </div>
+          </div>
+
+          <!-- 3 Pillars -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
+            <div class="p-5 rounded-2xl bg-camera-darkest/90 border border-white/5">
+              <div class="w-7 h-7 rounded-xl bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold flex items-center justify-center mb-3">
+                1
+              </div>
+              <h5 class="text-xs font-mono uppercase text-zinc-400 tracking-wider mb-2 font-bold">
+                Nasıl Uygulanır?
+              </h5>
+              <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed">
+                ${recipe.howTo}
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-camera-darkest/90 border border-amber-500/20">
+              <div class="w-7 h-7 rounded-xl bg-amber-500/20 text-amber-400 font-mono text-xs font-bold flex items-center justify-center mb-3">
+                ★
+              </div>
+              <h5 class="text-xs font-mono uppercase text-amber-400 tracking-wider mb-2 font-bold">
+                Fotoğrafçının Gizli Hilesi
+              </h5>
+              <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed">
+                ${recipe.trick}
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-camera-darkest/90 border border-rose-500/20">
+              <div class="w-7 h-7 rounded-xl bg-rose-500/20 text-rose-400 font-mono text-xs font-bold flex items-center justify-center mb-3">
+                ✕
+              </div>
+              <h5 class="text-xs font-mono uppercase text-rose-400 tracking-wider mb-2 font-bold">
+                Kaçınılması Gereken Hata
+              </h5>
+              <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                ${recipe.trap}
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ================= 7. WIZARD STEP CONTROLLER ================= */
+    let wizardCurrentStep = 1;
+    let wizardSubject = "portrait";
+    let wizardLight = "golden";
+    let wizardDevice = "iphone";
+    let wizardIphoneModel = "iphone-16-pro";
+    let wizardVibe = "cinematic";
+
+    function populateWizardIphoneDropdown() {
+      const select = document.getElementById("wizard-iphone-select");
+      if (!select) return;
+      select.innerHTML = iphoneSpecsData.map(m => `
+        <option value="${m.id}" ${m.id === wizardIphoneModel ? 'selected' : ''}>
+          ${m.name} (${m.generation}) — ${m.badge}
+        </option>
+      `).join("");
+      select.addEventListener("change", (e) => {
+        wizardIphoneModel = e.target.value;
+      });
+    }
+
+    function selectSubject(val) {
+      wizardSubject = val;
+      document.querySelectorAll(".subject-btn").forEach(b => {
+        b.className = b.dataset.id === val 
+          ? "subject-btn p-4 rounded-2xl border border-amber-500 bg-amber-500/15 shadow-glow text-left transition-all"
+          : "subject-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all";
+      });
+    }
+
+    function selectLight(val) {
+      wizardLight = val;
+      document.querySelectorAll(".light-btn").forEach(b => {
+        b.className = b.dataset.id === val
+          ? "light-btn p-4 rounded-2xl border border-amber-500 bg-amber-500/15 shadow-glow text-left transition-all"
+          : "light-btn p-4 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all";
+      });
+    }
+
+    function selectDevice(val) {
+      wizardDevice = val;
+      document.querySelectorAll(".device-btn").forEach(b => {
+        b.className = b.dataset.id === val
+          ? "device-btn p-5 rounded-2xl border border-amber-500 bg-amber-500/15 shadow-glow text-left transition-all"
+          : "device-btn p-5 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all";
+      });
+      const picker = document.getElementById("wizard-iphone-model-picker");
+      if (val === "iphone") {
+        picker.classList.remove("hidden");
+      } else {
+        picker.classList.add("hidden");
+      }
+    }
+
+    function selectVibe(val) {
+      wizardVibe = val;
+      document.querySelectorAll(".vibe-btn").forEach(b => {
+        b.className = b.dataset.id === val
+          ? "vibe-btn p-5 rounded-2xl border border-amber-500 bg-amber-500/15 shadow-glow text-left transition-all"
+          : "vibe-btn p-5 rounded-2xl border border-white/5 bg-camera-darkest/70 hover:border-amber-500 text-left transition-all";
+      });
+    }
+
+    function wizardNextStep() {
+      if (wizardCurrentStep === 1) {
+        document.getElementById("wizard-step-1").classList.add("hidden");
+        document.getElementById("wizard-step-2").classList.remove("hidden");
+        document.getElementById("btn-wizard-prev").classList.remove("hidden");
+        wizardCurrentStep = 2;
+        updateWizardProgress();
+      } else if (wizardCurrentStep === 2) {
+        document.getElementById("wizard-step-2").classList.add("hidden");
+        document.getElementById("wizard-step-3").classList.remove("hidden");
+        wizardCurrentStep = 3;
+        updateWizardProgress();
+      } else if (wizardCurrentStep === 3) {
+        document.getElementById("wizard-step-3").classList.add("hidden");
+        document.getElementById("wizard-step-4").classList.remove("hidden");
+        document.getElementById("btn-wizard-next").innerHTML = '<span>Reçetemi Üret</span> <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>';
+        wizardCurrentStep = 4;
+        updateWizardProgress();
+        lucide.createIcons();
+      } else if (wizardCurrentStep === 4) {
+        document.getElementById("wizard-step-4").classList.add("hidden");
+        document.getElementById("wizard-progress").classList.add("hidden");
+        document.getElementById("wizard-nav-btns").classList.add("hidden");
+        document.getElementById("wizard-result").classList.remove("hidden");
+        renderWizardResult();
+
+        // Confetti celebration
+        confetti({
+          particleCount: 80,
+          spread: 60,
+          origin: { y: 0.7 },
+          colors: ["#f59e0b", "#06b6d4", "#ffffff"]
+        });
+      }
+    }
+
+    function wizardPrevStep() {
+      if (wizardCurrentStep === 2) {
+        document.getElementById("wizard-step-2").classList.add("hidden");
+        document.getElementById("wizard-step-1").classList.remove("hidden");
+        document.getElementById("btn-wizard-prev").classList.add("hidden");
+        wizardCurrentStep = 1;
+      } else if (wizardCurrentStep === 3) {
+        document.getElementById("wizard-step-3").classList.add("hidden");
+        document.getElementById("wizard-step-2").classList.remove("hidden");
+        wizardCurrentStep = 2;
+      } else if (wizardCurrentStep === 4) {
+        document.getElementById("wizard-step-4").classList.add("hidden");
+        document.getElementById("wizard-step-3").classList.remove("hidden");
+        document.getElementById("btn-wizard-next").innerHTML = '<span>Sonraki Adım</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>';
+        wizardCurrentStep = 3;
+      }
+      updateWizardProgress();
+      lucide.createIcons();
+    }
+
+    function updateWizardProgress() {
+      const titles = ["Konu Seçimi", "Işık & Ortam", "Cihaz Türü", "İstenen Vibe"];
+      document.getElementById("step-indicator").innerText = `Adım ${wizardCurrentStep} / 4`;
+      document.getElementById("step-title").innerText = titles[wizardCurrentStep - 1] || "";
+      document.getElementById("progress-bar").style.width = (wizardCurrentStep * 25) + "%";
+    }
+
+    function renderWizardResult() {
+      const resultBox = document.getElementById("wizard-result");
+      const model = iphoneSpecsData.find(m => m.id === wizardIphoneModel) || iphoneSpecsData[0];
+
+      let catKey = "portrait";
+      if (wizardSubject === "night" || wizardLight === "dark") catKey = "night";
+      else if (wizardSubject === "food") catKey = "foodMacro";
+      else if (wizardSubject === "street" || wizardSubject === "action") catKey = "street";
+      else if (wizardSubject === "nature") catKey = "landscape";
+
+      const iphoneRecipe = model.recipes[catKey];
+
+      resultBox.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+          <div>
+            <div class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest mb-1 flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>Özel Çekim Reçeteniz Hazır</span>
+            </div>
+            <h3 class="text-2xl font-extrabold text-white">
+              ${iphoneRecipe ? iphoneRecipe.title : "Kişiselleştirilmiş Çekim Reçetesi"}
+            </h3>
+            
+            ${wizardDevice === "iphone" ? `
+              <div class="mt-2.5 inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs">
+                <i data-lucide="smartphone" class="w-3.5 h-3.5 text-amber-400"></i>
+                <span class="text-amber-300 font-semibold">${model.name}</span>
+                <span class="text-zinc-400 text-[11px]">• ${model.hardware.mainSensor}</span>
+                <a href="#iphone-studio" class="text-amber-400 hover:text-white underline font-mono text-[10px] ml-1">
+                  Model Stüdyosuna Git →
+                </a>
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="resetWizard()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold flex items-center gap-2 transition-colors">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              <span>Yeniden Başlat</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 Pillars -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-5 rounded-2xl bg-camera-darkest/90 border border-white/10">
+            <span class="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-400 font-mono text-xs font-bold flex items-center justify-center mb-3">1</span>
+            <h4 class="text-xs font-mono uppercase text-zinc-400 tracking-wider mb-1">Önerilen Lens</h4>
+            <p class="text-sm font-semibold text-white">${iphoneRecipe.lens}</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-camera-darkest/90 border border-white/10">
+            <span class="w-6 h-6 rounded-lg bg-cyan-500/20 text-cyan-400 font-mono text-xs font-bold flex items-center justify-center mb-3">2</span>
+            <h4 class="text-xs font-mono uppercase text-zinc-400 tracking-wider mb-1">Pozlama & Çekim</h4>
+            <p class="text-sm font-semibold text-white">${iphoneRecipe.howTo}</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-camera-darkest/90 border border-white/10">
+            <span class="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold flex items-center justify-center mb-3">3</span>
+            <h4 class="text-xs font-mono uppercase text-zinc-400 tracking-wider mb-1">Önerilen Ayarlar</h4>
+            <p class="text-sm font-semibold text-white">${iphoneRecipe.settings}</p>
+          </div>
+        </div>
+
+        <!-- Golden Trick -->
+        <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
+          <i data-lucide="sparkles" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+          <div class="text-xs">
+            <div class="font-bold text-amber-300 uppercase tracking-wide">Fotoğrafçının Gizli Sırrı:</div>
+            <div class="text-zinc-200 mt-1 leading-relaxed">${iphoneRecipe.trick}</div>
+          </div>
+        </div>
+
+        <!-- Hardware Advantage -->
+        <div class="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-start gap-3">
+          <i data-lucide="smartphone" class="w-5 h-5 text-cyan-400 shrink-0 mt-0.5"></i>
+          <div class="text-xs">
+            <div class="font-bold text-cyan-300 uppercase tracking-wide">Modelinize Özel Donanım Avantajı:</div>
+            <div class="text-zinc-200 mt-1 leading-relaxed">${iphoneRecipe.advantage}</div>
+          </div>
+        </div>
+      `;
+
+      lucide.createIcons();
+    }
+
+    function resetWizard() {
+      wizardCurrentStep = 1;
+      document.getElementById("wizard-result").classList.add("hidden");
+      document.getElementById("wizard-progress").classList.remove("hidden");
+      document.getElementById("wizard-nav-btns").classList.remove("hidden");
+      document.getElementById("wizard-step-1").classList.remove("hidden");
+      document.getElementById("wizard-step-2").classList.add("hidden");
+      document.getElementById("wizard-step-3").classList.add("hidden");
+      document.getElementById("wizard-step-4").classList.add("hidden");
+      document.getElementById("btn-wizard-prev").classList.add("hidden");
+      document.getElementById("btn-wizard-next").innerHTML = '<span>Sonraki Adım</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>';
+      updateWizardProgress();
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
