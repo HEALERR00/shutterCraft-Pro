@@ -87,6 +87,7 @@ export interface QuizState {
   light: string;
   device: string;
   iphoneModel?: string;
+  samsungModel?: string;
   vibe: string;
 }
 
@@ -107,11 +108,19 @@ export interface ShotRecipe {
   modelSpecificTip?: string;
 }
 
-/* ================= iPHONE MODEL SPECIFICATIONS & RECIPES ================= */
+/* ================= DEVICE & CAMERA MODEL SPECIFICATIONS & RECIPES ================= */
 
-export type ShootingCategoryKey = "night" | "street" | "landscape" | "portrait" | "foodMacro";
+export type DeviceBrand = "apple" | "samsung";
 
-export interface IphoneShootingRecipe {
+export type ShootingCategoryKey = 
+  | "night" 
+  | "street" 
+  | "landscape" 
+  | "portrait" 
+  | "foodMacro"
+  | "video";
+
+export interface DeviceShootingRecipe {
   categoryName: string;
   title: string;
   recommendedLens: string;
@@ -122,27 +131,42 @@ export interface IphoneShootingRecipe {
   commonTrap: string;
 }
 
-export interface IphoneModelSpec {
+export type IphoneShootingRecipe = DeviceShootingRecipe;
+
+export interface DeviceModelSpec {
   id: string;
-  series: "iPhone 12" | "iPhone 13" | "iPhone 14" | "iPhone 15" | "iPhone 16" | "iPhone 17 & 18";
+  brand: DeviceBrand;
+  series: string;
   name: string;
   badge: string;
   generation: string;
   releaseYear: number;
   isPro: boolean;
+  backViewImage: string;
+  accentColor?: string;
+  bestShootingType: string;
+  recommendedSetting: string;
+  topFeatureBadge: string;
   hardware: {
     mainSensor: string;
     ultraWide: string;
     telephoto: string;
     zoomCapabilities: string;
     apertures: string;
-    lidar: boolean;
-    sensorShiftOis: boolean;
-    actionButton: boolean;
-    cameraControl: boolean;
     rawSupport: string;
     macroSupport: boolean;
-    photonicEngine: boolean;
+    sensorShiftOis?: boolean;
+    ois?: boolean | string;
+    specialTech?: string[];
+    // Apple-specific tags
+    lidar?: boolean;
+    actionButton?: boolean;
+    cameraControl?: boolean;
+    photonicEngine?: boolean;
+    // Samsung-specific tags
+    spaceZoom?: string;
+    proVisualEngine?: boolean;
+    expertRawSupport?: boolean;
   };
   evaluation: {
     strongestSide: string;
@@ -153,8 +177,25 @@ export interface IphoneModelSpec {
       street: number;
       macro: number;
       landscape: number;
+      video?: number;
     };
     verdictBadge: string;
+    bestShootingScenarioDetails?: string;
   };
-  recipes: Record<ShootingCategoryKey, IphoneShootingRecipe>;
+  recipes: Partial<Record<ShootingCategoryKey, DeviceShootingRecipe>> & {
+    night: DeviceShootingRecipe;
+    street: DeviceShootingRecipe;
+    landscape: DeviceShootingRecipe;
+    portrait: DeviceShootingRecipe;
+    foodMacro: DeviceShootingRecipe;
+    video?: DeviceShootingRecipe;
+  };
+}
+
+export interface IphoneModelSpec extends DeviceModelSpec {
+  brand: "apple";
+}
+
+export interface SamsungModelSpec extends DeviceModelSpec {
+  brand: "samsung";
 }

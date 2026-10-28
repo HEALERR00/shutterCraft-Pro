@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import confetti from "canvas-confetti";
 import { Sparkles, Wand2, ArrowRight, RotateCcw, Copy, Check, CheckCircle2, Camera, Sun, Smartphone, Heart, Share2 } from "lucide-react";
 import { ShotRecipe } from "@/types";
-import { iphoneSpecsData } from "@/data/iphoneSpecs";
+import { iphoneSpecsData, samsungSpecsData } from "@/data/devices";
 
 export function ShotRecipeWizard() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -12,6 +12,7 @@ export function ShotRecipeWizard() {
   const [light, setLight] = useState("");
   const [device, setDevice] = useState("");
   const [iphoneModel, setIphoneModel] = useState("iphone-16-pro");
+  const [samsungModel, setSamsungModel] = useState("samsung-s24-ultra");
   const [vibe, setVibe] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -111,6 +112,35 @@ export function ShotRecipeWizard() {
           }
         }
       }
+    } else if (device === "samsung") {
+      const samsungModelData = samsungSpecsData.find((m) => m.id === samsungModel);
+      if (samsungModelData) {
+        let categoryKey: "night" | "street" | "landscape" | "portrait" | "foodMacro" = "portrait";
+        if (subject === "night" || light === "dark") categoryKey = "night";
+        else if (subject === "food") categoryKey = "foodMacro";
+        else if (subject === "street" || subject === "action") categoryKey = "street";
+        else if (subject === "nature") categoryKey = "landscape";
+
+        const modelRecipe = samsungModelData.recipes[categoryKey];
+        if (modelRecipe) {
+          lensChoice = `${modelRecipe.recommendedLens} (${samsungModelData.name})`;
+          focusAndEV = modelRecipe.stepByStepTip;
+          goldenRule = modelRecipe.secretTrick;
+          modelSpecificTip = `${samsungModelData.name} Donanım Avantajı: ${modelRecipe.hardwareAdvantage}`;
+
+          if (categoryKey === "night") {
+            settings = { iso: "ISO 100 - 320", shutter: "Nightography Sabit", ev: "-0.7 EV", lens: "1x Ana Kamera" };
+          } else if (categoryKey === "portrait") {
+            settings = { iso: "ISO 50 - 100", shutter: "1/250s", ev: "+0.3 EV", lens: "3x / 5x Optik Telefoto" };
+          } else if (categoryKey === "street") {
+            settings = { iso: "ISO 100 - 200", shutter: "1/640s", ev: "-0.3 EV", lens: "2x (48mm) / 3x (70mm)" };
+          } else if (categoryKey === "foodMacro") {
+            settings = { iso: "ISO 80 - 100", shutter: "1/160s", ev: "+0.3 EV", lens: samsungModelData.hardware.macroSupport ? "2cm Odak İyileştirici Makro" : "2x / 3x Telefoto" };
+          } else if (categoryKey === "landscape") {
+            settings = { iso: "ISO 50", shutter: "1/800s", ev: "0.0 EV", lens: samsungModelData.isPro ? "200MP / 50MP Expert RAW" : "50MP Yüksek Çözünürlük" };
+          }
+        }
+      }
     }
 
     const checklist = [
@@ -121,6 +151,10 @@ export function ShotRecipeWizard() {
           : iphoneSpecsData.find((m) => m.id === iphoneModel)?.hardware.actionButton
           ? "Eylem Düğmesi ile 0.5 saniyede hızlı kamera açın."
           : "Üstteki RAW simgesini açın ve 48MP yüksek çözünürlüğü etkinleştirin."
+        : device === "samsung"
+        ? samsungSpecsData.find((m) => m.id === samsungModel)?.hardware.spaceZoom
+          ? "Uzaktaki detaylar için Zoom Lock çerçevesine dokunarak kadrajı kilitleyin."
+          : "Expert RAW veya Pro modunu açıp 50MP yüksek çözünürlüğü kontrol edin."
         : "Kamera ayarlarından 3x3 kılavuz çizgilerini ve Pro modu kontrol edin.",
       "Dekanşöre basarken nefesinizi hafifçe vererek mikro titreşimi sıfırlayın.",
     ];
@@ -333,6 +367,51 @@ Lensini temizlemeyi unutma!`;
                       </div>
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">
                         {iphoneSpecsData.find((m) => m.id === iphoneModel)?.evaluation.verdictBadge}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Specific Samsung Galaxy Model Picker */}
+              {device === "samsung" && (
+                <div className="p-4 sm:p-5 rounded-2xl bg-camera-darkest/90 border border-cyan-500/30">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <label className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
+                      <Smartphone className="w-4 h-4" />
+                      <span>Hangi Samsung Galaxy Modelini Kullanıyorsunuz?</span>
+                    </label>
+                    <span className="text-[10px] text-zinc-400 font-mono">
+                      Galaxy S21'den S26 Ultra'ya Özel Optik Veri
+                    </span>
+                  </div>
+
+                  <select
+                    value={samsungModel}
+                    onChange={(e) => setSamsungModel(e.target.value)}
+                    className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs sm:text-sm text-white font-medium focus:outline-none focus:border-cyan-500 transition-colors cursor-pointer"
+                  >
+                    {samsungSpecsData.map((m) => (
+                      <option key={m.id} value={m.id} className="bg-zinc-950 text-white">
+                        {m.name} ({m.generation}) — {m.badge}
+                      </option>
+                    ))}
+                  </select>
+
+                  {/* Selected Samsung model preview info */}
+                  {samsungSpecsData.find((m) => m.id === samsungModel) && (
+                    <div className="mt-3 p-2.5 rounded-xl bg-white/5 border border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs">
+                      <div className="text-zinc-300 flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                        <span className="font-semibold text-white">
+                          {samsungSpecsData.find((m) => m.id === samsungModel)?.name}:
+                        </span>
+                        <span className="text-zinc-400 text-[11px]">
+                          {samsungSpecsData.find((m) => m.id === samsungModel)?.hardware.mainSensor}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">
+                        {samsungSpecsData.find((m) => m.id === samsungModel)?.evaluation.verdictBadge}
                       </span>
                     </div>
                   )}

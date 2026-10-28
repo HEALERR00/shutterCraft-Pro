@@ -72,7 +72,7 @@ export function Navbar({ onOpenWizard }: NavbarProps) {
             className="px-3.5 py-2 rounded-xl text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 transition-colors font-semibold flex items-center gap-1.5"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-            <span>iPhone Stüdyosu</span>
+            <span>Cihaz Stüdyosu (iPhone & Galaxy)</span>
           </a>
           <a
             href="#device-shortcuts"
@@ -145,7 +145,7 @@ export function Navbar({ onOpenWizard }: NavbarProps) {
               className="py-2 text-amber-400 font-bold flex items-center gap-2"
             >
               <Smartphone className="w-4 h-4" />
-              <span>iPhone Modeline Özel Çekim Stüdyosu</span>
+              <span>Cihaz Stüdyosu (iPhone & Samsung Galaxy)</span>
             </a>
             <a
               href="#device-shortcuts"
