@@ -1,8 +1,15 @@
 import { DeviceModelSpec, DeviceBrand, IphoneModelSpec, SamsungModelSpec } from "@/types";
 import { iphoneSpecsData } from "./iphoneSpecs";
-import { samsungSpecsData } from "./samsungSpecs";
+import { samsungSpecsData as rawSamsungSSpecs } from "./samsungSpecs";
+import { samsungZSpecsData } from "./samsungZSpecs";
 
-export { iphoneSpecsData, samsungSpecsData };
+export const samsungSSpecsData: SamsungModelSpec[] = rawSamsungSSpecs;
+export { iphoneSpecsData, samsungZSpecsData };
+
+export const samsungSpecsData: SamsungModelSpec[] = [
+  ...samsungSSpecsData,
+  ...samsungZSpecsData,
+];
 
 export const allDevices: DeviceModelSpec[] = [
   ...iphoneSpecsData,
@@ -11,6 +18,8 @@ export const allDevices: DeviceModelSpec[] = [
 
 export const totalDeviceCount = allDevices.length;
 export const iphoneCount = iphoneSpecsData.length;
+export const samsungSCount = samsungSSpecsData.length;
+export const samsungZCount = samsungZSpecsData.length;
 export const samsungCount = samsungSpecsData.length;
 
 export function getDeviceById(id: string): DeviceModelSpec | undefined {
@@ -19,6 +28,14 @@ export function getDeviceById(id: string): DeviceModelSpec | undefined {
 
 export function getDevicesByBrand(brand: DeviceBrand): DeviceModelSpec[] {
   return allDevices.filter((device) => device.brand === brand);
+}
+
+export function getSamsungSModels(): SamsungModelSpec[] {
+  return samsungSSpecsData;
+}
+
+export function getSamsungZModels(): SamsungModelSpec[] {
+  return samsungZSpecsData;
 }
 
 export function getIphoneModel(id: string): IphoneModelSpec | undefined {

@@ -152,7 +152,10 @@ export function ShotRecipeWizard() {
           ? "Eylem Düğmesi ile 0.5 saniyede hızlı kamera açın."
           : "Üstteki RAW simgesini açın ve 48MP yüksek çözünürlüğü etkinleştirin."
         : device === "samsung"
-        ? samsungSpecsData.find((m) => m.id === samsungModel)?.hardware.spaceZoom
+        ? (samsungSpecsData.find((m) => m.id === samsungModel)?.chassisDesign?.formFactor === "fold" ||
+           samsungSpecsData.find((m) => m.id === samsungModel)?.chassisDesign?.formFactor === "flip")
+          ? "📐 Flex Stand Avantajı: Cihazı 90° açıyla masaya koyup harici tripoda gerek kalmadan eller serbest çekim yapın veya Dual Preview ile arka kameradan yüksek kaliteli selfie çekin."
+          : samsungSpecsData.find((m) => m.id === samsungModel)?.hardware.spaceZoom
           ? "Uzaktaki detaylar için Zoom Lock çerçevesine dokunarak kadrajı kilitleyin."
           : "Expert RAW veya Pro modunu açıp 50MP yüksek çözünürlüğü kontrol edin."
         : "Kamera ayarlarından 3x3 kılavuz çizgilerini ve Pro modu kontrol edin.",
@@ -391,11 +394,24 @@ Lensini temizlemeyi unutma!`;
                     onChange={(e) => setSamsungModel(e.target.value)}
                     className="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-xs sm:text-sm text-white font-medium focus:outline-none focus:border-cyan-500 transition-colors cursor-pointer"
                   >
-                    {samsungSpecsData.map((m) => (
-                      <option key={m.id} value={m.id} className="bg-zinc-950 text-white">
-                        {m.name} ({m.generation}) — {m.badge}
-                      </option>
-                    ))}
+                    <optgroup label="Galaxy S Serisi (Amiral Gemisi & Ultra)" className="bg-zinc-950 text-cyan-400 font-bold">
+                      {samsungSpecsData
+                        .filter((m) => !m.id.includes("fold") && !m.id.includes("flip"))
+                        .map((m) => (
+                          <option key={m.id} value={m.id} className="bg-zinc-900 text-white font-normal">
+                            {m.name} ({m.generation}) — {m.badge}
+                          </option>
+                        ))}
+                    </optgroup>
+                    <optgroup label="Galaxy Z Serisi (Fold & Flip Katlanabilir)" className="bg-zinc-950 text-purple-400 font-bold">
+                      {samsungSpecsData
+                        .filter((m) => m.id.includes("fold") || m.id.includes("flip"))
+                        .map((m) => (
+                          <option key={m.id} value={m.id} className="bg-zinc-900 text-white font-normal">
+                            {m.name} ({m.generation}) — {m.badge}
+                          </option>
+                        ))}
+                    </optgroup>
                   </select>
 
                   {/* Selected Samsung model preview info */}

@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { iphoneSpecsData, samsungSpecsData, allDevices } from "@/data/devices";
+import {
+  iphoneSpecsData,
+  samsungSSpecsData,
+  samsungZSpecsData,
+  samsungSpecsData,
+  allDevices,
+} from "@/data/devices";
 import { DeviceModelSpec, DeviceBrand, ShootingCategoryKey } from "@/types";
 import { DeviceBackViewVisual } from "./DeviceBackViewVisual";
 import {
@@ -23,35 +29,54 @@ import {
   Aperture,
   Sliders,
   Filter,
+  Maximize2,
+  Minimize2,
+  Check,
 } from "lucide-react";
 
 export function IphoneSpecsStudio() {
   const [activeBrand, setActiveBrand] = useState<DeviceBrand>("apple");
-  const [selectedModelId, setSelectedModelId] = useState<string>("iphone-16-pro");
+  const [samsungSubTab, setSamsungSubTab] = useState<"s-series" | "z-series">("s-series");
+  const [selectedModelId, setSelectedModelId] = useState<string>("iphone-17-pro-max");
   const [activeCategory, setActiveCategory] = useState<ShootingCategoryKey>("portrait");
   const [filterType, setFilterType] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Brand models
-  const brandModels: DeviceModelSpec[] = useMemo(() => {
-    return activeBrand === "apple" ? iphoneSpecsData : samsungSpecsData;
-  }, [activeBrand]);
+  // Brand models based on active brand and Samsung sub-tab
+  const currentStudioModels: DeviceModelSpec[] = useMemo(() => {
+    if (activeBrand === "apple") {
+      return iphoneSpecsData;
+    }
+    return samsungSubTab === "s-series" ? samsungSSpecsData : samsungZSpecsData;
+  }, [activeBrand, samsungSubTab]);
 
-  // Handle brand switch
+  // Handle main brand switch
   const handleBrandSwitch = (brand: DeviceBrand) => {
     setActiveBrand(brand);
     setFilterType("all");
     setSearchQuery("");
     if (brand === "apple") {
-      setSelectedModelId("iphone-16-pro");
+      setSelectedModelId("iphone-17-pro-max");
     } else {
-      setSelectedModelId("samsung-s24-ultra");
+      setSelectedModelId(samsungSubTab === "s-series" ? "samsung-s25-ultra" : "samsung-z-fold8-ultra");
+    }
+  };
+
+  // Handle Samsung sub-studio switch
+  const handleSamsungSubSwitch = (sub: "s-series" | "z-series") => {
+    setSamsungSubTab(sub);
+    setFilterType("all");
+    setSearchQuery("");
+    if (sub === "s-series") {
+      setSelectedModelId("samsung-s25-ultra");
+    } else {
+      setSelectedModelId("samsung-z-fold8-ultra");
     }
   };
 
   // Filter models
   const filteredModels = useMemo(() => {
-    return brandModels.filter((m) => {
+    return currentStudioModels.filter((m) => {
       // Search filter
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
@@ -59,7 +84,8 @@ export function IphoneSpecsStudio() {
         const matchesSeries = m.series.toLowerCase().includes(query);
         const matchesBadge = m.badge.toLowerCase().includes(query);
         const matchesBest = m.bestShootingType.toLowerCase().includes(query);
-        if (!matchesName && !matchesSeries && !matchesBadge && !matchesBest) {
+        const matchesColor = m.signatureColor?.name?.toLowerCase().includes(query);
+        if (!matchesName && !matchesSeries && !matchesBadge && !matchesBest && !matchesColor) {
           return false;
         }
       }
@@ -71,29 +97,26 @@ export function IphoneSpecsStudio() {
         if (filterType === "pro") return m.isPro;
         if (filterType === "standard") return !m.isPro && !m.id.includes("se") && !m.id.includes("air") && !m.id.endsWith("e");
         if (filterType === "special") return m.id.includes("se") || m.id.includes("air") || m.id.endsWith("e");
-      } else {
-        // Samsung filters
+      } else if (samsungSubTab === "s-series") {
         if (filterType === "ultra") return m.id.includes("ultra");
         if (filterType === "standard") return !m.id.includes("ultra") && !m.id.includes("fe") && !m.id.includes("edge");
         if (filterType === "fe-edge") return m.id.includes("fe") || m.id.includes("edge");
-      }
-
-      // Series filter
-      if (filterType.startsWith("series-")) {
-        const targetSeries = filterType.replace("series-", "");
-        return m.series.toLowerCase().includes(targetSeries.toLowerCase());
+      } else {
+        // Z Series filters
+        if (filterType === "fold") return m.chassisDesign?.formFactor === "fold" || m.id.includes("fold");
+        if (filterType === "flip") return m.chassisDesign?.formFactor === "flip" || m.id.includes("flip");
       }
 
       return true;
     });
-  }, [brandModels, filterType, searchQuery, activeBrand]);
+  }, [currentStudioModels, filterType, searchQuery, activeBrand, samsungSubTab]);
 
   // Current selected model
   const currentModel: DeviceModelSpec = useMemo(() => {
     const found = allDevices.find((m) => m.id === selectedModelId);
     if (found) return found;
-    return brandModels[0] || iphoneSpecsData[0];
-  }, [selectedModelId, brandModels]);
+    return currentStudioModels[0] || iphoneSpecsData[0];
+  }, [selectedModelId, currentStudioModels]);
 
   // Category definitions
   const categories: {
@@ -121,12 +144,18 @@ export function IphoneSpecsStudio() {
     return (sum / scores.length).toFixed(1);
   }, [currentModel]);
 
+  const totalAllCount = iphoneSpecsData.length + samsungSSpecsData.length + samsungZSpecsData.length;
+
   return (
-    <section id="iphone-studio" className="py-24 px-4 sm:px-6 lg:px-8 relative bg-camera-darkest overflow-hidden">
-      {/* Dynamic Ambient Background Glows */}
+    <section id="iphone-studio" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-camera-darkest">
+      {/* Dynamic Background Glows */}
       <div
-        className={`absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none transition-colors duration-700 ${
-          activeBrand === "apple" ? "bg-amber-500/10" : "bg-cyan-500/10"
+        className={`absolute top-1/4 left-10 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none transition-colors duration-700 ${
+          activeBrand === "apple"
+            ? "bg-amber-500/10"
+            : samsungSubTab === "s-series"
+            ? "bg-cyan-500/10"
+            : "bg-purple-500/10"
         }`}
       />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
@@ -142,18 +171,18 @@ export function IphoneSpecsStudio() {
             }`}
           >
             <Smartphone className="w-4 h-4 animate-pulse" />
-            <span>Cihaz & Sensör Stüdyosu (41 Telefon Modeli Destekli)</span>
+            <span>Cihaz & Sensör Stüdyosu ({totalAllCount} Telefon Modeli Destekli)</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
             Cihazınızın Sensör Sınırlarını Keşfedin
           </h2>
           <p className="text-sm sm:text-base text-zinc-400 mt-3 leading-relaxed">
-            iPhone 12 - 18 Pro Max ve Samsung Galaxy S21 - S26 Ultra serisi için optimize edilmiş optik rehber, sensör analizi, şeffaf arka yüzey görseli ve profesyonel çekim reçeteleri.
+            iPhone 12 - 18 Pro Max, Samsung Galaxy S21 - S26 Ultra ve Katlanabilir Galaxy Z Fold & Flip serisi için optimize edilmiş optik rehber, tek imza lansman rengi, şeffaf kasa renderı ve profesyonel çekim reçeteleri.
           </p>
         </div>
 
         {/* 1. BRAND SWITCHER TABS (Apple vs Samsung) */}
-        <div className="flex items-center justify-center mb-8">
+        <div className="flex items-center justify-center mb-6">
           <div className="p-1.5 rounded-3xl bg-black/60 border border-white/10 backdrop-blur-xl flex items-center gap-2 shadow-2xl">
             <button
               onClick={() => handleBrandSwitch("apple")}
@@ -176,12 +205,63 @@ export function IphoneSpecsStudio() {
               }`}
             >
               <span className="text-base">🌌</span>
-              <span>Samsung Galaxy S ({samsungSpecsData.length} Model)</span>
+              <span>Samsung Galaxy ({samsungSpecsData.length} Model)</span>
             </button>
           </div>
         </div>
 
-        {/* 2. SEARCH & SUB-FILTERS */}
+        {/* 2. SAMSUNG SUB-STUDIO SELECTOR (S Serisi vs Z Fold & Flip Serisi) */}
+        {activeBrand === "samsung" && (
+          <div className="max-w-xl mx-auto mb-8 p-1.5 rounded-2xl bg-camera-card/90 border border-cyan-500/20 backdrop-blur-md flex items-center justify-between gap-2 shadow-xl animate-in fade-in duration-300">
+            <button
+              onClick={() => handleSamsungSubSwitch("s-series")}
+              className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                samsungSubTab === "s-series"
+                  ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-black shadow-cyanGlow"
+                  : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Smartphone className="w-4 h-4" />
+              <span>S Serisi Stüdyosu ({samsungSSpecsData.length} Model)</span>
+            </button>
+
+            <button
+              onClick={() => handleSamsungSubSwitch("z-series")}
+              className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                samsungSubTab === "z-series"
+                  ? "bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg"
+                  : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Layers className="w-4 h-4" />
+              <span>Fold & Flip Stüdyosu ({samsungZSpecsData.length} Model)</span>
+            </button>
+          </div>
+        )}
+
+        {/* 2B. FOLD & FLIP DEDICATED BANNER (When Z Series Active) */}
+        {activeBrand === "samsung" && samsungSubTab === "z-series" && (
+          <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-black/60 border border-purple-500/30 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0">
+                <Sparkles className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <span className="font-bold text-white block">
+                  Katlanabilir İnovasyon & FlexCam Avantajı
+                </span>
+                <span className="text-zinc-300 text-[11px] leading-relaxed block">
+                  Galaxy Z serisi, harici tripod olmadan 90° açıyla kendi başına dik durabilir; Kapak Ekranında Dual Preview ile arka kameradan yüksek kaliteli selfie'ler ve 90'lar el kamerası (Camcorder) tutuşu sağlar.
+                </span>
+              </div>
+            </div>
+            <div className="px-3 py-1 rounded-xl bg-purple-500/20 text-purple-200 border border-purple-500/30 font-mono text-[10px] shrink-0 self-start sm:self-auto">
+              Flex Stand & Dual Preview
+            </div>
+          </div>
+        )}
+
+        {/* 3. SEARCH & SUB-FILTERS */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
           {/* Sub-Filter Pills */}
           <div className="flex flex-wrap items-center gap-1.5 w-full md:w-auto">
@@ -228,7 +308,7 @@ export function IphoneSpecsStudio() {
                   Air & e / SE Serisi
                 </button>
               </>
-            ) : (
+            ) : samsungSubTab === "s-series" ? (
               <>
                 <button
                   onClick={() => setFilterType("all")}
@@ -238,7 +318,7 @@ export function IphoneSpecsStudio() {
                       : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
                   }`}
                 >
-                  Tümü ({samsungSpecsData.length})
+                  Tüm S Serisi ({samsungSSpecsData.length})
                 </button>
                 <button
                   onClick={() => setFilterType("ultra")}
@@ -271,26 +351,71 @@ export function IphoneSpecsStudio() {
                   FE & Edge Serisi
                 </button>
               </>
+            ) : (
+              <>
+                <button
+                  onClick={() => setFilterType("all")}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    filterType === "all"
+                      ? "bg-white text-black font-bold shadow-md"
+                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                  }`}
+                >
+                  Tüm Z Modelleri ({samsungZSpecsData.length})
+                </button>
+                <button
+                  onClick={() => setFilterType("fold")}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    filterType === "fold"
+                      ? "bg-purple-500 text-white font-bold shadow-lg"
+                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                  }`}
+                >
+                  Galaxy Z Fold (Büyük Ekran)
+                </button>
+                <button
+                  onClick={() => setFilterType("flip")}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    filterType === "flip"
+                      ? "bg-purple-500 text-white font-bold shadow-lg"
+                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                  }`}
+                >
+                  Galaxy Z Flip (FlexWindow & Vlog)
+                </button>
+              </>
             )}
           </div>
 
           {/* Search Bar */}
-          <div className="relative w-full md:w-64">
+          <div className="relative w-full md:w-72">
             <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={`${activeBrand === "apple" ? "iPhone" : "Galaxy S"} modeli ara...`}
+              placeholder={`${
+                activeBrand === "apple"
+                  ? "iPhone"
+                  : samsungSubTab === "s-series"
+                  ? "Galaxy S"
+                  : "Galaxy Z Fold / Flip"
+              } veya renk ara...`}
               className="w-full bg-camera-card border border-white/10 rounded-xl pl-9 pr-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-all font-mono"
             />
           </div>
         </div>
 
-        {/* 3. MODEL SELECTION GRID */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 mb-10 max-h-72 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-white/10">
+        {/* 4. MODEL SELECTION GRID */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 mb-10 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-white/10">
           {filteredModels.map((model) => {
             const isSelected = model.id === currentModel.id;
+            const sigColor = model.signatureColor || {
+              name: "Standart",
+              hex: "#71717A",
+            };
+            const lensCount = model.chassisDesign?.lensCount || (model.isPro ? 3 : 2);
+
             return (
               <button
                 key={model.id}
@@ -299,7 +424,9 @@ export function IphoneSpecsStudio() {
                   isSelected
                     ? activeBrand === "apple"
                       ? "bg-gradient-to-b from-amber-500/20 to-camera-card border-amber-500 shadow-glow"
-                      : "bg-gradient-to-b from-cyan-500/20 to-camera-card border-cyan-400 shadow-cyanGlow"
+                      : samsungSubTab === "s-series"
+                      ? "bg-gradient-to-b from-cyan-500/20 to-camera-card border-cyan-400 shadow-cyanGlow"
+                      : "bg-gradient-to-b from-purple-500/20 to-camera-card border-purple-400 shadow-lg"
                     : "bg-camera-card/80 border-white/5 hover:border-white/20 hover:bg-white/5"
                 }`}
               >
@@ -316,42 +443,64 @@ export function IphoneSpecsStudio() {
                     >
                       {model.series}
                     </span>
-                    {isSelected && (
-                      <span
-                        className={`w-2 h-2 rounded-full animate-ping ${
-                          activeBrand === "apple" ? "bg-amber-400" : "bg-cyan-400"
-                        }`}
-                      />
-                    )}
+                    <span className="text-[9px] font-mono text-zinc-400">
+                      {lensCount}L
+                    </span>
                   </div>
                   <div className="text-xs sm:text-sm font-bold text-white tracking-tight line-clamp-1">
                     {model.name}
                   </div>
                 </div>
-                <div className="text-[10px] text-zinc-400 mt-2 font-mono truncate">
-                  {model.badge.split("&")[0].trim()}
+
+                <div className="mt-2 pt-2 border-t border-white/5 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400 truncate max-w-[85%]">
+                    <span
+                      className="w-2 h-2 rounded-full shrink-0 border border-white/30"
+                      style={{ backgroundColor: sigColor.hex }}
+                    />
+                    <span className="truncate">{sigColor.name.split("(")[0].trim()}</span>
+                  </div>
+                  {isSelected && (
+                    <span
+                      className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                        activeBrand === "apple"
+                          ? "bg-amber-400"
+                          : samsungSubTab === "s-series"
+                          ? "bg-cyan-400"
+                          : "bg-purple-400"
+                      }`}
+                    />
+                  )}
                 </div>
               </button>
             );
           })}
         </div>
 
-        {/* 4. SELECTED MODEL SHOWCASE CARD (Visual + Specs + Performance) */}
+        {/* 5. SELECTED MODEL SHOWCASE CARD (Visual + Specs + Performance) */}
         <div className="rounded-3xl bg-camera-card/90 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 shadow-2xl mb-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-8 border-b border-white/10">
             {/* Left 4 Cols: Realistic Back-View Device Visual */}
             <div className="lg:col-span-4 flex flex-col items-center">
               <div className="w-full flex items-center justify-between mb-3 px-2">
                 <span className="text-[11px] font-mono text-zinc-400 flex items-center gap-1.5 font-semibold">
-                  <Aperture className={`w-3.5 h-3.5 ${activeBrand === "apple" ? "text-amber-400" : "text-cyan-400"}`} />
-                  <span>Şeffaf Arka Yüzey & Optik Modül</span>
+                  <Aperture
+                    className={`w-3.5 h-3.5 ${
+                      activeBrand === "apple"
+                        ? "text-amber-400"
+                        : samsungSubTab === "s-series"
+                        ? "text-cyan-400"
+                        : "text-purple-400"
+                    }`}
+                  />
+                  <span>Şeffaf Arka Yüzey & Optik Kasa</span>
                 </span>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">
                   {currentModel.releaseYear}
                 </span>
               </div>
 
-              {/* The Back-View Component */}
+              {/* The Back-View Component with Single Iconic Launch Color */}
               <DeviceBackViewVisual device={currentModel} />
             </div>
 
@@ -364,7 +513,9 @@ export function IphoneSpecsStudio() {
                     className={`px-2.5 py-0.5 rounded-lg border text-xs font-mono font-bold ${
                       activeBrand === "apple"
                         ? "bg-amber-500/20 text-amber-400 border-amber-500/30"
-                        : "bg-cyan-500/20 text-cyan-400 border-cyan-500/30"
+                        : samsungSubTab === "s-series"
+                        ? "bg-cyan-500/20 text-cyan-400 border-cyan-500/30"
+                        : "bg-purple-500/20 text-purple-300 border border-purple-500/30"
                     }`}
                   >
                     {currentModel.series}
@@ -375,6 +526,22 @@ export function IphoneSpecsStudio() {
                   <span className="px-2.5 py-0.5 rounded-lg bg-zinc-800 text-zinc-300 text-xs font-mono">
                     {currentModel.generation}
                   </span>
+
+                  {/* Single Iconic Launch Color Badge */}
+                  {currentModel.signatureColor && (
+                    <span className="px-2.5 py-0.5 rounded-lg bg-black/60 border border-white/15 text-xs font-mono flex items-center gap-1.5 shadow-sm">
+                      <span
+                        className="w-2.5 h-2.5 rounded-full border border-white/30"
+                        style={{ backgroundColor: currentModel.signatureColor.hex }}
+                      />
+                      <span className="text-zinc-300">
+                        İkonik Lansman Rengi:{" "}
+                        <strong className="text-white font-bold">
+                          {currentModel.signatureColor.name}
+                        </strong>
+                      </span>
+                    </span>
+                  )}
                 </div>
 
                 <h3 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
@@ -485,30 +652,30 @@ export function IphoneSpecsStudio() {
                   </div>
                 </div>
 
-                {/* Quick Hardware Specs */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3 text-xs font-mono">
+                {/* Key Hardware Summary Pill Matrix */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-3 text-xs font-mono">
                   <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                    <span className="text-[9px] text-zinc-500 block">OPTİK ZOOM</span>
-                    <span className="text-amber-400 font-semibold truncate block">
+                    <span className="text-[9px] text-zinc-500 block">ZOOM ARALIĞI</span>
+                    <span className="text-white font-semibold truncate block">
                       {currentModel.hardware.zoomCapabilities}
                     </span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                    <span className="text-[9px] text-zinc-500 block">HAM ÇEKİM (RAW)</span>
-                    <span className="text-cyan-400 font-semibold truncate block">
-                      {currentModel.hardware.rawSupport}
+                    <span className="text-[9px] text-zinc-500 block">RAW / FORMAT</span>
+                    <span className="text-amber-400 font-semibold truncate block">
+                      {currentModel.hardware.rawSupport.split("(")[0].trim()}
                     </span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
                     <span className="text-[9px] text-zinc-500 block">MAKRO</span>
                     <span className="text-emerald-400 font-semibold truncate block">
-                      {currentModel.hardware.macroSupport ? "✓ 2cm Süper Makro" : "✗ Yok"}
+                      {currentModel.hardware.macroSupport ? "✓ Otofokuslu Makro" : "✗ Yok"}
                     </span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
                     <span className="text-[9px] text-zinc-500 block">ÖNE ÇIKAN TEKNOLOJİ</span>
                     <span className="text-white font-semibold truncate block">
-                      {currentModel.topFeatureBadge}
+                      {currentModel.topFeatureBadge.split("&")[0].trim()}
                     </span>
                   </div>
                 </div>
@@ -548,7 +715,7 @@ export function IphoneSpecsStudio() {
           </div>
         </div>
 
-        {/* 5. SIX SCENARIO TABS & MODEL-SPECIFIC RECIPES */}
+        {/* 6. SIX SCENARIO TABS & MODEL-SPECIFIC RECIPES */}
         <div className="mb-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
@@ -559,7 +726,7 @@ export function IphoneSpecsStudio() {
                 </span>
               </h3>
               <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
-                Bu telefonun donanımına ve sensörüne göre optimize edilmiş özel kamera ayarları ve profesyonel ipuçları.
+                Bu telefonun optik donanımına ve form faktörüne göre hazırlanmış profesyonel çekim reçeteleri.
               </p>
             </div>
 
@@ -576,7 +743,9 @@ export function IphoneSpecsStudio() {
                       isActive
                         ? activeBrand === "apple"
                           ? "bg-amber-500 text-black shadow-glow font-bold"
-                          : "bg-cyan-500 text-black shadow-cyanGlow font-bold"
+                          : samsungSubTab === "s-series"
+                          ? "bg-cyan-500 text-black shadow-cyanGlow font-bold"
+                          : "bg-purple-500 text-white shadow-lg font-bold"
                         : "text-zinc-400 hover:text-white hover:bg-white/5"
                     }`}
                   >
@@ -595,7 +764,9 @@ export function IphoneSpecsStudio() {
                 className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r ${
                   activeBrand === "apple"
                     ? "from-amber-500 via-orange-400 to-amber-600"
-                    : "from-cyan-400 via-blue-500 to-indigo-500"
+                    : samsungSubTab === "s-series"
+                    ? "from-cyan-400 via-blue-500 to-indigo-500"
+                    : "from-purple-500 via-fuchsia-500 to-indigo-500"
                 }`}
               />
 
@@ -603,7 +774,11 @@ export function IphoneSpecsStudio() {
                 <div>
                   <div
                     className={`text-xs font-mono uppercase tracking-widest mb-1.5 flex items-center gap-1.5 font-bold ${
-                      activeBrand === "apple" ? "text-amber-400" : "text-cyan-400"
+                      activeBrand === "apple"
+                        ? "text-amber-400"
+                        : samsungSubTab === "s-series"
+                        ? "text-cyan-400"
+                        : "text-purple-300"
                     }`}
                   >
                     <Sparkles className="w-4 h-4" />
@@ -628,12 +803,18 @@ export function IphoneSpecsStudio() {
                   className={`border rounded-2xl p-4 lg:max-w-xs shrink-0 ${
                     activeBrand === "apple"
                       ? "bg-amber-500/10 border-amber-500/20"
-                      : "bg-cyan-500/10 border-cyan-500/20"
+                      : samsungSubTab === "s-series"
+                      ? "bg-cyan-500/10 border-cyan-500/20"
+                      : "bg-purple-500/10 border-purple-500/20"
                   }`}
                 >
                   <div
                     className={`text-[11px] font-mono uppercase font-bold mb-1 flex items-center gap-1 ${
-                      activeBrand === "apple" ? "text-amber-400" : "text-cyan-400"
+                      activeBrand === "apple"
+                        ? "text-amber-400"
+                        : samsungSubTab === "s-series"
+                        ? "text-cyan-400"
+                        : "text-purple-300"
                     }`}
                   >
                     <Flame className="w-3.5 h-3.5" />

@@ -112,12 +112,36 @@ export interface ShotRecipe {
 
 export type DeviceBrand = "apple" | "samsung";
 
+export interface DeviceSignatureColor {
+  name: string; // Tek imza lansman rengi, örn: "Titanyum Turuncu"
+  hex: string;  // Ana renk kodu, örn: "#E05A2B"
+  accentHex?: string;
+  gradient?: string; // CSS veya Tailwind gradient sınıfı
+}
+
+export interface DeviceChassisDesign {
+  lensCount: number; // 1, 2, 3, 4, 5
+  layout: 
+    | "single-center"       // iPhone SE (2022)
+    | "dual-diagonal"       // iPhone 13, 14, 15
+    | "dual-vertical"       // iPhone 16, 16e, 17e
+    | "triple-pro-triangle" // iPhone 12 Pro - 18 Pro Max
+    | "slim-single-fusion"  // iPhone Air
+    | "samsung-traffic-3"   // Galaxy S22 - S26, Plus, FE
+    | "samsung-s21-contour" // Galaxy S21 / S21+ (Contour-cut altın/menekşe)
+    | "samsung-ultra-multi" // Galaxy S21U - S26U (5 lens + periskop + lazer AF)
+    | "z-fold-vertical"     // Galaxy Z Fold 5, 6, 7, 8 (3 dikey lens ada)
+    | "z-fold-ultra"        // Galaxy Z Fold 8 Ultra (4 lens periskop ada)
+    | "z-flip-dual";        // Galaxy Z Flip 5, 6, 7, 8 (FlexWindow + çift lens)
+  formFactor: "slab" | "fold" | "flip";
+}
+
 export type ShootingCategoryKey = 
   | "night" 
   | "street" 
   | "landscape" 
   | "portrait" 
-  | "foodMacro"
+  | "foodMacro" 
   | "video";
 
 export interface DeviceShootingRecipe {
@@ -144,6 +168,9 @@ export interface DeviceModelSpec {
   isPro: boolean;
   backViewImage: string;
   accentColor?: string;
+  signatureColor: DeviceSignatureColor;
+  chassisDesign: DeviceChassisDesign;
+  samsungSubSeries?: "galaxy-s" | "galaxy-z";
   bestShootingType: string;
   recommendedSetting: string;
   topFeatureBadge: string;
@@ -167,6 +194,10 @@ export interface DeviceModelSpec {
     spaceZoom?: string;
     proVisualEngine?: boolean;
     expertRawSupport?: boolean;
+    // Fold & Flip specific tags
+    flexModeSupport?: boolean;
+    coverScreenPreview?: boolean;
+    handsFreeStand?: boolean;
   };
   evaluation: {
     strongestSide: string;
@@ -198,4 +229,5 @@ export interface IphoneModelSpec extends DeviceModelSpec {
 
 export interface SamsungModelSpec extends DeviceModelSpec {
   brand: "samsung";
+  samsungSubSeries: "galaxy-s" | "galaxy-z";
 }

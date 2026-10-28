@@ -3,6 +3,10 @@ import { SamsungModelSpec } from "@/types";
 export const samsungSpecsData: SamsungModelSpec[] = [
   {
     "id": "samsung-s21",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Hayalet Menekşe (Phantom Violet)","hex":"#7C3AED","gradient":"from-purple-700 via-violet-600 to-indigo-900"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-s21-contour","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S21",
     "name": "Samsung Galaxy S21",
@@ -112,6 +116,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s21-plus",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Hayalet Menekşe (Phantom Violet & Gold Wrap)","hex":"#7C3AED","gradient":"from-purple-700 via-violet-600 to-amber-600/40"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-s21-contour","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S21",
     "name": "Samsung Galaxy S21+",
@@ -220,6 +228,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s21-ultra",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Hayalet Siyah (Phantom Black)","hex":"#09090B","gradient":"from-neutral-900 via-zinc-900 to-black"},
+    "chassisDesign": {"lensCount":5,"layout":"samsung-ultra-multi","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S21",
     "name": "Samsung Galaxy S21 Ultra",
@@ -330,6 +342,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s21-fe",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Zeytin Yeşili (Olive)","hex":"#4D7C0F","gradient":"from-lime-800 via-emerald-900 to-zinc-900"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S21",
     "name": "Samsung Galaxy S21 FE",
@@ -438,6 +454,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s22",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Orman Yeşili (Green)","hex":"#065F46","gradient":"from-emerald-900 via-teal-950 to-zinc-900"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S22",
     "name": "Samsung Galaxy S22",
@@ -547,6 +567,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s22-plus",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Pembe Altın (Pink Gold)","hex":"#FB7185","gradient":"from-rose-300 via-pink-200 to-rose-400"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S22",
     "name": "Samsung Galaxy S22+",
@@ -656,6 +680,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s22-ultra",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Bordo (Burgundy)","hex":"#881337","gradient":"from-rose-950 via-red-950 to-zinc-950"},
+    "chassisDesign": {"lensCount":5,"layout":"samsung-ultra-multi","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S22",
     "name": "Samsung Galaxy S22 Ultra",
@@ -766,6 +794,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s23",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Krem (Cream)","hex":"#FEF08A","gradient":"from-amber-100 via-yellow-50 to-stone-200"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S23",
     "name": "Samsung Galaxy S23",
@@ -875,6 +907,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s23-plus",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Lavanta (Lavender)","hex":"#A855F7","gradient":"from-purple-300 via-fuchsia-200 to-purple-400"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S23",
     "name": "Samsung Galaxy S23+",
@@ -983,6 +1019,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s23-ultra",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Botanik Yeşili (Green)","hex":"#166534","gradient":"from-green-900 via-emerald-950 to-zinc-950"},
+    "chassisDesign": {"lensCount":5,"layout":"samsung-ultra-multi","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S23",
     "name": "Samsung Galaxy S23 Ultra",
@@ -1093,6 +1133,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s23-fe",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Nane Yeşili (Mint)","hex":"#2DD4BF","gradient":"from-teal-300 via-emerald-200 to-teal-400"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S23",
     "name": "Samsung Galaxy S23 FE",
@@ -1202,6 +1246,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s24",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Amber Sarısı (Amber Yellow)","hex":"#EAB308","gradient":"from-amber-300 via-yellow-200 to-amber-500"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S24",
     "name": "Samsung Galaxy S24",
@@ -1312,6 +1360,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s24-plus",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Kobalt Menekşe (Cobalt Violet)","hex":"#6366F1","gradient":"from-indigo-600 via-violet-500 to-indigo-800"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S24",
     "name": "Samsung Galaxy S24+",
@@ -1421,6 +1473,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s24-ultra",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Titanyum Gri (Titanium Gray)","hex":"#71717A","gradient":"from-zinc-600 via-stone-500 to-zinc-800"},
+    "chassisDesign": {"lensCount":5,"layout":"samsung-ultra-multi","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S24",
     "name": "Samsung Galaxy S24 Ultra",
@@ -1531,6 +1587,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s24-fe",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Buz Mavisi (Blue Frost)","hex":"#0EA5E9","gradient":"from-sky-300 via-blue-200 to-sky-500"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S24",
     "name": "Samsung Galaxy S24 FE",
@@ -1640,6 +1700,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s25",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Işıltılı Mavi (Sparkling Blue)","hex":"#38BDF8","gradient":"from-sky-400 via-blue-300 to-cyan-500"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S25",
     "name": "Samsung Galaxy S25",
@@ -1749,6 +1813,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s25-plus",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Işıltılı Gümüş (Sparkling Silver)","hex":"#CBD5E1","gradient":"from-slate-200 via-zinc-100 to-slate-400"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S25",
     "name": "Samsung Galaxy S25+",
@@ -1858,6 +1926,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s25-ultra",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Titanyum Yeşili (Titanium Jade Green)","hex":"#059669","gradient":"from-emerald-800 via-teal-900 to-zinc-950"},
+    "chassisDesign": {"lensCount":5,"layout":"samsung-ultra-multi","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S25",
     "name": "Samsung Galaxy S25 Ultra",
@@ -1967,6 +2039,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s25-edge",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Obsidiyen Siyah (Obsidian Black)","hex":"#18181B","gradient":"from-zinc-900 via-neutral-900 to-black"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S25",
     "name": "Samsung Galaxy S25 Edge",
@@ -2076,6 +2152,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s25-fe",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Adaçayı Yeşili (Sage Green)","hex":"#10B981","gradient":"from-emerald-300 via-teal-200 to-emerald-500"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S25",
     "name": "Samsung Galaxy S25 FE",
@@ -2185,6 +2265,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s26",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Kutup Beyazı (Polar White)","hex":"#F1F5F9","gradient":"from-white via-slate-100 to-slate-200"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S26",
     "name": "Samsung Galaxy S26",
@@ -2294,6 +2378,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s26-plus",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Titanyum Gümüş (Titanium Silver)","hex":"#94A3B8","gradient":"from-slate-300 via-zinc-200 to-slate-400"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S26",
     "name": "Samsung Galaxy S26+",
@@ -2403,6 +2491,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s26-ultra",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Titanyum Kobalt Menekşe (Titanium Cobalt Violet)","hex":"#6366F1","gradient":"from-indigo-950 via-slate-900 to-violet-950"},
+    "chassisDesign": {"lensCount":5,"layout":"samsung-ultra-multi","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S26",
     "name": "Samsung Galaxy S26 Ultra",
@@ -2514,6 +2606,10 @@ export const samsungSpecsData: SamsungModelSpec[] = [
   },
   {
     "id": "samsung-s26-fe",
+    "samsungSubSeries": "galaxy-s",
+    "signatureColor": {"name":"Elektrik Mavisi (Electric Blue)","hex":"#0284C7","gradient":"from-sky-500 via-blue-600 to-indigo-700"},
+    "chassisDesign": {"lensCount":3,"layout":"samsung-traffic-3","formFactor":"slab"},
+
     "brand": "samsung",
     "series": "Galaxy S26",
     "name": "Samsung Galaxy S26 FE",

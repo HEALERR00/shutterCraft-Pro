@@ -4,6 +4,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 1. iPHONE SE (2022 / 3. NESİL) ================= */
   {
     id: "iphone-se-2022",
+    signatureColor: {"name":"Gece Yarısı (Midnight)","hex":"#1E293B","gradient":"from-slate-900 via-neutral-900 to-black"},
+    chassisDesign: {"lensCount":1,"layout":"single-center","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone SE & e",
     name: "iPhone SE (2022 - 3. Nesil)",
@@ -112,6 +115,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 2. iPHONE 12 / 12 MINI ================= */
   {
     id: "iphone-12",
+    signatureColor: {"name":"Nane Yeşili (Mint Green)","hex":"#A7F3D0","gradient":"from-emerald-200 via-teal-100 to-emerald-300"},
+    chassisDesign: {"lensCount":2,"layout":"dual-vertical","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 12",
     name: "iPhone 12 & 12 Mini",
@@ -220,6 +226,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 3. iPHONE 12 PRO / 12 PRO MAX ================= */
   {
     id: "iphone-12-pro",
+    signatureColor: {"name":"Pasifik Mavisi (Pacific Blue)","hex":"#0369A1","gradient":"from-sky-900 via-cyan-950 to-slate-950"},
+    chassisDesign: {"lensCount":3,"layout":"triple-pro-triangle","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 12",
     name: "iPhone 12 Pro & 12 Pro Max",
@@ -328,6 +337,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 4. iPHONE 13 / 13 MINI ================= */
   {
     id: "iphone-13",
+    signatureColor: {"name":"Gece Yarısı (Midnight Black)","hex":"#0F172A","gradient":"from-slate-950 via-zinc-900 to-black"},
+    chassisDesign: {"lensCount":2,"layout":"dual-diagonal","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 13",
     name: "iPhone 13 & 13 Mini",
@@ -436,6 +448,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 5. iPHONE 13 PRO / 13 PRO MAX ================= */
   {
     id: "iphone-13-pro",
+    signatureColor: {"name":"Sierra Mavisi (Sierra Blue)","hex":"#60A5FA","gradient":"from-sky-400 via-blue-300 to-slate-300"},
+    chassisDesign: {"lensCount":3,"layout":"triple-pro-triangle","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 13",
     name: "iPhone 13 Pro & 13 Pro Max",
@@ -544,6 +559,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 6. iPHONE 14 / 14 PLUS ================= */
   {
     id: "iphone-14",
+    signatureColor: {"name":"Açık Mavi (Sky Blue)","hex":"#38BDF8","gradient":"from-sky-300 via-blue-200 to-sky-400"},
+    chassisDesign: {"lensCount":2,"layout":"dual-diagonal","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 14",
     name: "iPhone 14 & 14 Plus",
@@ -652,6 +670,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 7. iPHONE 14 PRO / 14 PRO MAX ================= */
   {
     id: "iphone-14-pro",
+    signatureColor: {"name":"Derin Mor (Deep Purple)","hex":"#4C1D95","gradient":"from-purple-950 via-violet-900 to-slate-950"},
+    chassisDesign: {"lensCount":3,"layout":"triple-pro-triangle","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 14",
     name: "iPhone 14 Pro & 14 Pro Max",
@@ -760,6 +781,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 8. iPHONE 15 / 15 PLUS ================= */
   {
     id: "iphone-15",
+    signatureColor: {"name":"Pastel Pembe (Soft Pink)","hex":"#F472B6","gradient":"from-rose-300 via-pink-200 to-rose-400"},
+    chassisDesign: {"lensCount":2,"layout":"dual-diagonal","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 15",
     name: "iPhone 15 & 15 Plus",
@@ -868,6 +892,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 9. iPHONE 15 PRO / 15 PRO MAX ================= */
   {
     id: "iphone-15-pro",
+    signatureColor: {"name":"Doğal Titanyum (Natural Titanium)","hex":"#9CA3AF","gradient":"from-zinc-400 via-stone-300 to-zinc-500"},
+    chassisDesign: {"lensCount":3,"layout":"triple-pro-triangle","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 15",
     name: "iPhone 15 Pro & 15 Pro Max",
@@ -976,6 +1003,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 10. iPHONE 16 / 16 PLUS ================= */
   {
     id: "iphone-16",
+    signatureColor: {"name":"Ultramarin Mavi (Ultramarine Blue)","hex":"#3B82F6","gradient":"from-blue-600 via-indigo-500 to-blue-700"},
+    chassisDesign: {"lensCount":2,"layout":"dual-vertical","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 16",
     name: "iPhone 16 & 16 Plus",
@@ -1084,6 +1114,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 11. iPHONE 16e ================= */
   {
     id: "iphone-16e",
+    signatureColor: {"name":"Buz Yeşili (Mint Frost)","hex":"#34D399","gradient":"from-emerald-300 via-teal-200 to-emerald-400"},
+    chassisDesign: {"lensCount":2,"layout":"dual-vertical","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone SE & e",
     name: "iPhone 16e",
@@ -1192,6 +1225,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 12. iPHONE 16 PRO / 16 PRO MAX ================= */
   {
     id: "iphone-16-pro",
+    signatureColor: {"name":"Çöl Titanyum (Desert Titanium)","hex":"#C2A68C","gradient":"from-amber-200 via-stone-300 to-amber-700/60"},
+    chassisDesign: {"lensCount":3,"layout":"triple-pro-triangle","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 16",
     name: "iPhone 16 Pro & 16 Pro Max",
@@ -1300,6 +1336,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 13. iPHONE AIR ================= */
   {
     id: "iphone-air",
+    signatureColor: {"name":"Hava Gümüşü (Aero Sky Silver)","hex":"#7DD3FC","gradient":"from-sky-200 via-slate-100 to-sky-300"},
+    chassisDesign: {"lensCount":1,"layout":"slim-single-fusion","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone Air",
     name: "iPhone Air",
@@ -1408,6 +1447,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 14. iPHONE 17e ================= */
   {
     id: "iphone-17e",
+    signatureColor: {"name":"Pastel Lavanta (Soft Lavender)","hex":"#C084FC","gradient":"from-purple-300 via-fuchsia-200 to-purple-400"},
+    chassisDesign: {"lensCount":2,"layout":"dual-vertical","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone SE & e",
     name: "iPhone 17e",
@@ -1516,6 +1558,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 15. iPHONE 17 PRO & 17 PRO MAX ================= */
   {
     id: "iphone-17-pro",
+    signatureColor: {"name":"Titanyum Bakır (Titanium Copper)","hex":"#B45309","gradient":"from-amber-700 via-orange-800 to-stone-900"},
+    chassisDesign: {"lensCount":3,"layout":"triple-pro-triangle","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 17 & 18",
     name: "iPhone 17 Pro & 17 Pro Max",
@@ -1621,9 +1666,131 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
     },
   },
 
+
+  /* ================= 15B. iPHONE 17 PRO MAX ================= */
+  {
+    id: "iphone-17-pro-max",
+    brand: "apple",
+    series: "iPhone 17 & 18",
+    name: "iPhone 17 Pro Max",
+    badge: "Üçlü 48MP Sensör & Titanyum Turuncu",
+    generation: "2025 Gelecek Nesil Pro Max",
+    releaseYear: 2025,
+    isPro: true,
+    backViewImage: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
+    accentColor: "#E05A2B",
+    signatureColor: {
+      name: "Titanyum Turuncu (Cosmic Orange)",
+      hex: "#E05A2B",
+      gradient: "from-[#38180c] via-[#853213] to-[#E05A2B]"
+    },
+    chassisDesign: {
+      lensCount: 3,
+      layout: "triple-pro-triangle",
+      formFactor: "slab"
+    },
+    bestShootingType: "Manzara, Portre & 8K ProRes Video (Üçlü 48MP)",
+    recommendedSetting: "Üçlü 48MP ProRAW • 5x Telefoto 48MP (120mm) • 4K 120fps Log",
+    topFeatureBadge: "Üçlü 48MP & Titanyum Turuncu",
+    hardware: {
+      mainSensor: "48 MP Fusion (Yeni Nesil 1/1.2\" Sensör, f/1.6, 24/28/35mm)",
+      ultraWide: "48 MP Ultra Geniş (f/2.0, Gelişmiş Anti-Flare kaplama, 2cm Makro)",
+      telephoto: "48 MP Tetraprism Periskop Telefoto (5x 120mm f/2.4, OIS)",
+      zoomCapabilities: "0.5x (48MP), 1x (24/28/35mm), 2x, 5x (48MP), 10x Optik Kalite Zoom",
+      apertures: "Ana: f/1.6 | Ultra Geniş: f/2.0 | Telefoto: f/2.4",
+      lidar: true,
+      sensorShiftOis: true,
+      actionButton: true,
+      cameraControl: true,
+      rawSupport: "Apple ProRAW (Üçlü 48MP Max) & HEIF Max",
+      macroSupport: true,
+      photonicEngine: true,
+      specialTech: ["Tüm Kameralarda 48MP Sensör Dizilimi", "48MP 5x Periskop ile 10x Kayıpsız Sensör İçi Kırpma", "Anti-Flare Yansıma Önleyici Kaplama", "Apple Log 2.0"]
+    },
+    evaluation: {
+      strongestSide: "Tüm arka lenslerin 48MP olması ve ikonik Titanyum Turuncu lansman rengiyle 5x periskoptan kayıpsız 10x (240mm) optik zoom.",
+      weakestSide: "Üçlü 48MP ProRAW dosyalarının yüksek dosya boyutu.",
+      scoreOverview: {
+        night: 9.9,
+        portrait: 9.9,
+        street: 9.6,
+        macro: 9.8,
+        landscape: 9.9,
+        video: 9.9
+      },
+      verdictBadge: "Üçlü 48MP & Titanyum Turuncu Zirvesi",
+      bestShootingScenarioDetails: "Altın saatte 5x 48MP periskop ile gün batımı manzarası ve 4K 120fps sinematik ağır çekim."
+    },
+    recipes: {
+      night: {
+        categoryName: "Gece Fotoğrafçılığı",
+        title: "Üçlü 48MP Gece Şehir Manzarası",
+        recommendedLens: "24mm Ana Fusion (f/1.6)",
+        isoShutterEv: "1/4s (elde) / 10s Gece Modu | EV: -0.3 | ISO 125",
+        hardwareAdvantage: "Gelişmiş anti-flare kaplama sokak lambası parlamalarını engeller.",
+        stepByStepTip: "1. 48MP ProRAW modunu açın. 2. Gece Modunu 3 saniyeye sabitleyin. 3. Çekin.",
+        secretTrick: "Yansıma önleyici lens kaplaması sayesinde araç farlarına karşı doğrudan çekim yapabilirsiniz.",
+        commonTrap: "Karanlıkta 10x dijital zoom yapmak yerine 5x 48MP optik lensi kullanın."
+      },
+      street: {
+        categoryName: "Sokak Fotoğrafçılığı",
+        title: "35mm Sokak Belgeseli",
+        recommendedLens: "35mm Sanal Odak (Ana Lens)",
+        isoShutterEv: "1/500s | EV: 0.0 | ISO 160",
+        hardwareAdvantage: "Kamera Denetimi tuşuna çift hafif basış ile lensi 35mm'ye anında sabitleyin.",
+        stepByStepTip: "1. 35mm seçeneğini seçin. 2. Fotoğrafik Stillerden 'Zengin Sıcak' modunu seçin. 3. Deklanşöre basın.",
+        secretTrick: "Kamera Denetimi tuşunu kaydırarak pozlamayı anında -0.3 yapın.",
+        commonTrap: "Sokakta hızlı geçerken lensi kirletmeyin."
+      },
+      landscape: {
+        categoryName: "Manzara & Doğa",
+        title: "Üçlü 48MP Manzara Tablosu",
+        recommendedLens: "48MP Ultra Geniş & 5x 48MP Periskop",
+        isoShutterEv: "1/250s | EV: -0.3 | ISO 50",
+        hardwareAdvantage: "Ultra Geniş lensin de 48MP olması köşelerde sıfır kayıp sağlar.",
+        stepByStepTip: "1. 48MP RAW Max seçin. 2. Ufku üçte bir kuralına göre dengeleyin.",
+        secretTrick: "5x periskop ile dağ silüetlerini devasa gösteren perspektif sıkıştırması elde edin.",
+        commonTrap: "Rüzgarlı havalarda hafif titreşimi önlemek için iki elle tutun."
+      },
+      portrait: {
+        categoryName: "Portre & İnsan",
+        title: "5x 48MP Stüdyo Portresi (120mm)",
+        recommendedLens: "5x Telefoto (120mm)",
+        isoShutterEv: "1/200s | EV: -0.3 | ISO 100",
+        hardwareAdvantage: "120mm odak uzaklığı yüzü basıklaştırmadan doğal orantıda stüdyo bokehi sunar.",
+        stepByStepTip: "1. Portre modunda 5x seçin. 2. Modelden 3 metre uzaklaşın. 3. Göz odağını kilitleyin.",
+        secretTrick: "Arka plan ışıklarını yuvarlak bokeh tanelerine dönüştürmek için modeli ışık kaynağının önüne yerleştirin.",
+        commonTrap: "Modele çok yaklaşmayın, 5x lens asgari mesafe ister."
+      },
+      foodMacro: {
+        categoryName: "Yemek & Makro",
+        title: "48MP Ultra Geniş 2cm Süper Makro",
+        recommendedLens: "48MP Ultra Geniş Makro",
+        isoShutterEv: "1/120s | EV: +0.3 | ISO 80",
+        hardwareAdvantage: "48MP makro sensörü her detay kırıntısını ve sos dokusunu kaydeder.",
+        stepByStepTip: "1. Tabağa 2 cm yaklaşın. 2. Sarı çiçek ikonunun belirdiğini görün. 3. Çekin.",
+        secretTrick: "Tabağın arkasına peçeteyle reflektör dolgu ışığı verin.",
+        commonTrap: "Kendi telefonunuzun gölgesini tabağın üstüne düşürmeyin."
+      },
+      video: {
+        categoryName: "Video & Sinematik",
+        title: "4K 120fps Sinematik Ağır Çekim Log",
+        recommendedLens: "5x Telefoto & Ana Fusion",
+        isoShutterEv: "4K 120fps | Apple Log 2.0 | ProRes",
+        hardwareAdvantage: "4K 120fps Log desteği ile sinema kamerası ayarında post prodüksiyon.",
+        stepByStepTip: "1. Video ayarlarından 4K 120fps ProRes Log açın. 2. Harici SSD bağlayın. 3. Kaydedin.",
+        secretTrick: "Kurguda 120fps videoyu %20 hıza (24fps) yavaşlatarak Hollywood rüya sekansı oluşturun.",
+        commonTrap: "4K 120fps ProRes dahili hafızayı hızla doldurur, harici Type-C SSD kullanın."
+      }
+    }
+  },
+  
   /* ================= 16. iPHONE 18 PRO ================= */
   {
     id: "iphone-18-pro",
+    signatureColor: {"name":"Titanyum Platin (Neo Platinum)","hex":"#CBD5E1","gradient":"from-slate-200 via-zinc-100 to-slate-400"},
+    chassisDesign: {"lensCount":3,"layout":"triple-pro-triangle","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 17 & 18",
     name: "iPhone 18 Pro",
@@ -1732,6 +1899,9 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
   /* ================= 17. iPHONE 18 PRO MAX ================= */
   {
     id: "iphone-18-pro-max",
+    signatureColor: {"name":"Derin Vişne (Deep Cherry Titanium)","hex":"#581825","gradient":"from-rose-950 via-[#3a0d16] to-[#1a0509]"},
+    chassisDesign: {"lensCount":3,"layout":"triple-pro-triangle","formFactor":"slab"},
+
     brand: "apple",
     series: "iPhone 17 & 18",
     name: "iPhone 18 Pro Max",
