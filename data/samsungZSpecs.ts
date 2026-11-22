@@ -14,7 +14,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Fold Serisi (2026)",
     releaseYear: 2026,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1616469829941-c7200edec809?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "Titanyum Obsidiyen (Titanium Obsidian)",
       hex: "#0F172A",
@@ -144,7 +145,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Fold Serisi (2026)",
     releaseYear: 2026,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "Titanyum Platin (Titanium Platinum)",
       hex: "#E2E8F0",
@@ -273,7 +275,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Fold Serisi (2025)",
     releaseYear: 2025,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "Titanyum Derin Gece (Titanium Deep Night)",
       hex: "#1E3A8A",
@@ -402,7 +405,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Fold Serisi (2024)",
     releaseYear: 2024,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "Gümüş Gölge (Silver Shadow)",
       hex: "#94A3B8",
@@ -531,7 +535,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Fold Serisi (2023)",
     releaseYear: 2023,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "İpeksi Mavi (Icy Blue)",
       hex: "#67E8F9",
@@ -660,7 +665,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Flip Serisi (2026)",
     releaseYear: 2026,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "Siber Lavanta (Cyber Lavender)",
       hex: "#C084FC",
@@ -789,7 +795,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Flip Serisi (2025)",
     releaseYear: 2025,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "Mercan Pembesi (Coral Pink)",
       hex: "#FB7185",
@@ -918,7 +925,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Flip Serisi (2025)",
     releaseYear: 2025,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "Grafit Siyahı (Graphite Black)",
       hex: "#27272A",
@@ -1047,7 +1055,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Flip Serisi (2024)",
     releaseYear: 2024,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "Enerjik Sarı (Yellow)",
       hex: "#FACC15",
@@ -1176,7 +1185,8 @@ export const samsungZSpecsData: SamsungModelSpec[] = [
     generation: "Z Flip Serisi (2023)",
     releaseYear: 2023,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
+    imageUrl: "",
+    backViewImage: "",
     signatureColor: {
       name: "Nane Yeşili (Mint)",
       hex: "#6EE7B7",

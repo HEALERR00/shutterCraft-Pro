@@ -14,8 +14,8 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
     generation: "2022 Kompakt",
     releaseYear: 2022,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#ef4444",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-se-2022.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-se-2022.jpg",    accentColor: "#ef4444",
     bestShootingType: "Sokak & Günlük Anlar (Street Photography)",
     recommendedSetting: "1x Ana Lens (28mm) • Smart HDR 4 • Seri Çekim (Burst Mode)",
     topFeatureBadge: "A15 Bionic ISP & Deep Fusion",
@@ -120,13 +120,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 12",
-    name: "iPhone 12 & 12 Mini",
+    name: "iPhone 12",
     badge: "12MP Çift Kamera & Gece Modu",
     generation: "2020 Klasik",
     releaseYear: 2020,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1611472173362-3f53dbd65d80?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#3b82f6",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-12.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-12.jpg",    accentColor: "#3b82f6",
     bestShootingType: "Sokak & Gün Işığı Şehir Fotoğrafçılığı",
     recommendedSetting: "1x f/1.6 Ana Kamera • Gece Modu 3s • Akıllı HDR 3",
     topFeatureBadge: "f/1.6 Diyafram & Dolby Vision HDR",
@@ -231,13 +231,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 12",
-    name: "iPhone 12 Pro & 12 Pro Max",
+    name: "iPhone 12 Pro",
     badge: "LiDAR Tarayıcı & Apple ProRAW Öncüsü",
     generation: "2020 Pro Serisi",
     releaseYear: 2020,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#6366f1",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-12-pro--.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-12-pro--.jpg",    accentColor: "#6366f1",
     bestShootingType: "Portre & Gece Portresi (LiDAR Destekli)",
     recommendedSetting: "2x / 2.5x Telefoto • Gece Portre Modu (LiDAR) • Apple ProRAW",
     topFeatureBadge: "LiDAR Tarayıcı & Apple ProRAW",
@@ -342,13 +342,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 13",
-    name: "iPhone 13 & 13 Mini",
+    name: "iPhone 13",
     badge: "Çapraz Lens Tasarımı & Sinematik Mod Başlangıcı",
     generation: "2021 Popüler",
     releaseYear: 2021,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#ec4899",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13.jpg",    accentColor: "#ec4899",
     bestShootingType: "Sinematik Video & Hikaye Anlatımı",
     recommendedSetting: "Sinematik Mod (1080p 30fps) • 1x Sensör Kaydırma • Fotoğrafik Stiller",
     topFeatureBadge: "Sinematik Mod & Sensör Kaydırmalı OIS",
@@ -453,13 +453,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 13",
-    name: "iPhone 13 Pro & 13 Pro Max",
+    name: "iPhone 13 Pro",
     badge: "3x Telefoto, 2cm Otomatik Makro & ProRes Video",
     generation: "2021 Pro Serisi",
     releaseYear: 2021,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1632661674596-df8be070a5c5?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#06b6d4",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro.jpg",    accentColor: "#06b6d4",
     bestShootingType: "Makro & Mikro Detay Fotoğrafçılığı (2cm)",
     recommendedSetting: "Ultra Geniş 2cm Makro Modu • 3x Optik Telefoto (77mm) • Apple ProRAW",
     topFeatureBadge: "2cm Makro Modu & 3x Optik Telefoto",
@@ -564,13 +564,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 14",
-    name: "iPhone 14 & 14 Plus",
+    name: "iPhone 14",
     badge: "Photonic Engine & Sarsıntısız Hareket Modu",
     generation: "2022 Standart",
     releaseYear: 2022,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#a855f7",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14.jpg",    accentColor: "#a855f7",
     bestShootingType: "Aksiyon & Koşu Videosu (Hareket Modu)",
     recommendedSetting: "Hareket Modu (Action Mode 2.8K) • Photonic Engine • 1x f/1.5",
     topFeatureBadge: "Photonic Engine & Action Mode",
@@ -675,13 +675,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 14",
-    name: "iPhone 14 Pro & 14 Pro Max",
+    name: "iPhone 14 Pro",
     badge: "48MP Quad-Pixel & 2x Optik Kalite Kırpma Devrimi",
     generation: "2022 Pro Serisi",
     releaseYear: 2022,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#8b5cf6",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14-pro.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14-pro.jpg",    accentColor: "#8b5cf6",
     bestShootingType: "Manzara & Mimari (48MP Apple ProRAW)",
     recommendedSetting: "48MP ProRAW Max • 2x Optik Kalite (48mm) • Photonic Engine",
     topFeatureBadge: "48MP Quad-Pixel & Dinamik Ada",
@@ -786,13 +786,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 15",
-    name: "iPhone 15 & 15 Plus",
+    name: "iPhone 15",
     badge: "48MP Ana Sensör & 24MP Varsayılan Yeni Standart",
     generation: "2023 Standart",
     releaseYear: 2023,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#10b981",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15.jpg",    accentColor: "#10b981",
     bestShootingType: "Portre & Doğal İnsan Çekimi (Otomatik Odak Kaydı)",
     recommendedSetting: "24MP Varsayılan Çözünürlük • 2x Optik Kalite (48mm) • Yeni Nesil Portre",
     topFeatureBadge: "48MP Fusion & 24MP Süper Yüksek Çözünürlük",
@@ -897,13 +897,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 15",
-    name: "iPhone 15 Pro & 15 Pro Max",
+    name: "iPhone 15 Pro",
     badge: "5x Tetraprism Periskop, Apple Log & Eylem Düğmesi",
     generation: "2023 Titanyum Amiral Gemisi",
     releaseYear: 2023,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#f59e0b",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro.jpg",    accentColor: "#f59e0b",
     bestShootingType: "Vahşi Yaşam & Uzak Portre (5x Tetraprism 120mm)",
     recommendedSetting: "5x Optik Zoom (120mm) • Apple Log Video • 48MP ProRAW (24/28/35mm)",
     topFeatureBadge: "5x Tetraprism (120mm) & Apple Log",
@@ -1008,13 +1008,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 16",
-    name: "iPhone 16 & 16 Plus",
+    name: "iPhone 16",
     badge: "Kamera Denetimi, Dikey Lensler & Uzamsal Çekim",
     generation: "2024 Güncel Standart",
     releaseYear: 2024,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#0284c7",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16.jpg",    accentColor: "#0284c7",
     bestShootingType: "Uzamsal Fotoğraf & Hızlı Anlar (Kamera Denetimi)",
     recommendedSetting: "Kamera Denetimi (Haptik Kaydırma) • Uzamsal Video • 48MP Fusion",
     topFeatureBadge: "Kamera Denetimi & Uzamsal Çekim",
@@ -1124,8 +1124,8 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
     generation: "2025 Kompakt Amiral Gemisi",
     releaseYear: 2025,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#06b6d4",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16e.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16e.jpg",    accentColor: "#06b6d4",
     bestShootingType: "Sokak Fotoğrafçılığı & Hızlı AI Çekimi",
     recommendedSetting: "48MP Fusion • 2x Optik Kalite (52mm) • Apple Intelligence Temizleme",
     topFeatureBadge: "Apple Intelligence & 48MP Fusion",
@@ -1230,13 +1230,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 16",
-    name: "iPhone 16 Pro & 16 Pro Max",
+    name: "iPhone 16 Pro",
     badge: "48MP Ultra Geniş, 5x Telefoto & 4K 120fps Dolby Vision",
     generation: "2024 Pro Amiral Gemisi",
     releaseYear: 2024,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#eab308",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16-pro.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16-pro.jpg",    accentColor: "#eab308",
     bestShootingType: "Sinematik Video & Ağır Çekim (4K 120fps Dolby Vision)",
     recommendedSetting: "4K 120fps Dolby Vision / Log • 5x Optik Zoom (120mm) • 48MP ProRAW Max",
     topFeatureBadge: "4K 120fps & Kamera Denetimi",
@@ -1346,8 +1346,8 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
     generation: "2025 Yeni Nesil İnce Tasarım",
     releaseYear: 2025,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#38bdf8",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-air.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-air.jpg",    accentColor: "#38bdf8",
     bestShootingType: "Sokak & Günlük Minimalist Estetik",
     recommendedSetting: "48MP Fusion • 28mm / 35mm Eşdeğeri • Kamera Denetimi • Akıllı Nöral Bokeh",
     topFeatureBadge: "Ultra İnce Kasa & 48MP Fusion",
@@ -1457,8 +1457,8 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
     generation: "2026 Kompakt Giriş Amiral Gemisi",
     releaseYear: 2026,
     isPro: false,
-    backViewImage: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#14b8a6",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17e.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17e.jpg",    accentColor: "#14b8a6",
     bestShootingType: "Günlük Fotoğrafçılık & Akıllı Portre",
     recommendedSetting: "48MP Fusion • 2x Optik Kalite (52mm) • Apple Intelligence 2.0",
     topFeatureBadge: "Apple Intelligence 2.0 & A19 Bionic",
@@ -1563,13 +1563,13 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
 
     brand: "apple",
     series: "iPhone 17 & 18",
-    name: "iPhone 17 Pro & 17 Pro Max",
+    name: "iPhone 17 Pro",
     badge: "Üçlü 48MP Sensör & 5x Tetraprism 48MP Devrimi",
     generation: "2025 Gelecek Nesil Pro Amiral Gemisi",
     releaseYear: 2025,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#f59e0b",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro.jpg",    accentColor: "#f59e0b",
     bestShootingType: "Manzara, Portre & 8K ProRes Video (Üçlü 48MP)",
     recommendedSetting: "Üçlü 48MP ProRAW • 5x Telefoto 48MP (120mm) • 4K 120fps Log • Kamera Denetimi 2.0",
     topFeatureBadge: "Üçlü 48MP Sensör & 5x Tele 48MP",
@@ -1677,8 +1677,8 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
     generation: "2025 Gelecek Nesil Pro Max",
     releaseYear: 2025,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#E05A2B",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro-max.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro-max.jpg",    accentColor: "#E05A2B",
     signatureColor: {
       name: "Titanyum Turuncu (Cosmic Orange)",
       hex: "#E05A2B",
@@ -1798,8 +1798,8 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
     generation: "2026 Gelecek Nesil Kompakt Pro",
     releaseYear: 2026,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#ec4899",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone18-pro.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone18-pro.jpg",    accentColor: "#ec4899",
     bestShootingType: "Portre & Gece Fotoğrafçılığı (f/1.4 Mekanik Bokeh)",
     recommendedSetting: "Mekanik Diyafram f/1.4 • Üçlü 48MP ProRAW • Nöral Pozlama Motoru",
     topFeatureBadge: "f/1.4-f/4.0 Değişken Diyafram",
@@ -1909,8 +1909,8 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
     generation: "2026 Zirve Amiral Gemisi",
     releaseYear: 2026,
     isPro: true,
-    backViewImage: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
-    accentColor: "#d97706",
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone18-pro-max.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone18-pro-max.jpg",    accentColor: "#d97706",
     bestShootingType: "Vahşi Yaşam, Uzak Konser & Sinematik Portre (10x Kesintisiz Optik Zum)",
     recommendedSetting: "10x Kesintisiz Periskop (240mm) • Mekanik Diyafram f/1.4 • 8K 60fps Log",
     topFeatureBadge: "10x Kesintisiz Periskop & Değişken Diyafram",
@@ -2006,4 +2006,719 @@ export const iphoneSpecsData: IphoneModelSpec[] = [
       },
     },
   },
+
+  /* ================= 19. iPHONE 17 (STANDART) ================= */
+  {
+    id: "iphone-17",
+    brand: "apple",
+    series: "iPhone 17 & 18",
+    name: "iPhone 17",
+    badge: "Çift 48MP & 120Hz ProMotion",
+    generation: "2025 Standart",
+    releaseYear: 2025,
+    isPro: false,
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17.jpg",
+    accentColor: "#10B981",
+    signatureColor: {
+      name: "Adaçayı Yeşili (Sage Green)",
+      hex: "#10B981",
+      gradient: "from-emerald-800 via-teal-900 to-zinc-900"
+    },
+    chassisDesign: {
+      lensCount: 2,
+      layout: "dual-vertical",
+      formFactor: "slab"
+    },
+    bestShootingType: "Günlük Sokak & Manzara (48MP Detay)",
+    recommendedSetting: "48MP HEIF Max • 2x Sensör İçi Kırpma • Kamera Denetimi",
+    topFeatureBadge: "Çift 48MP & Kamera Denetimi",
+    hardware: {
+      mainSensor: "48 MP Fusion (f/1.6 diyafram, 26mm, Sensör Kaydırmalı OIS)",
+      ultraWide: "48 MP Ultra Geniş (f/2.2, 120˚ görüş açısı, 2cm Makro)",
+      telephoto: "Fiziki telefoto yok (48MP sensör içi 2x kayıpsız optik kalite zoom)",
+      zoomCapabilities: "0.5x Ultra Geniş, 1x Geniş, 2x Sensör İçi Kayıpsız Kırpma",
+      apertures: "Ana: f/1.6 | Ultra Geniş: f/2.2",
+      lidar: false,
+      sensorShiftOis: true,
+      actionButton: true,
+      cameraControl: true,
+      rawSupport: "48MP HEIF Max & 3. parti RAW",
+      macroSupport: true,
+      photonicEngine: true,
+      specialTech: ["Çift 48MP Sensör Mimarisi", "Kamera Denetimi Tuşu", "Photonic Engine 2.0", "Yeni Nesil Portre Modu"]
+    },
+    evaluation: {
+      strongestSide: "Hem ana hem de ultra geniş kameranın 48MP olması ve standart modele ilk kez eklenen 120Hz ekran ile akıcı vizör deneyimi.",
+      weakestSide: "Fiziksel telefoto periskop lensinin bulunmaması.",
+      scoreOverview: {
+        night: 9.3,
+        portrait: 9.2,
+        street: 9.5,
+        macro: 9.3,
+        landscape: 9.4,
+        video: 9.4
+      },
+      verdictBadge: "Mükemmel Standart Amiral Gemisi",
+      bestShootingScenarioDetails: "Gündüz sokak gezilerinde 48MP Ultra Geniş ile mimari detayları yakalamak ve Kamera Denetimi ile anlık pozlama yapmak."
+    },
+    recipes: {
+      night: {
+        categoryName: "Gece Fotoğrafçılığı",
+        title: "Photonic Engine ile Sıfır Grenli Gece",
+        recommendedLens: "1x Ana Kamera (f/1.6)",
+        isoShutterEv: "1/4s elde / 2s Gece Modu | EV: -0.3 | ISO 160",
+        hardwareAdvantage: "Geniş f/1.6 diyafram ve sensör kaydırmalı OIS gece titremelerini önler.",
+        stepByStepTip: "1. 1x lensi seçin. 2. Işıklı bir tabelaya dokunun. 3. Kamera Denetimi ile pozlamayı hafif kısın.",
+        secretTrick: "Kamera Denetimi tuşunu kaydırarak pozlama telafisini anında kilitleyin.",
+        commonTrap: "Karanlıkta 2x üzeri dijital zoom yapmak."
+      },
+      street: {
+        categoryName: "Sokak Fotoğrafçılığı",
+        title: "2x Sensör İçi Kırpma ile Sokak Portresi",
+        recommendedLens: "2x (52mm Eşdeğeri)",
+        isoShutterEv: "1/500s | EV: 0.0 | ISO 125",
+        hardwareAdvantage: "48MP ana sensörün merkezindeki 12MP alan kullanılarak kayıpsız optik kalitede 52mm sokak kadrajı alınır.",
+        stepByStepTip: "1. 2x moduna dokunun. 2. Fotoğrafik Stillerden 'Zengin Sıcak' modunu seçin. 3. Çekin.",
+        secretTrick: "Kamera Denetimi tuşuna iki kez hafif dokunarak doğrudan zoom seçeneğine geçin.",
+        commonTrap: "Hızlı hareket ederken iki elle dengeli tutmamak."
+      },
+      landscape: {
+        categoryName: "Manzara Fotoğrafçılığı",
+        title: "48MP Ultra Geniş Doğa Panoraması",
+        recommendedLens: "48MP Ultra Geniş (0.5x)",
+        isoShutterEv: "1/320s | EV: 0.0 | ISO 50",
+        hardwareAdvantage: "48MP ultra geniş açı manzaradaki en uzak ağaç yapraklarını bile pikselsiz kaydeder.",
+        stepByStepTip: "1. 0.5x lense geçin. 2. HEIF Max 48MP'yi açın. 3. Ufku üçte bir kuralına hizalayın.",
+        secretTrick: "Güneş açısını çapraza alarak gökyüzü mavisini canlandırın.",
+        commonTrap: "Köşelerdeki eğrilmeleri hesaba katmadan çekim yapmak."
+      },
+      portrait: {
+        categoryName: "Portre Fotoğrafçılığı",
+        title: "Otomatik Odak Noktası Değiştirilebilir Portre",
+        recommendedLens: "2x veya 1x Portre",
+        isoShutterEv: "1/200s | EV: -0.3 | f/2.8",
+        hardwareAdvantage: "Fotoğraf çekildikten sonra bile Galeri'den odak noktasını ve derinlik seviyesini değiştirebilirsiniz.",
+        stepByStepTip: "1. 2x portreyi seçin. 2. Modelden 2 metre uzaklaşın. 3. Çekin.",
+        secretTrick: "Çekimden sonra düzenleye basıp diyaframı f/2.0'a çekerek arka planı daha çok eritin.",
+        commonTrap: "Modeli arka plana çok yakın durdurmak."
+      },
+      foodMacro: {
+        categoryName: "Yemek / Ürün Fotoğrafçılığı",
+        title: "48MP 2cm Yakın Çekim Makro",
+        recommendedLens: "48MP Ultra Geniş (Makro Modu)",
+        isoShutterEv: "1/125s | EV: +0.3 | ISO 80",
+        hardwareAdvantage: "Ultra geniş sensör 2 cm mesafeden otomatik olarak makroya geçer.",
+        stepByStepTip: "1. Tabağa 2-3 cm yaklaşın. 2. Çiçek simgesini görünce çekin.",
+        secretTrick: "Yiyeceğin sos detaylarını parlatmak için doğal pencere ışığını kullanın.",
+        commonTrap: "Telefonun gölgesini yemeğin üstüne düşürmek."
+      },
+      video: {
+        categoryName: "Video & Sinematik",
+        title: "4K 60fps Dolby Vision Sinematik Vlog",
+        recommendedLens: "1x Fusion & 0.5x Ultra Geniş",
+        isoShutterEv: "4K 60fps | Action Mode Açık",
+        hardwareAdvantage: "Sensör kaydırmalı OIS yürürken gimbal gibi stabilizasyon sağlar.",
+        stepByStepTip: "1. 4K 60fps'yi açın. 2. Koşu ve hareketli çekimlerde Action Mode'a geçin.",
+        secretTrick: "Ses ayarlarından Rüzgar Azaltma özelliğini açık tutun.",
+        commonTrap: "Karanlık ortamlarda Action Mode kullanmak; bol ışık gerektirir."
+      }
+    }
+  },
+
+  /* ================= 20. iPHONE 16 PRO MAX ================= */
+  {
+    id: "iphone-16-pro-max",
+    brand: "apple",
+    series: "iPhone 16",
+    name: "iPhone 16 Pro Max",
+    badge: "5x Tetraprism & 4K 120fps & Çöl Titanyumu",
+    generation: "2024 Pro Max",
+    releaseYear: 2024,
+    isPro: true,
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16-pro-max.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16-pro-max.jpg",
+    accentColor: "#C2A68C",
+    signatureColor: {
+      name: "Çöl Titanyum (Desert Titanium)",
+      hex: "#C2A68C",
+      gradient: "from-amber-200 via-stone-300 to-amber-700/60"
+    },
+    chassisDesign: {
+      lensCount: 3,
+      layout: "triple-pro-triangle",
+      formFactor: "slab"
+    },
+    bestShootingType: "Konser, Portre & 4K 120fps ProRes Video",
+    recommendedSetting: "5x Telefoto (120mm) • 48MP ProRAW Max • 4K 120fps Log",
+    topFeatureBadge: "5x Tetraprism & Kamera Denetimi",
+    hardware: {
+      mainSensor: "48 MP Fusion (2. nesil Sensör Kaydırmalı OIS, 24/28/35mm)",
+      ultraWide: "48 MP Ultra Geniş (f/2.2, 2cm Makro)",
+      telephoto: "12 MP Tetraprism Periskop Telefoto (5x 120mm f/2.8, 3D Sensör Kaydırmalı OIS)",
+      zoomCapabilities: "0.5x, 1x (24/28/35mm), 2x (48mm), 5x Optik (120mm), 25x Dijital",
+      apertures: "Ana: f/1.78 | Ultra Geniş: f/2.2 | Telefoto: f/2.8",
+      lidar: true,
+      sensorShiftOis: true,
+      actionButton: true,
+      cameraControl: true,
+      rawSupport: "Apple ProRAW (48MP Max) & HEIF Max",
+      macroSupport: true,
+      photonicEngine: true,
+      specialTech: ["Kamera Denetimi Haptik Düğmesi", "4K 120fps Dolby Vision Video", "48MP Ultra Geniş Makro", "Stüdyo Kalitesinde 4'lü Mikrofon"]
+    },
+    evaluation: {
+      strongestSide: "6.9 inç dev ekran, 5x optik periskop zoom ve Kamera Denetimi ile en profesyonel mobil video ve konser fotoğrafçılığı.",
+      weakestSide: "Büyük gövde ve tek elle tutuşta ağırlık.",
+      scoreOverview: {
+        night: 9.8,
+        portrait: 9.9,
+        street: 9.5,
+        macro: 9.7,
+        landscape: 9.8,
+        video: 10.0
+      },
+      verdictBadge: "Apple'ın En Gelişmiş Pro Max Amiral Gemisi",
+      bestShootingScenarioDetails: "Konserlerde 5x periskop ile sahneyi 4K 120fps Dolby Vision kalitesinde kaydetmek ve Kamera Denetimi ile anlık zoom yapmak."
+    },
+    recipes: {
+      night: {
+        categoryName: "Gece Fotoğrafçılığı",
+        title: "5x Gece Konser & Şehir Işıkları",
+        recommendedLens: "5x Telefoto veya 1x Fusion",
+        isoShutterEv: "1/4s elde / 3s Gece Modu | EV: -0.7 | ISO 250",
+        hardwareAdvantage: "3D sensör kaydırmalı OIS 120mm periskop lenste bile el titremesini tamamen dengeler.",
+        stepByStepTip: "1. 5x lensi seçin. 2. Kamera Denetimi tuşunu kaydırarak pozlamayı -0.7 yapın. 3. Sahne ışıklarını patlatmadan çekin.",
+        secretTrick: "Harici SSD bağlayarak 4K 120fps ProRes Log formatında gece konseri kaydedin.",
+        commonTrap: "Karanlıkta 10x üzeri dijital zoom yapmak."
+      },
+      street: {
+        categoryName: "Sokak Fotoğrafçılığı",
+        title: "Kamera Denetimi ile Anında Sokak Enstantanesi",
+        recommendedLens: "35mm Sanal Odak veya 5x (120mm)",
+        isoShutterEv: "1/800s | EV: -0.3 | ISO 100",
+        hardwareAdvantage: "Kamera Denetimi tuşuna tek basış ile kilit ekranından 0.2 saniyede çekime hazır hale gelir.",
+        stepByStepTip: "1. Tuşa basıp kamerayı açın. 2. Parmağınızı kaydırarak odak veya stili seçin. 3. Sert basıp çekin.",
+        secretTrick: "Yeni nesil Fotoğrafik Stillerden 'Doğal Sıcak' paletini sokak için varsayılan yapın.",
+        commonTrap: "Tuşa basarken telefonu aniden titretmek."
+      },
+      landscape: {
+        categoryName: "Manzara Fotoğrafçılığı",
+        title: "48MP Ultra Geniş Dağ ve Vadi Çekimi",
+        recommendedLens: "48MP Ultra Geniş (13mm)",
+        isoShutterEv: "1/400s | EV: 0.0 | ISO 50",
+        hardwareAdvantage: "Ultra geniş açı 48MP olduğu için köşelerdeki kaya dokuları ve yapraklar net kalır.",
+        stepByStepTip: "1. 0.5x'i seçin. 2. 48MP RAW Max açın. 3. Ufku üçte bir kuralına göre hizalayın.",
+        secretTrick: "5x periskop ile uzaktaki dağ zirvelerini kadraja sıkıştırın.",
+        commonTrap: "Rüzgarda hafif titremeyi önlemek için iki elle tutun."
+      },
+      portrait: {
+        categoryName: "Portre Fotoğrafçılığı",
+        title: "120mm (5x) ile Saf Optik Arka Plan Ayrımı",
+        recommendedLens: "5x Telefoto (120mm f/2.8)",
+        isoShutterEv: "1/250s | EV: -0.3 | f/2.8",
+        hardwareAdvantage: "120mm odak uzaklığı yüzü basıklaştırmadan doğal orantıda stüdyo bokehi sunar.",
+        stepByStepTip: "1. Portre modunda 5x'e geçin. 2. Modelden 3.5 metre uzaklaşın. 3. Göz bebeğine odaklayın.",
+        secretTrick: "Modelin arkasındaki şehir ışıklarını devasa yuvarlak bokeh tanelerine dönüştürün.",
+        commonTrap: "Modele 1.5 metreden fazla yaklaşmak; 5x lens asgari odak mesafesi gerektirir."
+      },
+      foodMacro: {
+        categoryName: "Yemek / Ürün Fotoğrafçılığı",
+        title: "48MP Ultra Geniş 2cm Süper Makro",
+        recommendedLens: "48MP Ultra Geniş Makro",
+        isoShutterEv: "1/160s | EV: +0.3 | ISO 80",
+        hardwareAdvantage: "48MP makro sensörü her detay kırıntısını ve sos dokusunu kaydeder.",
+        stepByStepTip: "1. Tabağa 2 cm yaklaşın. 2. Sarı çiçek ikonunun belirdiğini görün. 3. Çekin.",
+        secretTrick: "Tabağın arkasına peçeteyle reflektör dolgu ışığı verin.",
+        commonTrap: "Kendi telefonunuzun gölgesini tabağın üstüne düşürmeyin."
+      },
+      video: {
+        categoryName: "Video & Sinematik",
+        title: "4K 120fps Dolby Vision Ağır Çekim",
+        recommendedLens: "5x Telefoto & 1x Fusion",
+        isoShutterEv: "4K 120fps | Dolby Vision / Apple Log",
+        hardwareAdvantage: "4K 120fps desteği ile sinematik Hollywood rüya sekansları üretin.",
+        stepByStepTip: "1. Video modunda 4K 120fps seçin. 2. Hızlı bir hareketi kaydedin. 3. Kurguda %20 hıza yavaşlatın.",
+        secretTrick: "Audio Mix özelliği ile stüdyo vokal izolasyonunu videodan sonradan ayarlayın.",
+        commonTrap: "Dahili depolama yerine yüksek hızlı harici Type-C SSD kullanmayı ihmal etmek."
+      }
+    }
+  },
+
+  /* ================= 21. iPHONE 15 PRO MAX ================= */
+  {
+    id: "iphone-15-pro-max",
+    brand: "apple",
+    series: "iPhone 15",
+    name: "iPhone 15 Pro Max",
+    badge: "İlk 5x Tetraprism & Titanyum Mavi",
+    generation: "2023 Pro Max",
+    releaseYear: 2023,
+    isPro: true,
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg",
+    accentColor: "#1E3A8A",
+    signatureColor: {
+      name: "Titanyum Mavi (Blue Titanium)",
+      hex: "#1E3A8A",
+      gradient: "from-blue-950 via-slate-900 to-indigo-950"
+    },
+    chassisDesign: {
+      lensCount: 3,
+      layout: "triple-pro-triangle",
+      formFactor: "slab"
+    },
+    bestShootingType: "Vahşi Doğa & Spor Fotoğrafçılığı (5x Optik)",
+    recommendedSetting: "5x Optik Telefoto (120mm) • 48MP ProRAW • Apple Log (USB-C SSD)",
+    topFeatureBadge: "5x Tetraprism Periskop & Eylem Düğmesi",
+    hardware: {
+      mainSensor: "48 MP Fusion (f/1.78, 24/28/35mm, Sensör Kaydırmalı OIS)",
+      ultraWide: "12 MP Ultra Geniş (f/2.2, 2cm Makro)",
+      telephoto: "12 MP Tetraprism Periskop Telefoto (5x 120mm f/2.8, 3D OIS)",
+      zoomCapabilities: "0.5x, 1x (24/28/35mm), 2x (48mm), 5x Optik (120mm), 25x Dijital",
+      apertures: "Ana: f/1.78 | Ultra Geniş: f/2.2 | Telefoto: f/2.8",
+      lidar: true,
+      sensorShiftOis: true,
+      actionButton: true,
+      cameraControl: false,
+      rawSupport: "Apple ProRAW (48MP Max) & Log",
+      macroSupport: true,
+      photonicEngine: true,
+      specialTech: ["İlk 5x Tetraprism Periskop", "USB-C ile Harici SSD'ye ProRes Log Kaydı", "Titanyum Kasa Mimarisi", "Eylem Düğmesi"]
+    },
+    evaluation: {
+      strongestSide: "Apple tarihindeki ilk 5x optik periskop lensi ve USB-C üzerinden doğrudan harici SSD'ye ProRes Log video kaydı.",
+      weakestSide: "Ultra geniş kameranın 12MP çözünürlükte kalması.",
+      scoreOverview: {
+        night: 9.6,
+        portrait: 9.7,
+        street: 9.4,
+        macro: 9.4,
+        landscape: 9.6,
+        video: 9.8
+      },
+      verdictBadge: "5x Periskop Devriminin Öncüsü",
+      bestShootingScenarioDetails: "5x optik periskop ile uzaktaki vahşi hayvanları veya sporcuları kristal netliğinde fotoğraflamak."
+    },
+    recipes: {
+      night: {
+        categoryName: "Gece Fotoğrafçılığı",
+        title: "5x Periskop ile Gece Şehir Işıkları",
+        recommendedLens: "5x Telefoto (120mm)",
+        isoShutterEv: "1/8s elde / 3s Gece Modu | EV: -0.7 | ISO 320",
+        hardwareAdvantage: "3D sensör kaydırmalı OIS periskop lenste gece el titremesini yok eder.",
+        stepByStepTip: "1. 5x lensi seçin. 2. Gece modunun otomatik aktifleşmesini bekleyin. 3. Çekin.",
+        secretTrick: "Köprü korkuluğuna telefonu dayayarak sıfır titreşimli 5 saniyelik uzun pozlama yapın.",
+        commonTrap: "Karanlıkta 10x dijital zoom yapmak."
+      },
+      street: {
+        categoryName: "Sokak Fotoğrafçılığı",
+        title: "Eylem Düğmesi ile 0.3 Saniyede Çekim",
+        recommendedLens: "35mm Sanal Odak",
+        isoShutterEv: "1/500s | EV: -0.3 | ISO 160",
+        hardwareAdvantage: "Eylem Düğmesine uzun basarak kamerayı cebinizden çıkarırken anında açın.",
+        stepByStepTip: "1. Eylem Düğmesine basarak kamerayı açın. 2. 35mm lensi seçin. 3. Deklanşöre basın.",
+        secretTrick: "Fotoğrafik Stillerden 'Zengin Sıcak' modunu seçip sokak sahnelerine sinematik ton katın.",
+        commonTrap: "Güneşe doğrudan nişan alıp lens parlaması oluşturmak."
+      },
+      landscape: {
+        categoryName: "Manzara Fotoğrafçılığı",
+        title: "48MP ProRAW ile Manzara Detayı",
+        recommendedLens: "24mm Ana Kamera (48MP ProRAW)",
+        isoShutterEv: "1/320s | EV: 0.0 | ISO 50",
+        hardwareAdvantage: "48MP ProRAW sensör dinamik aralığı maksimumda tutarak gölgeleri kurtarır.",
+        stepByStepTip: "1. RAW simgesine dokunun. 2. Ufku dengeleyin. 3. Çekin.",
+        secretTrick: "5x lens ile uzaktaki dağ köylerini ön plana taşıyarak katmanlı kompozisyon kurun.",
+        commonTrap: "RAW fotoğrafların dosya boyutunu dikkate almamak."
+      },
+      portrait: {
+        categoryName: "Portre Fotoğrafçılığı",
+        title: "5x Optik ile Kusursuz Portre İzolasyonu",
+        recommendedLens: "5x Telefoto (120mm)",
+        isoShutterEv: "1/200s | EV: -0.3 | f/2.8",
+        hardwareAdvantage: "120mm odak uzaklığı yüzü basıklaştırmadan en doğal oranlarında gösterir.",
+        stepByStepTip: "1. Portre modunda 5x seçin. 2. Modelden 3 metre uzaklaşın. 3. Çekin.",
+        secretTrick: "Ters ışıkta modelin saç telleri parıldarken pozlamayı hafif kısın.",
+        commonTrap: "Modele çok yaklaşmak."
+      },
+      foodMacro: {
+        categoryName: "Yemek / Ürün Fotoğrafçılığı",
+        title: "2cm Makro ile Tatlı Sunumu",
+        recommendedLens: "Ultra Geniş Makro",
+        isoShutterEv: "1/120s | EV: +0.3 | ISO 100",
+        hardwareAdvantage: "2cm otomatik makro netleme.",
+        stepByStepTip: "1. Tabağa 2 cm yaklaşın. 2. Sos damlasına dokunup odaklayın. 3. Çekin.",
+        secretTrick: "Pencere ışığını tabağın arkasına alın.",
+        commonTrap: "Telefon gölgesini tabağa düşürmek."
+      },
+      video: {
+        categoryName: "Video & Sinematik",
+        title: "Apple Log ile 4K 60fps Sinema Filmi",
+        recommendedLens: "24mm Ana Kamera & 5x Telefoto",
+        isoShutterEv: "4K 60fps | Apple Log | Harici SSD",
+        hardwareAdvantage: "USB-C portu üzerinden harici SSD'ye doğrudan Apple Log video kaydı.",
+        stepByStepTip: "1. Type-C SSD bağlayın. 2. ProRes Log açın. 3. Kaydedin.",
+        secretTrick: "DaVinci Resolve veya Final Cut ile resmi Apple LUT uygulayarak renk derecelendirme yapın.",
+        commonTrap: "SSD kablosunu çekim sırasında oynatmak."
+      }
+    }
+  },
+
+  /* ================= 22. iPHONE 14 PRO MAX ================= */
+  {
+    id: "iphone-14-pro-max",
+    brand: "apple",
+    series: "iPhone 14",
+    name: "iPhone 14 Pro Max",
+    badge: "İlk 48MP Sensör & Dynamic Island & Derin Mor",
+    generation: "2022 Pro Max",
+    releaseYear: 2022,
+    isPro: true,
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14-pro-max-.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14-pro-max-.jpg",
+    accentColor: "#4C1D95",
+    signatureColor: {
+      name: "Derin Mor (Deep Purple)",
+      hex: "#4C1D95",
+      gradient: "from-purple-950 via-violet-900 to-slate-950"
+    },
+    chassisDesign: {
+      lensCount: 3,
+      layout: "triple-pro-triangle",
+      formFactor: "slab"
+    },
+    bestShootingType: "Manzara & Düşük Işık Şehir Çekimi",
+    recommendedSetting: "48MP ProRAW • 3x Telefoto (77mm) • Photonic Engine",
+    topFeatureBadge: "İlk 48MP ProRAW & 3x Telefoto",
+    hardware: {
+      mainSensor: "48 MP Dört Pikselli Sensör (f/1.78, 24mm, 2. nesil Sensör Kaydırmalı OIS)",
+      ultraWide: "12 MP Ultra Geniş (f/2.2, 2cm Makro)",
+      telephoto: "12 MP Telefoto (3x 77mm f/2.8, OIS)",
+      zoomCapabilities: "0.5x, 1x (24mm), 2x (48mm Sensör İçi Kırpma), 3x Optik (77mm), 15x Dijital",
+      apertures: "Ana: f/1.78 | Ultra Geniş: f/2.2 | Telefoto: f/2.8",
+      lidar: true,
+      sensorShiftOis: true,
+      actionButton: false,
+      cameraControl: false,
+      rawSupport: "Apple ProRAW (48MP ve 12MP)",
+      macroSupport: true,
+      photonicEngine: true,
+      specialTech: ["İlk 48MP Dört Pikselli Sensör", "Dynamic Island Bildirim Alanı", "Photonic Engine Derin Piksel İşleme", "Action Mode"]
+    },
+    evaluation: {
+      strongestSide: "Apple dünyasına 48MP çözünürlüğü getiren ilk model; ProRAW ile olağanüstü detay ve 2x sensör içi kırpma netliği.",
+      weakestSide: "Lightning portu üzerinden 48MP ProRAW dosyalarını aktarmanın yavaş olması.",
+      scoreOverview: {
+        night: 9.4,
+        portrait: 9.5,
+        street: 9.4,
+        macro: 9.2,
+        landscape: 9.5,
+        video: 9.6
+      },
+      verdictBadge: "48MP Çözünürlük Çağının Başlangıcı",
+      bestShootingScenarioDetails: "Geniş doğa manzaralarında 48MP ProRAW ile çekip sonradan kırpma (crop) özgürlüğü yaşamak."
+    },
+    recipes: {
+      night: {
+        categoryName: "Gece Fotoğrafçılığı",
+        title: "Photonic Engine ile Gece Şehir Manzarası",
+        recommendedLens: "1x Ana Kamera (24mm)",
+        isoShutterEv: "1/4s elde / 3s Gece Modu | EV: -0.3 | ISO 200",
+        hardwareAdvantage: "Photonic Engine sıkıştırılmamış RAW katmanlarını birleştirerek gece detaylarını kurtarır.",
+        stepByStepTip: "1. 1x lensi seçin. 2. Gece modunu 3 saniyeye ayarlayın. 3. Çekin.",
+        secretTrick: "Kamera ayarlarından Gece Modunu manuel açıp pozlama süresini uzatın.",
+        commonTrap: "Karanlıkta 3x üzeri dijital zoom yapmak."
+      },
+      street: {
+        categoryName: "Sokak Fotoğrafçılığı",
+        title: "2x Sensör İçi Kırpma ile Sokak Belgeseli",
+        recommendedLens: "2x (48mm Eşdeğeri)",
+        isoShutterEv: "1/500s | EV: 0.0 | ISO 100",
+        hardwareAdvantage: "48MP sensörün merkezinden optik kalitede 12MP 48mm kadraj.",
+        stepByStepTip: "1. 2x'e dokunun. 2. Sokaktaki nesneyi takip edin. 3. Çekin.",
+        secretTrick: "Zengin Kontrast stili ile gölgeleri derinleştirin.",
+        commonTrap: "Hızlı geçerken lensi kirletmek."
+      },
+      landscape: {
+        categoryName: "Manzara Fotoğrafçılığı",
+        title: "48MP ProRAW ile Dev Detay",
+        recommendedLens: "1x Ana Kamera (48MP ProRAW)",
+        isoShutterEv: "1/250s | EV: 0.0 | ISO 50",
+        hardwareAdvantage: "48MP çözünürlük ile fotoğraftan devasa baskılar alabilme.",
+        stepByStepTip: "1. RAW simgesine dokunun. 2. Ufku hizalayın. 3. Çekin.",
+        secretTrick: "Güneşin doğuşunda gölgelerdeki renk zenginliğini Lightroom'da açın.",
+        commonTrap: "Depolama alanının hızlı dolacağını unutmak."
+      },
+      portrait: {
+        categoryName: "Portre Fotoğrafçılığı",
+        title: "3x Optik (77mm) ile Stüdyo Portresi",
+        recommendedLens: "3x Telefoto Lens",
+        isoShutterEv: "1/200s | EV: -0.3 | f/2.8",
+        hardwareAdvantage: "77mm odak uzaklığı yüz hatlarını doğal oranda sıkıştırır.",
+        stepByStepTip: "1. Portre modunda 3x seçin. 2. Modelden 2.5 metre geriye açılın. 3. Çekin.",
+        secretTrick: "Modelin arkasındaki ışıkları yuvarlak bokeh toplarına çevirin.",
+        commonTrap: "Modele çok yaklaşmak."
+      },
+      foodMacro: {
+        categoryName: "Yemek / Ürün Fotoğrafçılığı",
+        title: "2cm Otomatik Makro",
+        recommendedLens: "Ultra Geniş Makro",
+        isoShutterEv: "1/120s | EV: +0.3 | ISO 80",
+        hardwareAdvantage: "Ultra geniş sensör tabağa yaklaşınca otomatik makro moduna geçer.",
+        stepByStepTip: "1. Tabağa 2 cm yaklaşın. 2. Çiçek simgesini görünce çekin.",
+        secretTrick: "Doğal pencere ışığı kullanın.",
+        commonTrap: "Flaş açmak."
+      },
+      video: {
+        categoryName: "Video & Sinematik",
+        title: "Action Mode ile Koşarken Gimbal Sabitliği",
+        recommendedLens: "1x Fusion & 0.5x Ultra Geniş",
+        isoShutterEv: "2.8K 60fps | Action Mode Açık",
+        hardwareAdvantage: "Aşırı sarsıntılı spor anlarını bile gimbal varmış gibi sabitler.",
+        stepByStepTip: "1. Video moduna geçin. 2. Koşan adam simgesine (Action Mode) dokunun. 3. Kaydedin.",
+        secretTrick: "Gün ışığında koşarak nesneyi takip edin.",
+        commonTrap: "Düşük ışıkta Action Mode kullanmak."
+      }
+    }
+  },
+
+  /* ================= 23. iPHONE 13 PRO MAX ================= */
+  {
+    id: "iphone-13-pro-max",
+    brand: "apple",
+    series: "iPhone 13",
+    name: "iPhone 13 Pro Max",
+    badge: "2cm Süper Makro & 3x Optik & Alpler Yeşili",
+    generation: "2021 Pro Max",
+    releaseYear: 2021,
+    isPro: true,
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro-max.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro-max.jpg",
+    accentColor: "#166534",
+    signatureColor: {
+      name: "Alpler Yeşili (Alpine Green)",
+      hex: "#166534",
+      gradient: "from-emerald-950 via-green-900 to-slate-950"
+    },
+    chassisDesign: {
+      lensCount: 3,
+      layout: "triple-pro-triangle",
+      formFactor: "slab"
+    },
+    bestShootingType: "Doğa Makro & Sinematik Portre",
+    recommendedSetting: "2cm Ultra Geniş Makro • 3x Telefoto • Sinematik Mod",
+    topFeatureBadge: "2cm Süper Makro & 3x Optik",
+    hardware: {
+      mainSensor: "12 MP (1.9µm büyük pikseller, f/1.5, Sensör Kaydırmalı OIS)",
+      ultraWide: "12 MP Ultra Geniş (f/1.8, 2cm Makro Odaklama)",
+      telephoto: "12 MP Telefoto (3x 77mm f/2.8, OIS)",
+      zoomCapabilities: "0.5x, 1x, 3x Optik Zoom (77mm), 15x Dijital",
+      apertures: "Ana: f/1.5 | Ultra Geniş: f/1.8 | Telefoto: f/2.8",
+      lidar: true,
+      sensorShiftOis: true,
+      actionButton: false,
+      cameraControl: false,
+      rawSupport: "Apple ProRAW",
+      macroSupport: true,
+      photonicEngine: false,
+      specialTech: ["2cm Otomatik Makro Odak", "Sinematik Mod (Otomatik Odak Geçişi)", "1.9µm Büyük Piksel Ana Sensör", "ProRes Video"]
+    },
+    evaluation: {
+      strongestSide: "1.9 mikron dev pikselleriyle düşük ışıkta inanılmaz temiz gece çekimleri ve ilk kez gelen 2cm makro modu.",
+      weakestSide: "Sinematik modun 1080p ile sınırlı olması.",
+      scoreOverview: {
+        night: 9.3,
+        portrait: 9.4,
+        street: 9.3,
+        macro: 9.5,
+        landscape: 9.2,
+        video: 9.5
+      },
+      verdictBadge: "Makro ve Düşük Işık Efsanesi",
+      bestShootingScenarioDetails: "Çiçeklerin veya su damlalarının 2 cm yakınına girip mikroskobik detay yakalamak."
+    },
+    recipes: {
+      night: {
+        categoryName: "Gece Fotoğrafçılığı",
+        title: "f/1.5 Geniş Diyafram ile Gece Sokakları",
+        recommendedLens: "1x Ana Kamera",
+        isoShutterEv: "1/4s | EV: -0.3 | ISO 160",
+        hardwareAdvantage: "1.9µm piksel boyutu sensöre %49 daha fazla ışık toplar.",
+        stepByStepTip: "1. 1x lensi seçin. 2. Gece modunu otomatiğe bırakın. 3. Çekin.",
+        secretTrick: "Işıkların etrafında puslanma olmaması için lensi temiz tutun.",
+        commonTrap: "Karanlıkta 3x telefotoyu zorlamak."
+      },
+      street: {
+        categoryName: "Sokak Fotoğrafçılığı",
+        title: "3x Telefoto ile Sokak Detayı",
+        recommendedLens: "3x (77mm)",
+        isoShutterEv: "1/400s | EV: 0.0 | ISO 100",
+        hardwareAdvantage: "77mm odak uzaklığı ile uzaktaki insanları rahatsız etmeden çekebilme.",
+        stepByStepTip: "1. 3x lense geçin. 2. Doğal anı bekleyin. 3. Deklanşöre basın.",
+        secretTrick: "Zengin Sıcak fotoğraf stilini kullanın.",
+        commonTrap: "Hızlı hareket ederken iki elle tutmamak."
+      },
+      landscape: {
+        categoryName: "Manzara Fotoğrafçılığı",
+        title: "Ultra Geniş Açı ile Vadi Manzarası",
+        recommendedLens: "0.5x Ultra Geniş",
+        isoShutterEv: "1/320s | EV: 0.0 | ISO 50",
+        hardwareAdvantage: "f/1.8 ultra geniş diyafram kenar netliğini korur.",
+        stepByStepTip: "1. 0.5x'i seçin. 2. Ufku hizalayın. 3. Çekin.",
+        secretTrick: "Güneşi köşeye alarak sanatsal parlama oluşturun.",
+        commonTrap: "Köşe distorsiyonunu hesaba katmamak."
+      },
+      portrait: {
+        categoryName: "Portre Fotoğrafçılığı",
+        title: "3x Optik Portre",
+        recommendedLens: "3x Telefoto",
+        isoShutterEv: "1/200s | EV: -0.3 | f/2.8",
+        hardwareAdvantage: "77mm optik sıkıştırma yüzü doğal gösterir.",
+        stepByStepTip: "1. 3x portreyi seçin. 2. Modelden 2.5 metre geriye çıkın. 3. Çekin.",
+        secretTrick: "Arka plan ışıklarını yuvarlak bokeh yapın.",
+        commonTrap: "Modele çok yaklaşmak."
+      },
+      foodMacro: {
+        categoryName: "Yemek / Ürün Fotoğrafçılığı",
+        title: "2cm Süper Makro ile Tatlı Detayı",
+        recommendedLens: "Ultra Geniş Makro",
+        isoShutterEv: "1/120s | EV: +0.3 | ISO 80",
+        hardwareAdvantage: "2 cm mesafeden otomatik netleme.",
+        stepByStepTip: "1. Tabağa 2 cm yaklaşın. 2. Çiçek ikonunu görünce çekin.",
+        secretTrick: "Doğal pencere ışığı kullanın.",
+        commonTrap: "Gölge düşürmek."
+      },
+      video: {
+        categoryName: "Video & Sinematik",
+        title: "Sinematik Mod ile Otomatik Odak Geçişi",
+        recommendedLens: "1x & 3x Telefoto",
+        isoShutterEv: "1080p 30fps | Sinematik Mod",
+        hardwareAdvantage: "Bir kişi kadraja girdiğinde kamera odağı otomatik ona kaydırır.",
+        stepByStepTip: "1. Sinematik Moda geçin. 2. Konuşan kişiyi kaydedin. 3. Çekimden sonra odağı düzenleyin.",
+        secretTrick: "Kurguda diyaframı f/2.0 yaparak arka planı sinema filmi gibi eritin.",
+        commonTrap: "Çok hızlı kamera hareketi yapmak."
+      }
+    }
+  },
+
+  /* ================= 24. iPHONE 12 PRO MAX ================= */
+  {
+    id: "iphone-12-pro-max",
+    brand: "apple",
+    series: "iPhone 12",
+    name: "iPhone 12 Pro Max",
+    badge: "Sensör Kaydırmalı OIS & 2.5x Telefoto",
+    generation: "2020 Pro Max",
+    releaseYear: 2020,
+    isPro: true,
+    imageUrl: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-12-pro-max-.jpg",
+    backViewImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-12-pro-max-.jpg",
+    accentColor: "#0369A1",
+    signatureColor: {
+      name: "Pasifik Mavisi (Pacific Blue)",
+      hex: "#0369A1",
+      gradient: "from-sky-900 via-cyan-950 to-slate-950"
+    },
+    chassisDesign: {
+      lensCount: 3,
+      layout: "triple-pro-triangle",
+      formFactor: "slab"
+    },
+    bestShootingType: "Gece Şehir Portreleri & LiDAR Hızlı Netleme",
+    recommendedSetting: "1x Sensor-shift OIS • 2.5x Telefoto (65mm) • Gece Modu Portre",
+    topFeatureBadge: "Sensor-shift OIS & Apple ProRAW",
+    hardware: {
+      mainSensor: "12 MP (%47 daha büyük 1.7µm sensör, f/1.6, Sensör Kaydırmalı OIS)",
+      ultraWide: "12 MP Ultra Geniş (f/2.4, 120˚)",
+      telephoto: "12 MP Telefoto (2.5x 65mm f/2.2, OIS)",
+      zoomCapabilities: "0.5x, 1x, 2.5x Optik Zoom (65mm), 12x Dijital",
+      apertures: "Ana: f/1.6 | Ultra Geniş: f/2.4 | Telefoto: f/2.2",
+      lidar: true,
+      sensorShiftOis: true,
+      actionButton: false,
+      cameraControl: false,
+      rawSupport: "Apple ProRAW",
+      macroSupport: false,
+      photonicEngine: false,
+      specialTech: ["İlk Sensör Kaydırmalı OIS (Sensor-shift)", "LiDAR Destekli Gece Modu Portre", "Apple ProRAW Formatı", "Dolby Vision HDR"]
+    },
+    evaluation: {
+      strongestSide: "Apple dünyasında ilk kez lens yerine sensörün hareket ettiği OIS teknolojisi ve LiDAR ile zifiri karanlıkta 6 kat hızlı netleme.",
+      weakestSide: "Makro modunun bulunmaması.",
+      scoreOverview: {
+        night: 9.1,
+        portrait: 9.2,
+        street: 9.1,
+        macro: 8.4,
+        landscape: 9.0,
+        video: 9.3
+      },
+      verdictBadge: "Sensör Kaydırma Teknolojisinin Öncüsü",
+      bestShootingScenarioDetails: "Gece sokak lambalarının altında LiDAR ile anında netleyen stüdyo kalitesinde portreler yakalamak."
+    },
+    recipes: {
+      night: {
+        categoryName: "Gece Fotoğrafçılığı",
+        title: "LiDAR Destekli Gece Modu Portresi",
+        recommendedLens: "1x Ana Kamera (LiDAR Açık)",
+        isoShutterEv: "1/4s | EV: -0.3 | ISO 200",
+        hardwareAdvantage: "LiDAR karanlıkta görünmez lazer ışınlarıyla modeli milisaniyede netler.",
+        stepByStepTip: "1. Portre moduna geçin. 2. Gece modunun açıldığını görün. 3. Modeli sabit tutup çekin.",
+        secretTrick: "Arka plandaki sokak lambalarını bokeh toplarına dönüştürün.",
+        commonTrap: "Karanlıkta 2.5x lensi zorlamak; 1x sensör çok daha aydınlıktır."
+      },
+      street: {
+        categoryName: "Sokak Fotoğrafçılığı",
+        title: "2.5x (65mm) ile Doğal Sokak Kadrajı",
+        recommendedLens: "2.5x Telefoto",
+        isoShutterEv: "1/500s | EV: 0.0 | ISO 100",
+        hardwareAdvantage: "65mm klasik portre odak uzaklığı sokakta harika bir oran verir.",
+        stepByStepTip: "1. 2.5x lense geçin. 2. Yürüyen insanı kadraja alın. 3. Çekin.",
+        secretTrick: "Kontrastlı siyah beyaz filtre uygulayın.",
+        commonTrap: "Hızlı hareket ederken telefonu titretmek."
+      },
+      landscape: {
+        categoryName: "Manzara Fotoğrafçılığı",
+        title: "Dolby Vision HDR ile Canlı Renkler",
+        recommendedLens: "24mm Ana Kamera",
+        isoShutterEv: "1/320s | EV: 0.0 | ISO 50",
+        hardwareAdvantage: "Smart HDR 3 gölgeleri ve açık alanları dengeler.",
+        stepByStepTip: "1. 1x lensi seçin. 2. Ufku teraziye getirin. 3. Çekin.",
+        secretTrick: "Apple ProRAW ile çekip renkleri sonradan genişletin.",
+        commonTrap: "Güneşe doğrudan bakıp lens parlaması yapmak."
+      },
+      portrait: {
+        categoryName: "Portre Fotoğrafçılığı",
+        title: "2.5x Optik Portre",
+        recommendedLens: "2.5x Telefoto (65mm)",
+        isoShutterEv: "1/200s | EV: -0.3 | f/2.2",
+        hardwareAdvantage: "f/2.2 diyafram açıklığı 2.5x telefotoda çok yumuşak bir alan derinliği sağlar.",
+        stepByStepTip: "1. Portre moduna geçin. 2. Modelden 2 metre uzaklaşın. 3. Çekin.",
+        secretTrick: "Doğal Işık filtresini seçin.",
+        commonTrap: "Modele çok yaklaşmak."
+      },
+      foodMacro: {
+        categoryName: "Yemek / Ürün Fotoğrafçılığı",
+        title: "2.5x Telefoto ile Tabağa Gölgesiz Yaklaşım",
+        recommendedLens: "2.5x Telefoto",
+        isoShutterEv: "1/120s | EV: +0.3 | ISO 100",
+        hardwareAdvantage: "2.5x optik zoom tabağa eğilmeden uzaktan netleme sağlar.",
+        stepByStepTip: "1. 2.5x'e geçin. 2. Masadan 50 cm geride durun. 3. Çekin.",
+        secretTrick: "Doğal pencere ışığı kullanın.",
+        commonTrap: "Tabağın çok yakınına girip netliği kaçırmak."
+      },
+      video: {
+        categoryName: "Video & Sinematik",
+        title: "4K 60fps Dolby Vision HDR Video",
+        recommendedLens: "1x Sensor-shift OIS",
+        isoShutterEv: "4K 60fps | Dolby Vision 10-bit HDR",
+        hardwareAdvantage: "Sensör kaydırmalı OIS ile koşarken bile sarsıntısız video.",
+        stepByStepTip: "1. 4K 60fps'yi açın. 2. Yavaş ve akıcı adımlarla yürüyün. 3. Çekin.",
+        secretTrick: "Güneşin batışında 10-bit HDR renk zenginliğini kaydedin.",
+        commonTrap: "Ani ve sert kamera dönüşleri yapmak."
+      }
+    }
+  }
+
 ];

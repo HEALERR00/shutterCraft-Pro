@@ -2,13 +2,15 @@ import { DeviceModelSpec, DeviceBrand, IphoneModelSpec, SamsungModelSpec } from 
 import { iphoneSpecsData } from "./iphoneSpecs";
 import { samsungSpecsData as rawSamsungSSpecs } from "./samsungSpecs";
 import { samsungZSpecsData } from "./samsungZSpecs";
+import { samsungASpecsData } from "./samsungASpecs";
 
 export const samsungSSpecsData: SamsungModelSpec[] = rawSamsungSSpecs;
-export { iphoneSpecsData, samsungZSpecsData };
+export { iphoneSpecsData, samsungZSpecsData, samsungASpecsData };
 
 export const samsungSpecsData: SamsungModelSpec[] = [
   ...samsungSSpecsData,
   ...samsungZSpecsData,
+  ...samsungASpecsData,
 ];
 
 export const allDevices: DeviceModelSpec[] = [
@@ -20,6 +22,7 @@ export const totalDeviceCount = allDevices.length;
 export const iphoneCount = iphoneSpecsData.length;
 export const samsungSCount = samsungSSpecsData.length;
 export const samsungZCount = samsungZSpecsData.length;
+export const samsungACount = samsungASpecsData.length;
 export const samsungCount = samsungSpecsData.length;
 
 export function getDeviceById(id: string): DeviceModelSpec | undefined {
@@ -36,6 +39,10 @@ export function getSamsungSModels(): SamsungModelSpec[] {
 
 export function getSamsungZModels(): SamsungModelSpec[] {
   return samsungZSpecsData;
+}
+
+export function getSamsungAModels(): SamsungModelSpec[] {
+  return samsungASpecsData;
 }
 
 export function getIphoneModel(id: string): IphoneModelSpec | undefined {

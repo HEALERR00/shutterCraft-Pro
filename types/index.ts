@@ -166,11 +166,12 @@ export interface DeviceModelSpec {
   generation: string;
   releaseYear: number;
   isPro: boolean;
-  backViewImage: string;
+  imageUrl?: string;
+  backViewImage?: string;
   accentColor?: string;
   signatureColor: DeviceSignatureColor;
   chassisDesign: DeviceChassisDesign;
-  samsungSubSeries?: "galaxy-s" | "galaxy-z";
+  samsungSubSeries?: "galaxy-s" | "galaxy-z" | "galaxy-a";
   bestShootingType: string;
   recommendedSetting: string;
   topFeatureBadge: string;
@@ -229,5 +230,5 @@ export interface IphoneModelSpec extends DeviceModelSpec {
 
 export interface SamsungModelSpec extends DeviceModelSpec {
   brand: "samsung";
-  samsungSubSeries: "galaxy-s" | "galaxy-z";
+  samsungSubSeries: "galaxy-s" | "galaxy-z" | "galaxy-a";
 }
