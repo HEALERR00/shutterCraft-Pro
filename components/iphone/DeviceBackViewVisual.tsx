@@ -24,9 +24,16 @@ export function DeviceBackViewVisual({ device, className = "" }: DeviceBackViewV
   }, [device.id, device.imageUrl, device.backViewImage]);
 
   const isSamsung = device.brand === "samsung";
+  const isHuawei = device.brand === "huawei";
   const chassis = device.chassisDesign || {
-    lensCount: isSamsung ? (device.id.includes("ultra") ? 5 : 3) : device.isPro ? 3 : 2,
-    layout: isSamsung
+    lensCount: isHuawei ? 3 : isSamsung ? (device.id.includes("ultra") ? 5 : 3) : device.isPro ? 3 : 2,
+    layout: isHuawei
+      ? device.id.includes("pura")
+        ? "huawei-pura-triangle"
+        : device.id.includes("mate")
+        ? "huawei-mate-ring"
+        : "huawei-nova-oval"
+      : isSamsung
       ? device.id.includes("ultra")
         ? "samsung-ultra-multi"
         : "samsung-traffic-3"
@@ -40,7 +47,7 @@ export function DeviceBackViewVisual({ device, className = "" }: DeviceBackViewV
   const isFlip = chassis.formFactor === "flip";
   const sigColor = device.signatureColor || {
     name: "Standart Titanyum",
-    hex: isSamsung ? "#38BDF8" : "#E05A2B",
+    hex: isHuawei ? "#EF4444" : isSamsung ? "#38BDF8" : "#E05A2B",
     gradient: "from-slate-900 via-neutral-900 to-black",
   };
 
@@ -358,12 +365,132 @@ export function DeviceBackViewVisual({ device, className = "" }: DeviceBackViewV
                   <span className="text-[10px] font-mono font-bold text-sky-300">48MP AIR</span>
                 </div>
               )}
+
+              {/* LAYOUT 11: HUAWEI PURA FORWARD TRIANGLE (Pura 70 / 80 Series) */}
+              {chassis.layout === "huawei-pura-triangle" && (
+                <div
+                  className="p-3 rounded-[32px] bg-black/85 border backdrop-blur-xl shadow-2xl relative flex flex-col gap-2 min-w-[125px]"
+                  style={{ borderColor: `${sigColor.hex}66` }}
+                >
+                  {/* Big Main 1-Inch Retractable Eye */}
+                  <div
+                    className="w-14 h-14 rounded-full bg-gradient-to-tr from-zinc-800 to-zinc-950 border-2 flex items-center justify-center relative shadow-xl mx-auto"
+                    style={{ borderColor: sigColor.hex }}
+                  >
+                    <div className="w-8 h-8 rounded-full bg-black border border-white/40 flex items-center justify-center">
+                      <div className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: sigColor.hex }} />
+                    </div>
+                    <span className="absolute -top-1.5 -right-1.5 px-1 py-0.5 rounded text-[7px] font-mono bg-red-600 text-white font-black">
+                      1"
+                    </span>
+                  </div>
+
+                  {/* Secondary Telephoto & UW Lenses + XMAGE Tag */}
+                  <div className="flex items-center justify-between px-1 gap-2 pt-1">
+                    <div className="w-8 h-8 rounded-full bg-zinc-800 border-2 border-white/30 flex items-center justify-center">
+                      <div className="w-4 h-4 rounded-full bg-black border border-cyan-400/60" />
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="text-[8px] font-black tracking-widest text-red-500 font-mono">XMAGE</span>
+                      <div className="w-2 h-2 rounded-full bg-amber-300 mt-0.5" />
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-zinc-800 border-2 border-white/30 flex items-center justify-center">
+                      <div className="w-4 h-3 rounded-sm bg-black border border-amber-400" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* LAYOUT 12: HUAWEI MATE STAR RING (Mate 50 / 60 / 70 / X6 Series) */}
+              {chassis.layout === "huawei-mate-ring" && (
+                <div
+                  className="w-32 h-32 rounded-full bg-black/85 border-2 backdrop-blur-xl shadow-2xl mx-auto relative flex items-center justify-center"
+                  style={{ borderColor: sigColor.hex }}
+                >
+                  {/* Central XMAGE Core */}
+                  <div className="w-12 h-12 rounded-full bg-neutral-900 border border-white/20 flex flex-col items-center justify-center shadow-inner">
+                    <span className="text-[9px] font-black tracking-widest text-red-500 font-mono">XMAGE</span>
+                    <span className="text-[7px] font-mono text-zinc-400">RYYB</span>
+                  </div>
+                  {/* 4 Peripheral Lenses on the Ring */}
+                  <div className="absolute top-2 w-7 h-7 rounded-full bg-zinc-800 border border-white/40 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-black border border-sky-400" />
+                  </div>
+                  <div className="absolute bottom-2 w-7 h-7 rounded-full bg-zinc-800 border border-white/40 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-black border border-amber-400" />
+                  </div>
+                  <div className="absolute left-2 w-7 h-7 rounded-full bg-zinc-800 border border-white/40 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-black border border-white/30" />
+                  </div>
+                  <div className="absolute right-2 w-7 h-7 rounded-full bg-zinc-800 border border-white/40 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-black border border-white/30" />
+                  </div>
+                </div>
+              )}
+
+              {/* LAYOUT 13: HUAWEI NOVA STAR ORBIT (nova 11 / 12 / 13 / 14 Series) */}
+              {chassis.layout === "huawei-nova-oval" && (
+                <div
+                  className="p-3 rounded-full bg-black/85 border-2 backdrop-blur-xl shadow-2xl flex flex-col items-center gap-2.5"
+                  style={{ borderColor: sigColor.hex }}
+                >
+                  {/* Top Golden Camera Loop */}
+                  <div
+                    className="w-12 h-12 rounded-full bg-zinc-800 border-2 flex items-center justify-center shadow-lg"
+                    style={{ borderColor: sigColor.hex }}
+                  >
+                    <div className="w-6 h-6 rounded-full bg-black border border-emerald-400/60 flex items-center justify-center">
+                      <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: sigColor.hex }} />
+                    </div>
+                  </div>
+                  {/* Secondary Macro / UW Lens */}
+                  <div className="w-8 h-8 rounded-full bg-zinc-800 border-2 border-white/30 flex items-center justify-center">
+                    <div className="w-4 h-4 rounded-full bg-black border border-white/40" />
+                  </div>
+                  {/* Star Orbit Tag */}
+                  <span className="text-[7px] font-mono tracking-widest text-emerald-400 uppercase font-bold">
+                    nova
+                  </span>
+                </div>
+              )}
+
+              {/* LAYOUT 14: HUAWEI P60 ROCOCO PEARL ISLAND */}
+              {chassis.layout === "huawei-p60-rococo" && (
+                <div className="p-3 rounded-3xl bg-black/85 border border-white/20 backdrop-blur-xl shadow-2xl flex flex-col items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-zinc-800 border border-white/30 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-black" />
+                  </div>
+                  {/* Giant Central Eye */}
+                  <div
+                    className="w-14 h-14 rounded-full bg-gradient-to-tr from-zinc-800 to-zinc-950 border-2 flex items-center justify-center relative shadow-xl"
+                    style={{ borderColor: sigColor.hex }}
+                  >
+                    <div className="w-8 h-8 rounded-full bg-black border border-white/40 flex items-center justify-center">
+                      <div className="w-3.5 h-3.5 rounded-full bg-amber-400" />
+                    </div>
+                    <span className="absolute -bottom-1 text-[7px] font-black text-red-500 font-mono tracking-wider">
+                      XMAGE
+                    </span>
+                  </div>
+                  <div className="w-7 h-7 rounded-full bg-zinc-800 border border-white/30 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-black border border-amber-300" />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Center / Bottom Branding Stamp */}
             <div className="w-full text-center py-2 relative z-10">
               <div className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">
-                {isSamsung ? (isFold ? "SAMSUNG GALAXY Z FOLD" : isFlip ? "SAMSUNG GALAXY Z FLIP" : "SAMSUNG GALAXY") : "APPLE iPHONE"}
+                {isHuawei
+                  ? "HUAWEI XMAGE"
+                  : isSamsung
+                  ? isFold
+                    ? "SAMSUNG GALAXY Z FOLD"
+                    : isFlip
+                    ? "SAMSUNG GALAXY Z FLIP"
+                    : "SAMSUNG GALAXY"
+                  : "APPLE iPHONE"}
               </div>
               <div className="text-xs font-bold text-white mt-0.5 drop-shadow">
                 {device.name}

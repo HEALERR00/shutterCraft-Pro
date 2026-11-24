@@ -5,7 +5,9 @@ import {
   iphoneSpecsData,
   samsungSSpecsData,
   samsungZSpecsData,
+  samsungASpecsData,
   samsungSpecsData,
+  huaweiSpecsData,
   allDevices,
 } from "@/data/devices";
 import { DeviceModelSpec, DeviceBrand, ShootingCategoryKey } from "@/types";
@@ -36,19 +38,33 @@ import {
 
 export function IphoneSpecsStudio() {
   const [activeBrand, setActiveBrand] = useState<DeviceBrand>("apple");
-  const [samsungSubTab, setSamsungSubTab] = useState<"s-series" | "z-series">("s-series");
+  const [samsungSubTab, setSamsungSubTab] = useState<"s-series" | "z-series" | "a-series">("s-series");
+  const [huaweiSubTab, setHuaweiSubTab] = useState<"pura" | "mate" | "nova">("pura");
   const [selectedModelId, setSelectedModelId] = useState<string>("iphone-17-pro-max");
   const [activeCategory, setActiveCategory] = useState<ShootingCategoryKey>("portrait");
   const [filterType, setFilterType] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Brand models based on active brand and Samsung sub-tab
+  // Memoized sub-series slices
+  const huaweiPuraModels = useMemo(() => huaweiSpecsData.filter((m) => m.huaweiSubSeries === "pura"), []);
+  const huaweiMateModels = useMemo(() => huaweiSpecsData.filter((m) => m.huaweiSubSeries === "mate"), []);
+  const huaweiNovaModels = useMemo(() => huaweiSpecsData.filter((m) => m.huaweiSubSeries === "nova"), []);
+
+  // Brand models based on active brand and active sub-tab
   const currentStudioModels: DeviceModelSpec[] = useMemo(() => {
     if (activeBrand === "apple") {
       return iphoneSpecsData;
     }
-    return samsungSubTab === "s-series" ? samsungSSpecsData : samsungZSpecsData;
-  }, [activeBrand, samsungSubTab]);
+    if (activeBrand === "samsung") {
+      if (samsungSubTab === "s-series") return samsungSSpecsData;
+      if (samsungSubTab === "z-series") return samsungZSpecsData;
+      return samsungASpecsData;
+    }
+    // Huawei
+    if (huaweiSubTab === "pura") return huaweiPuraModels;
+    if (huaweiSubTab === "mate") return huaweiMateModels;
+    return huaweiNovaModels;
+  }, [activeBrand, samsungSubTab, huaweiSubTab, huaweiPuraModels, huaweiMateModels, huaweiNovaModels]);
 
   // Handle main brand switch
   const handleBrandSwitch = (brand: DeviceBrand) => {
@@ -57,20 +73,50 @@ export function IphoneSpecsStudio() {
     setSearchQuery("");
     if (brand === "apple") {
       setSelectedModelId("iphone-17-pro-max");
+    } else if (brand === "samsung") {
+      setSelectedModelId(
+        samsungSubTab === "s-series"
+          ? "samsung-s25-ultra"
+          : samsungSubTab === "z-series"
+          ? "samsung-z-fold8-ultra"
+          : "samsung-a56"
+      );
     } else {
-      setSelectedModelId(samsungSubTab === "s-series" ? "samsung-s25-ultra" : "samsung-z-fold8-ultra");
+      setSelectedModelId(
+        huaweiSubTab === "pura"
+          ? "huawei-pura-80-ultra"
+          : huaweiSubTab === "mate"
+          ? "huawei-mate-70-pro"
+          : "huawei-nova-14-pro"
+      );
     }
   };
 
   // Handle Samsung sub-studio switch
-  const handleSamsungSubSwitch = (sub: "s-series" | "z-series") => {
+  const handleSamsungSubSwitch = (sub: "s-series" | "z-series" | "a-series") => {
     setSamsungSubTab(sub);
     setFilterType("all");
     setSearchQuery("");
     if (sub === "s-series") {
       setSelectedModelId("samsung-s25-ultra");
-    } else {
+    } else if (sub === "z-series") {
       setSelectedModelId("samsung-z-fold8-ultra");
+    } else {
+      setSelectedModelId("samsung-a56");
+    }
+  };
+
+  // Handle Huawei sub-studio switch
+  const handleHuaweiSubSwitch = (sub: "pura" | "mate" | "nova") => {
+    setHuaweiSubTab(sub);
+    setFilterType("all");
+    setSearchQuery("");
+    if (sub === "pura") {
+      setSelectedModelId("huawei-pura-80-ultra");
+    } else if (sub === "mate") {
+      setSelectedModelId("huawei-mate-70-pro");
+    } else {
+      setSelectedModelId("huawei-nova-14-pro");
     }
   };
 
@@ -97,19 +143,37 @@ export function IphoneSpecsStudio() {
         if (filterType === "pro") return m.isPro;
         if (filterType === "standard") return !m.isPro && !m.id.includes("se") && !m.id.includes("air") && !m.id.endsWith("e");
         if (filterType === "special") return m.id.includes("se") || m.id.includes("air") || m.id.endsWith("e");
-      } else if (samsungSubTab === "s-series") {
-        if (filterType === "ultra") return m.id.includes("ultra");
-        if (filterType === "standard") return !m.id.includes("ultra") && !m.id.includes("fe") && !m.id.includes("edge");
-        if (filterType === "fe-edge") return m.id.includes("fe") || m.id.includes("edge");
+      } else if (activeBrand === "samsung") {
+        if (samsungSubTab === "s-series") {
+          if (filterType === "ultra") return m.id.includes("ultra");
+          if (filterType === "standard") return !m.id.includes("ultra") && !m.id.includes("fe") && !m.id.includes("edge");
+          if (filterType === "fe-edge") return m.id.includes("fe") || m.id.includes("edge");
+        } else if (samsungSubTab === "z-series") {
+          if (filterType === "fold") return m.chassisDesign?.formFactor === "fold" || m.id.includes("fold");
+          if (filterType === "flip") return m.chassisDesign?.formFactor === "flip" || m.id.includes("flip");
+        } else {
+          // A Series
+          if (filterType === "a50") return m.id.includes("a56") || m.id.includes("a55") || m.id.includes("a54");
+          if (filterType === "a30-down") return m.id.includes("a36") || m.id.includes("a35") || m.id.includes("a25") || m.id.includes("a16");
+        }
       } else {
-        // Z Series filters
-        if (filterType === "fold") return m.chassisDesign?.formFactor === "fold" || m.id.includes("fold");
-        if (filterType === "flip") return m.chassisDesign?.formFactor === "flip" || m.id.includes("flip");
+        // Huawei filters
+        if (huaweiSubTab === "pura") {
+          if (filterType === "ultra") return m.id.includes("ultra");
+          if (filterType === "pro-standard") return !m.id.includes("ultra");
+        } else if (huaweiSubTab === "mate") {
+          if (filterType === "fold") return m.chassisDesign?.formFactor === "fold" || m.id.includes("mate-x");
+          if (filterType === "pro") return !m.id.includes("mate-x");
+        } else {
+          // nova filters
+          if (filterType === "pro") return m.isPro;
+          if (filterType === "standard") return !m.isPro;
+        }
       }
 
       return true;
     });
-  }, [currentStudioModels, filterType, searchQuery, activeBrand, samsungSubTab]);
+  }, [currentStudioModels, filterType, searchQuery, activeBrand, samsungSubTab, huaweiSubTab]);
 
   // Current selected model
   const currentModel: DeviceModelSpec = useMemo(() => {
@@ -167,7 +231,9 @@ export function IphoneSpecsStudio() {
             className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-mono mb-4 shadow-sm transition-colors ${
               activeBrand === "apple"
                 ? "bg-amber-500/10 border-amber-500/30 text-amber-400"
-                : "bg-cyan-500/10 border-cyan-500/30 text-cyan-400"
+                : activeBrand === "samsung"
+                ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-400"
+                : "bg-red-500/10 border-red-500/30 text-red-400"
             }`}
           >
             <Smartphone className="w-4 h-4 animate-pulse" />
@@ -177,69 +243,134 @@ export function IphoneSpecsStudio() {
             Cihazınızın Sensör Sınırlarını Keşfedin
           </h2>
           <p className="text-sm sm:text-base text-zinc-400 mt-3 leading-relaxed">
-            iPhone 12 - 18 Pro Max, Samsung Galaxy S21 - S26 Ultra ve Katlanabilir Galaxy Z Fold & Flip serisi için optimize edilmiş optik rehber, tek imza lansman rengi, şeffaf kasa renderı ve profesyonel çekim reçeteleri.
+            iPhone 12 - 18 Pro Max, Samsung Galaxy S & Z & A serisi ve Huawei Pura, Mate ve nova XMAGE serisi için optimize edilmiş optik rehber, tek imza lansman rengi, şeffaf kasa renderı ve profesyonel çekim reçeteleri.
           </p>
         </div>
 
-        {/* 1. BRAND SWITCHER TABS (Apple vs Samsung) */}
+        {/* 1. BRAND SWITCHER TABS (Apple vs Samsung vs Huawei) */}
         <div className="flex items-center justify-center mb-6">
-          <div className="p-1.5 rounded-3xl bg-black/60 border border-white/10 backdrop-blur-xl flex items-center gap-2 shadow-2xl">
+          <div className="p-1.5 rounded-3xl bg-black/60 border border-white/10 backdrop-blur-xl flex flex-wrap items-center justify-center gap-2 shadow-2xl">
             <button
               onClick={() => handleBrandSwitch("apple")}
-              className={`px-5 sm:px-8 py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-2.5 transition-all cursor-pointer ${
+              className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
                 activeBrand === "apple"
                   ? "bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-glow font-black"
                   : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             >
               <span className="text-base">🍎</span>
-              <span>Apple iPhone ({iphoneSpecsData.length} Model)</span>
+              <span>Apple iPhone ({iphoneSpecsData.length})</span>
             </button>
 
             <button
               onClick={() => handleBrandSwitch("samsung")}
-              className={`px-5 sm:px-8 py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-2.5 transition-all cursor-pointer ${
+              className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
                 activeBrand === "samsung"
                   ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-black shadow-cyanGlow font-black"
                   : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             >
               <span className="text-base">🌌</span>
-              <span>Samsung Galaxy ({samsungSpecsData.length} Model)</span>
+              <span>Samsung Galaxy ({samsungSpecsData.length})</span>
+            </button>
+
+            <button
+              onClick={() => handleBrandSwitch("huawei")}
+              className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                activeBrand === "huawei"
+                  ? "bg-gradient-to-r from-red-500 via-rose-600 to-amber-600 text-white shadow-[0_0_25px_rgba(239,68,68,0.5)] font-black"
+                  : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <span className="text-base">🔴</span>
+              <span>Huawei XMAGE ({huaweiSpecsData.length})</span>
             </button>
           </div>
         </div>
 
-        {/* 2. SAMSUNG SUB-STUDIO SELECTOR (S Serisi vs Z Fold & Flip Serisi) */}
+        {/* 2A. SAMSUNG SUB-STUDIO SELECTOR */}
         {activeBrand === "samsung" && (
-          <div className="max-w-xl mx-auto mb-8 p-1.5 rounded-2xl bg-camera-card/90 border border-cyan-500/20 backdrop-blur-md flex items-center justify-between gap-2 shadow-xl animate-in fade-in duration-300">
+          <div className="max-w-2xl mx-auto mb-8 p-1.5 rounded-2xl bg-camera-card/90 border border-cyan-500/20 backdrop-blur-md flex flex-wrap items-center justify-between gap-1.5 shadow-xl animate-in fade-in duration-300">
             <button
               onClick={() => handleSamsungSubSwitch("s-series")}
-              className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                 samsungSubTab === "s-series"
                   ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-black shadow-cyanGlow"
                   : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <Smartphone className="w-4 h-4" />
-              <span>S Serisi Stüdyosu ({samsungSSpecsData.length} Model)</span>
+              <Smartphone className="w-3.5 h-3.5" />
+              <span>S Serisi ({samsungSSpecsData.length})</span>
             </button>
 
             <button
               onClick={() => handleSamsungSubSwitch("z-series")}
-              className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                 samsungSubTab === "z-series"
                   ? "bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg"
                   : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <Layers className="w-4 h-4" />
-              <span>Fold & Flip Stüdyosu ({samsungZSpecsData.length} Model)</span>
+              <Layers className="w-3.5 h-3.5" />
+              <span>Fold & Flip ({samsungZSpecsData.length})</span>
+            </button>
+
+            <button
+              onClick={() => handleSamsungSubSwitch("a-series")}
+              className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                samsungSubTab === "a-series"
+                  ? "bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-lg"
+                  : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>A Serisi ({samsungASpecsData.length})</span>
             </button>
           </div>
         )}
 
-        {/* 2B. FOLD & FLIP DEDICATED BANNER (When Z Series Active) */}
+        {/* 2B. HUAWEI SUB-STUDIO SELECTOR */}
+        {activeBrand === "huawei" && (
+          <div className="max-w-2xl mx-auto mb-8 p-1.5 rounded-2xl bg-camera-card/90 border border-red-500/20 backdrop-blur-md flex flex-wrap items-center justify-between gap-1.5 shadow-xl animate-in fade-in duration-300">
+            <button
+              onClick={() => handleHuaweiSubSwitch("pura")}
+              className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                huaweiSubTab === "pura"
+                  ? "bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+                  : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Aperture className="w-3.5 h-3.5" />
+              <span>Pura / P Serisi ({huaweiPuraModels.length})</span>
+            </button>
+
+            <button
+              onClick={() => handleHuaweiSubSwitch("mate")}
+              className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                huaweiSubTab === "mate"
+                  ? "bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg"
+                  : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>Mate Serisi ({huaweiMateModels.length})</span>
+            </button>
+
+            <button
+              onClick={() => handleHuaweiSubSwitch("nova")}
+              className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                huaweiSubTab === "nova"
+                  ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg"
+                  : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>nova Serisi ({huaweiNovaModels.length})</span>
+            </button>
+          </div>
+        )}
+
+        {/* 2C. DEDICATED FEATURE BANNERS */}
         {activeBrand === "samsung" && samsungSubTab === "z-series" && (
           <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-black/60 border border-purple-500/30 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
             <div className="flex items-center gap-3">
@@ -257,6 +388,90 @@ export function IphoneSpecsStudio() {
             </div>
             <div className="px-3 py-1 rounded-xl bg-purple-500/20 text-purple-200 border border-purple-500/30 font-mono text-[10px] shrink-0 self-start sm:self-auto">
               Flex Stand & Dual Preview
+            </div>
+          </div>
+        )}
+
+        {activeBrand === "samsung" && samsungSubTab === "a-series" && (
+          <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-blue-950/40 via-teal-950/30 to-black/60 border border-teal-500/30 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center shrink-0">
+                <Sparkles className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <span className="font-bold text-white block">
+                  Galaxy A Serisi • Fiyat/Performans & Key Island Tasarımı
+                </span>
+                <span className="text-zinc-300 text-[11px] leading-relaxed block">
+                  50MP OIS ana kamera, Nightography, Super HDR 10-bit video ve Key Island ergonomisiyle günlük mobil fotoğrafçılıkta segmentinin en çok satan F/P modelleri.
+                </span>
+              </div>
+            </div>
+            <div className="px-3 py-1 rounded-xl bg-teal-500/20 text-teal-200 border border-teal-500/30 font-mono text-[10px] shrink-0 self-start sm:self-auto">
+              50MP OIS & Super HDR
+            </div>
+          </div>
+        )}
+
+        {activeBrand === "huawei" && huaweiSubTab === "pura" && (
+          <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-red-950/50 via-rose-950/30 to-black/70 border border-red-500/30 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-red-500/20 text-red-300 flex items-center justify-center shrink-0">
+                <Aperture className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <span className="font-bold text-white block">
+                  XMAGE & 1 İnç Geri Çekilebilir (Retractable) Lens Teknolojisi
+                </span>
+                <span className="text-zinc-300 text-[11px] leading-relaxed block">
+                  DXOMARK #1 zirve puanlı Huawei Pura serisi: 1 inç mekanik açılan lens, f/1.4 - f/4.0 fiziksel 10 kademeli diyafram, 300 km/s hız dondurma (Ultra Speed Snapshot) ve 35x süper makro telefoto.
+                </span>
+              </div>
+            </div>
+            <div className="px-3 py-1 rounded-xl bg-red-500/20 text-red-200 border border-red-500/30 font-mono text-[10px] shrink-0 self-start sm:self-auto">
+              1" Retractable & f/1.6-4.0
+            </div>
+          </div>
+        )}
+
+        {activeBrand === "huawei" && huaweiSubTab === "mate" && (
+          <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-amber-950/50 via-orange-950/30 to-black/70 border border-amber-500/30 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0">
+                <Layers className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <span className="font-bold text-white block">
+                  İş & İnovasyon Zirvesi • Star Ring & Red Maple Spektral Renk
+                </span>
+                <span className="text-zinc-300 text-[11px] leading-relaxed block">
+                  Huawei Mate serisi: 4.6mm ultra ince katlanabilir Mate X6, Red Maple 1.5M spektral kanallı mutlak renk doğruluğu ve değişken diyaframlı efsanevi Star Ring tasarımı.
+                </span>
+              </div>
+            </div>
+            <div className="px-3 py-1 rounded-xl bg-amber-500/20 text-amber-200 border border-amber-500/30 font-mono text-[10px] shrink-0 self-start sm:self-auto">
+              Star Ring & Red Maple
+            </div>
+          </div>
+        )}
+
+        {activeBrand === "huawei" && huaweiSubTab === "nova" && (
+          <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-teal-950/30 to-black/70 border border-emerald-500/30 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0">
+                <Sparkles className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <span className="font-bold text-white block">
+                  Vlog & Portre Uzmanı • 60MP 100° 4K Ön Kamera & Star Orbit
+                </span>
+                <span className="text-zinc-300 text-[11px] leading-relaxed block">
+                  Huawei nova serisi: 60MP 100 derece ultra geniş açılı 4K ön kamera, 2x-5x selfie zoom, AI Best Expression göz kırpma düzeltme ve 6.88mm ultra ince şık kasa.
+                </span>
+              </div>
+            </div>
+            <div className="px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-200 border border-emerald-500/30 font-mono text-[10px] shrink-0 self-start sm:self-auto">
+              60MP 4K Vlog & AI Expression
             </div>
           </div>
         )}
@@ -308,82 +523,219 @@ export function IphoneSpecsStudio() {
                   Air & e / SE Serisi
                 </button>
               </>
-            ) : samsungSubTab === "s-series" ? (
-              <>
-                <button
-                  onClick={() => setFilterType("all")}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    filterType === "all"
-                      ? "bg-white text-black font-bold shadow-md"
-                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
-                  }`}
-                >
-                  Tüm S Serisi ({samsungSSpecsData.length})
-                </button>
-                <button
-                  onClick={() => setFilterType("ultra")}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    filterType === "ultra"
-                      ? "bg-cyan-500 text-black font-bold shadow-cyanGlow"
-                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
-                  }`}
-                >
-                  Ultra (100x Zoom & 200MP)
-                </button>
-                <button
-                  onClick={() => setFilterType("standard")}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    filterType === "standard"
-                      ? "bg-cyan-500/80 text-black font-bold"
-                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
-                  }`}
-                >
-                  Standart & Plus
-                </button>
-                <button
-                  onClick={() => setFilterType("fe-edge")}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    filterType === "fe-edge"
-                      ? "bg-cyan-500/80 text-black font-bold"
-                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
-                  }`}
-                >
-                  FE & Edge Serisi
-                </button>
-              </>
+            ) : activeBrand === "samsung" ? (
+              samsungSubTab === "s-series" ? (
+                <>
+                  <button
+                    onClick={() => setFilterType("all")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "all"
+                        ? "bg-white text-black font-bold shadow-md"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Tüm S Serisi ({samsungSSpecsData.length})
+                  </button>
+                  <button
+                    onClick={() => setFilterType("ultra")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "ultra"
+                        ? "bg-cyan-500 text-black font-bold shadow-cyanGlow"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Ultra (100x Zoom & 200MP)
+                  </button>
+                  <button
+                    onClick={() => setFilterType("standard")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "standard"
+                        ? "bg-cyan-500/80 text-black font-bold"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Standart & Plus
+                  </button>
+                  <button
+                    onClick={() => setFilterType("fe-edge")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "fe-edge"
+                        ? "bg-cyan-500/80 text-black font-bold"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    FE & Edge Serisi
+                  </button>
+                </>
+              ) : samsungSubTab === "z-series" ? (
+                <>
+                  <button
+                    onClick={() => setFilterType("all")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "all"
+                        ? "bg-white text-black font-bold shadow-md"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Tüm Z Modelleri ({samsungZSpecsData.length})
+                  </button>
+                  <button
+                    onClick={() => setFilterType("fold")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "fold"
+                        ? "bg-purple-500 text-white font-bold shadow-lg"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Galaxy Z Fold (Büyük Ekran)
+                  </button>
+                  <button
+                    onClick={() => setFilterType("flip")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "flip"
+                        ? "bg-purple-500 text-white font-bold shadow-lg"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Galaxy Z Flip (FlexWindow & Vlog)
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => setFilterType("all")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "all"
+                        ? "bg-white text-black font-bold shadow-md"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Tüm A Serisi ({samsungASpecsData.length})
+                  </button>
+                  <button
+                    onClick={() => setFilterType("a50")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "a50"
+                        ? "bg-teal-500 text-black font-bold shadow-md"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    A50 Serisi (Amiral Katili)
+                  </button>
+                  <button
+                    onClick={() => setFilterType("a30-down")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "a30-down"
+                        ? "bg-teal-500/80 text-black font-bold"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    A30 / A20 / A10 Serisi
+                  </button>
+                </>
+              )
             ) : (
-              <>
-                <button
-                  onClick={() => setFilterType("all")}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    filterType === "all"
-                      ? "bg-white text-black font-bold shadow-md"
-                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
-                  }`}
-                >
-                  Tüm Z Modelleri ({samsungZSpecsData.length})
-                </button>
-                <button
-                  onClick={() => setFilterType("fold")}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    filterType === "fold"
-                      ? "bg-purple-500 text-white font-bold shadow-lg"
-                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
-                  }`}
-                >
-                  Galaxy Z Fold (Büyük Ekran)
-                </button>
-                <button
-                  onClick={() => setFilterType("flip")}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                    filterType === "flip"
-                      ? "bg-purple-500 text-white font-bold shadow-lg"
-                      : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
-                  }`}
-                >
-                  Galaxy Z Flip (FlexWindow & Vlog)
-                </button>
-              </>
+              // Huawei Filters
+              huaweiSubTab === "pura" ? (
+                <>
+                  <button
+                    onClick={() => setFilterType("all")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "all"
+                        ? "bg-white text-black font-bold shadow-md"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Tüm Pura Modelleri ({huaweiPuraModels.length})
+                  </button>
+                  <button
+                    onClick={() => setFilterType("ultra")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "ultra"
+                        ? "bg-red-500 text-white font-bold shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Ultra (1" Retractable & RYYB)
+                  </button>
+                  <button
+                    onClick={() => setFilterType("pro-standard")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "pro-standard"
+                        ? "bg-red-500/80 text-white font-bold"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Pro & Standart & P60
+                  </button>
+                </>
+              ) : huaweiSubTab === "mate" ? (
+                <>
+                  <button
+                    onClick={() => setFilterType("all")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "all"
+                        ? "bg-white text-black font-bold shadow-md"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Tüm Mate Modelleri ({huaweiMateModels.length})
+                  </button>
+                  <button
+                    onClick={() => setFilterType("fold")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "fold"
+                        ? "bg-amber-500 text-black font-bold shadow-lg"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Katlanabilir (Mate X6)
+                  </button>
+                  <button
+                    onClick={() => setFilterType("pro")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "pro"
+                        ? "bg-amber-500/80 text-black font-bold"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Mate 70 / 50 Pro
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => setFilterType("all")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "all"
+                        ? "bg-white text-black font-bold shadow-md"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Tüm nova Modelleri ({huaweiNovaModels.length})
+                  </button>
+                  <button
+                    onClick={() => setFilterType("pro")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "pro"
+                        ? "bg-emerald-500 text-black font-bold shadow-lg"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Pro (Çift Ön Portre & Diyafram)
+                  </button>
+                  <button
+                    onClick={() => setFilterType("standard")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      filterType === "standard"
+                        ? "bg-emerald-500/80 text-black font-bold"
+                        : "bg-camera-card text-zinc-400 hover:text-white border border-white/5"
+                    }`}
+                  >
+                    Ultra İnce (nova 13 / 12s)
+                  </button>
+                </>
+              )
             )}
           </div>
 
@@ -397,9 +749,17 @@ export function IphoneSpecsStudio() {
               placeholder={`${
                 activeBrand === "apple"
                   ? "iPhone"
-                  : samsungSubTab === "s-series"
-                  ? "Galaxy S"
-                  : "Galaxy Z Fold / Flip"
+                  : activeBrand === "samsung"
+                  ? samsungSubTab === "s-series"
+                    ? "Galaxy S"
+                    : samsungSubTab === "z-series"
+                    ? "Galaxy Z Fold / Flip"
+                    : "Galaxy A"
+                  : huaweiSubTab === "pura"
+                  ? "Huawei Pura / P"
+                  : huaweiSubTab === "mate"
+                  ? "Huawei Mate"
+                  : "Huawei nova"
               } veya renk ara...`}
               className="w-full bg-camera-card border border-white/10 rounded-xl pl-9 pr-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-all font-mono"
             />
@@ -424,9 +784,13 @@ export function IphoneSpecsStudio() {
                   isSelected
                     ? activeBrand === "apple"
                       ? "bg-gradient-to-b from-amber-500/20 to-camera-card border-amber-500 shadow-glow"
-                      : samsungSubTab === "s-series"
-                      ? "bg-gradient-to-b from-cyan-500/20 to-camera-card border-cyan-400 shadow-cyanGlow"
-                      : "bg-gradient-to-b from-purple-500/20 to-camera-card border-purple-400 shadow-lg"
+                      : activeBrand === "samsung"
+                      ? samsungSubTab === "s-series"
+                        ? "bg-gradient-to-b from-cyan-500/20 to-camera-card border-cyan-400 shadow-cyanGlow"
+                        : samsungSubTab === "z-series"
+                        ? "bg-gradient-to-b from-purple-500/20 to-camera-card border-purple-400 shadow-lg"
+                        : "bg-gradient-to-b from-teal-500/20 to-camera-card border-teal-400 shadow-lg"
+                      : "bg-gradient-to-b from-red-600/25 to-camera-card border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]"
                     : "bg-camera-card/80 border-white/5 hover:border-white/20 hover:bg-white/5"
                 }`}
               >
@@ -437,7 +801,9 @@ export function IphoneSpecsStudio() {
                         model.isPro
                           ? activeBrand === "apple"
                             ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
-                            : "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+                            : activeBrand === "samsung"
+                            ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+                            : "bg-red-500/20 text-red-300 border border-red-500/30"
                           : "bg-zinc-800 text-zinc-400"
                       }`}
                     >
@@ -465,9 +831,11 @@ export function IphoneSpecsStudio() {
                       className={`w-1.5 h-1.5 rounded-full shrink-0 ${
                         activeBrand === "apple"
                           ? "bg-amber-400"
-                          : samsungSubTab === "s-series"
-                          ? "bg-cyan-400"
-                          : "bg-purple-400"
+                          : activeBrand === "samsung"
+                          ? samsungSubTab === "s-series"
+                            ? "bg-cyan-400"
+                            : "bg-purple-400"
+                          : "bg-red-400"
                       }`}
                     />
                   )}
@@ -488,9 +856,11 @@ export function IphoneSpecsStudio() {
                     className={`w-3.5 h-3.5 ${
                       activeBrand === "apple"
                         ? "text-amber-400"
-                        : samsungSubTab === "s-series"
-                        ? "text-cyan-400"
-                        : "text-purple-400"
+                        : activeBrand === "samsung"
+                        ? samsungSubTab === "s-series"
+                          ? "text-cyan-400"
+                          : "text-purple-400"
+                        : "text-red-400"
                     }`}
                   />
                   <span>Şeffaf Arka Yüzey & Optik Kasa</span>
@@ -513,9 +883,11 @@ export function IphoneSpecsStudio() {
                     className={`px-2.5 py-0.5 rounded-lg border text-xs font-mono font-bold ${
                       activeBrand === "apple"
                         ? "bg-amber-500/20 text-amber-400 border-amber-500/30"
-                        : samsungSubTab === "s-series"
-                        ? "bg-cyan-500/20 text-cyan-400 border-cyan-500/30"
-                        : "bg-purple-500/20 text-purple-300 border border-purple-500/30"
+                        : activeBrand === "samsung"
+                        ? samsungSubTab === "s-series"
+                          ? "bg-cyan-500/20 text-cyan-400 border-cyan-500/30"
+                          : "bg-purple-500/20 text-purple-300 border border-purple-500/30"
+                        : "bg-red-500/20 text-red-400 border border-red-500/30"
                     }`}
                   >
                     {currentModel.series}
@@ -743,9 +1115,11 @@ export function IphoneSpecsStudio() {
                       isActive
                         ? activeBrand === "apple"
                           ? "bg-amber-500 text-black shadow-glow font-bold"
-                          : samsungSubTab === "s-series"
-                          ? "bg-cyan-500 text-black shadow-cyanGlow font-bold"
-                          : "bg-purple-500 text-white shadow-lg font-bold"
+                          : activeBrand === "samsung"
+                          ? samsungSubTab === "s-series"
+                            ? "bg-cyan-500 text-black shadow-cyanGlow font-bold"
+                            : "bg-purple-500 text-white shadow-lg font-bold"
+                          : "bg-red-500 text-white shadow-[0_0_15px_rgba(239,68,68,0.5)] font-bold"
                         : "text-zinc-400 hover:text-white hover:bg-white/5"
                     }`}
                   >
@@ -764,9 +1138,11 @@ export function IphoneSpecsStudio() {
                 className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r ${
                   activeBrand === "apple"
                     ? "from-amber-500 via-orange-400 to-amber-600"
-                    : samsungSubTab === "s-series"
-                    ? "from-cyan-400 via-blue-500 to-indigo-500"
-                    : "from-purple-500 via-fuchsia-500 to-indigo-500"
+                    : activeBrand === "samsung"
+                    ? samsungSubTab === "s-series"
+                      ? "from-cyan-400 via-blue-500 to-indigo-500"
+                      : "from-purple-500 via-fuchsia-500 to-indigo-500"
+                    : "from-red-500 via-rose-500 to-amber-500"
                 }`}
               />
 
@@ -776,9 +1152,11 @@ export function IphoneSpecsStudio() {
                     className={`text-xs font-mono uppercase tracking-widest mb-1.5 flex items-center gap-1.5 font-bold ${
                       activeBrand === "apple"
                         ? "text-amber-400"
-                        : samsungSubTab === "s-series"
-                        ? "text-cyan-400"
-                        : "text-purple-300"
+                        : activeBrand === "samsung"
+                        ? samsungSubTab === "s-series"
+                          ? "text-cyan-400"
+                          : "text-purple-300"
+                        : "text-red-400"
                     }`}
                   >
                     <Sparkles className="w-4 h-4" />
@@ -803,18 +1181,22 @@ export function IphoneSpecsStudio() {
                   className={`border rounded-2xl p-4 lg:max-w-xs shrink-0 ${
                     activeBrand === "apple"
                       ? "bg-amber-500/10 border-amber-500/20"
-                      : samsungSubTab === "s-series"
-                      ? "bg-cyan-500/10 border-cyan-500/20"
-                      : "bg-purple-500/10 border-purple-500/20"
+                      : activeBrand === "samsung"
+                      ? samsungSubTab === "s-series"
+                        ? "bg-cyan-500/10 border-cyan-500/20"
+                        : "bg-purple-500/10 border-purple-500/20"
+                      : "bg-red-500/10 border-red-500/20"
                   }`}
                 >
                   <div
                     className={`text-[11px] font-mono uppercase font-bold mb-1 flex items-center gap-1 ${
                       activeBrand === "apple"
                         ? "text-amber-400"
-                        : samsungSubTab === "s-series"
-                        ? "text-cyan-400"
-                        : "text-purple-300"
+                        : activeBrand === "samsung"
+                        ? samsungSubTab === "s-series"
+                          ? "text-cyan-400"
+                          : "text-purple-300"
+                        : "text-red-400"
                     }`}
                   >
                     <Flame className="w-3.5 h-3.5" />

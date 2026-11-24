@@ -110,7 +110,7 @@ export interface ShotRecipe {
 
 /* ================= DEVICE & CAMERA MODEL SPECIFICATIONS & RECIPES ================= */
 
-export type DeviceBrand = "apple" | "samsung";
+export type DeviceBrand = "apple" | "samsung" | "huawei";
 
 export interface DeviceSignatureColor {
   name: string; // Tek imza lansman rengi, örn: "Titanyum Turuncu"
@@ -132,7 +132,11 @@ export interface DeviceChassisDesign {
     | "samsung-ultra-multi" // Galaxy S21U - S26U (5 lens + periskop + lazer AF)
     | "z-fold-vertical"     // Galaxy Z Fold 5, 6, 7, 8 (3 dikey lens ada)
     | "z-fold-ultra"        // Galaxy Z Fold 8 Ultra (4 lens periskop ada)
-    | "z-flip-dual";        // Galaxy Z Flip 5, 6, 7, 8 (FlexWindow + çift lens)
+    | "z-flip-dual"         // Galaxy Z Flip 5, 6, 7, 8 (FlexWindow + çift lens)
+    | "huawei-pura-triangle"// Huawei Pura 70 / 80 serisi ikonik üçgen kamera adası
+    | "huawei-mate-ring"    // Huawei Mate 50 / 60 / 70 / X6 dairesel Star Ring adası
+    | "huawei-nova-oval"    // Huawei nova serisi Star Orbit oval kamera adası
+    | "huawei-p60-rococo";  // Huawei P60 Pro büyük merkezi lens + çift yardımcı lens
   formFactor: "slab" | "fold" | "flip";
 }
 
@@ -172,6 +176,7 @@ export interface DeviceModelSpec {
   signatureColor: DeviceSignatureColor;
   chassisDesign: DeviceChassisDesign;
   samsungSubSeries?: "galaxy-s" | "galaxy-z" | "galaxy-a";
+  huaweiSubSeries?: "pura" | "mate" | "nova";
   bestShootingType: string;
   recommendedSetting: string;
   topFeatureBadge: string;
@@ -199,6 +204,13 @@ export interface DeviceModelSpec {
     flexModeSupport?: boolean;
     coverScreenPreview?: boolean;
     handsFreeStand?: boolean;
+    // Huawei-specific tags
+    variableAperture?: string;
+    xmageEngine?: boolean;
+    ryybSensor?: boolean;
+    retractableLens?: boolean;
+    telephotoMacro?: boolean;
+    redMapleSensor?: boolean;
   };
   evaluation: {
     strongestSide: string;
@@ -231,4 +243,9 @@ export interface IphoneModelSpec extends DeviceModelSpec {
 export interface SamsungModelSpec extends DeviceModelSpec {
   brand: "samsung";
   samsungSubSeries: "galaxy-s" | "galaxy-z" | "galaxy-a";
+}
+
+export interface HuaweiModelSpec extends DeviceModelSpec {
+  brand: "huawei";
+  huaweiSubSeries: "pura" | "mate" | "nova";
 }
